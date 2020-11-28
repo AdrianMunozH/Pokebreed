@@ -3,13 +3,20 @@ package com.example.pokebreed;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ListAdapter;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -30,6 +37,11 @@ public class MainActivity extends AppCompatActivity {
     public List<String> pokemons;
 
     String selectedMon="";
+
+    //Initialise variable
+    Spinner spinner;
+    TextView textView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +50,41 @@ public class MainActivity extends AppCompatActivity {
         //mit api
         pokemons = new ArrayList<>();
         fillPokemons();
+
+        //Assign variable
+        spinner = findViewById(R.id.spinner);
+        textView = findViewById(R.id.textView);
+
+       spinner.setAdapter(new ArrayAdapter<>(MainActivity.this,
+               android.R.layout.simple_spinner_dropdown_item,pokemons));
+
+       spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+           @Override
+           public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+               if (position == 0){
+                   //Display toast message
+                   Toast.makeText(getApplicationContext(),
+                          "Please Select one",Toast.LENGTH_SHORT).show();
+                   //set empty value on textview
+                   textView.setText("");
+               }else{
+                   //get selected value
+                   String sNumber = parent.getItemAtPosition(position).toString();
+                   //set selected value on textview
+                   textView.setText(sNumber);
+               }
+
+           }
+
+           @Override
+           public void onNothingSelected(AdapterView<?> parent) {
+
+           }
+       });
+
+
+
+
 
         final Spinner spinner = (Spinner) findViewById(R.id.spinner);
 
@@ -70,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
     private void fillPokemons() {
         final TextView textView = (TextView) findViewById(R.id.textView);
 
@@ -98,4 +146,7 @@ public class MainActivity extends AppCompatActivity {
         });
         queue.add(json);
     }
-}
+
+
+
+    };
