@@ -26,8 +26,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    //Kommentar von Daniel - ASD
+    //Kommentar von Daniel - ASDf
     public List<String> pokemons;
+
+    String selectedMon="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,13 +53,14 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter listAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item,pokemons);
 
 
-        spinner.setAdapter(arrayAdapter);
+        spinner.setAdapter(listAdapter);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 // gibt das ausgewählte element aus
                 Log.e("spinner",spinner.getSelectedItem().toString());
+                selectedMon=spinner.getSelectedItem().toString();
             }
 
             @Override
@@ -71,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView textView = (TextView) findViewById(R.id.textView);
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "https://pokeapi.co/api/v2/pokemon?limit=50";
+        String url = "https://pokeapi.co/api/v2/pokemon?limit=800";
         JsonObjectRequest json = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
