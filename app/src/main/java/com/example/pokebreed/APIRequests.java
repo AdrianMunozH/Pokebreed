@@ -23,6 +23,9 @@ public class APIRequests {
     RequestQueue requestQueue;
     private static APIRequests instance = null;
 
+    //test
+    private JSONObject jsonObject;
+
     public APIRequests(Context context) {
         requestQueue = Volley.newRequestQueue(context);
     }
@@ -40,9 +43,17 @@ public class APIRequests {
         return instance;
     }
 
-    public List<String> getAllPoke() {
-        List<String> allPoke= new ArrayList<>();
 
+    public void setJsonObject(JSONObject jsonObject) {
+        this.jsonObject = jsonObject;
+    }
+    public List<String> getAllPoke() throws JSONException {
+        List<String> allPoke= new ArrayList<>();
+        if (requestGet("pokemon?limit=100") == null)
+        {
+            Log.e("Nullchecker", "hier ist null");
+            return null;
+        }
         try {
             JSONArray jsonArray = requestGet("pokemon?limit=800").getJSONArray("results");
             for (int i = 0; i < jsonArray.length();i++) {
@@ -57,14 +68,15 @@ public class APIRequests {
     }
 
     public JSONObject requestGet(String urlEnd) {
+        final List<JSONObject> list = new ArrayList<>();
         final JSONObject[] ret = new JSONObject[1];
         String url = baseurl.concat(urlEnd);
 
         JsonObjectRequest json = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                ret[0] = response;
-                Log.e("Rest","rest erfolgreich");
+                list.add(response);
+                Log.e("REST","rest erfolgreich" + response.toString());
             }
         }, new Response.ErrorListener() {
             @Override
@@ -72,8 +84,12 @@ public class APIRequests {
                 System.err.println(error);
             }
         });
+
+        if (s == null) {
+
+        }
         requestQueue.add(json);
-        return ret[0];
+        return list.get(0);
     }
 
 
@@ -81,11 +97,11 @@ public class APIRequests {
     public List<String> getEggGroup (String name) {
         String url= "/pokemon-species" + name;
         List<String> eggGroupEntries = new ArrayList<>();
-        JSONArray egggrp = null;
+        JSONArray eggGrp;
         try {
-            egggrp = requestGet(url).getJSONArray("egg_groups");
-            for (int i = 0;i < egggrp.length(); i++) {
-                JSONObject entry = egggrp.getJSONObject(i);
+            eggGrp = requestGet(url).getJSONArray("egg_groups");
+            for (int i = 0;i < eggGrp.length(); i++) {
+                JSONObject entry = eggGrp.getJSONObject(i);
                 eggGroupEntries.add(entry.getString("name"));
             }
         } catch (JSONException e) {
