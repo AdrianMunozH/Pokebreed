@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         pokemons = new ArrayList<>();
         fillPokemons();
 
+        //searchable spinner anfang
         //Assign variable
         spinner = findViewById(R.id.spinner);
         textView = findViewById(R.id.textView);
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
            }
        });
-
+        //searchable spinner ende
 
 
 
