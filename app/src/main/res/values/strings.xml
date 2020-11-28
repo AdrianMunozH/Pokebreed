@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Pokebreed</string>
+    <string-array name="strarr">
+        <item>First</item>
+        <item>Second</item>
+    </string-array>
 </resources>
