@@ -24,7 +24,7 @@ public class APIRequests {
     private static APIRequests instance = null;
 
     //test
-    private JSONObject jsonObject;
+    public JSONObject jsonObject;
 
     public APIRequests(Context context) {
         requestQueue = Volley.newRequestQueue(context);
@@ -45,15 +45,12 @@ public class APIRequests {
 
 
     public void setJsonObject(JSONObject jsonObject) {
+        Log.e("setter", jsonObject.toString());
         this.jsonObject = jsonObject;
     }
+
     public List<String> getAllPoke() throws JSONException {
         List<String> allPoke= new ArrayList<>();
-        if (requestGet("pokemon?limit=100") == null)
-        {
-            Log.e("Nullchecker", "hier ist null");
-            return null;
-        }
         try {
             JSONArray jsonArray = requestGet("pokemon?limit=800").getJSONArray("results");
             for (int i = 0; i < jsonArray.length();i++) {
@@ -68,34 +65,27 @@ public class APIRequests {
     }
 
     public JSONObject requestGet(String urlEnd) {
-        final List<JSONObject> list = new ArrayList<>();
-        final JSONObject[] ret = new JSONObject[1];
         String url = baseurl.concat(urlEnd);
 
         JsonObjectRequest json = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                list.add(response);
+                setJsonObject(response);
                 Log.e("REST","rest erfolgreich" + response.toString());
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 System.err.println(error);
+                jsonObject = null;
             }
         });
-
-        if (s == null) {
-
-        }
         requestQueue.add(json);
-        return list.get(0);
+        return jsonObject;
     }
-
-
     
     public List<String> getEggGroup (String name) {
-        String url= "/pokemon-species" + name;
+        String url= "/pokemon-species/" + name;
         List<String> eggGroupEntries = new ArrayList<>();
         JSONArray eggGrp;
         try {

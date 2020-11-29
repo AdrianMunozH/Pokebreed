@@ -7,19 +7,13 @@ import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
+import com.android.volley.*;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,10 +36,9 @@ public class MainActivity extends AppCompatActivity {
         //API Instance für komplette App
         APIRequests.getInstance(this);
 
-        if(APIRequests.getInstance().requestGet("pokemon") == null) {
-            Log.e("api", "immer null");
-        }
+
         //mit api
+        /*
         try {
             if (APIRequests.getInstance().getAllPoke() != null)
                 pokemons = APIRequests.getInstance().getAllPoke();
@@ -59,14 +52,15 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+         */
 
         //Assign variable
         spinner = findViewById(R.id.spinner);
         textView = findViewById(R.id.textView);
-        spinner.setAdapter(new ArrayAdapter<>(MainActivity.this,
-               android.R.layout.simple_spinner_dropdown_item,pokemons));
+       // spinner.setAdapter(new ArrayAdapter<>(MainActivity.this,
+        //       android.R.layout.simple_spinner_dropdown_item,pokemons));
+
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
            @Override
            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -90,6 +84,27 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        Button button = findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    pokemons = APIRequests.getInstance().getAllPoke();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                spinner.setAdapter(new ArrayAdapter<>(MainActivity.this,
+                        android.R.layout.simple_spinner_dropdown_item,pokemons));
+            }
+        });
+        Button button2 = findViewById(R.id.button2);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                APIRequests.getInstance().getEggGroup("1");
+            }
+        });
 
     }
+
 }
