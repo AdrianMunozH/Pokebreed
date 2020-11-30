@@ -37,8 +37,7 @@ public class MainActivity extends AppCompatActivity {
         APIRequests.getInstance(this);
 
 
-        //mit api
-        /*
+
         try {
             if (APIRequests.getInstance().getAllPoke() != null)
                 pokemons = APIRequests.getInstance().getAllPoke();
@@ -52,13 +51,14 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-         */
 
+
+        //Start spinner
         //Assign variable
         spinner = findViewById(R.id.spinner);
         textView = findViewById(R.id.textView);
-       // spinner.setAdapter(new ArrayAdapter<>(MainActivity.this,
-        //       android.R.layout.simple_spinner_dropdown_item,pokemons));
+        spinner.setAdapter(new ArrayAdapter<>(MainActivity.this,
+                android.R.layout.simple_spinner_dropdown_item,pokemons));
 
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -97,6 +97,8 @@ public class MainActivity extends AppCompatActivity {
                         android.R.layout.simple_spinner_dropdown_item,pokemons));
             }
         });
+        //ende spinner
+
         Button button2 = findViewById(R.id.button2);
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
