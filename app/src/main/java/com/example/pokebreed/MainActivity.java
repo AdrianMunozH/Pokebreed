@@ -1,6 +1,8 @@
 package com.example.pokebreed;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,46 +31,47 @@ public class MainActivity extends AppCompatActivity {
     //Initialise variable
     private Spinner spinner;
     private TextView textView;
+    JSONParser jp = new JSONParser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //API Instance für komplette App
+        // !!!!!!!!!! muss nur einmal mit this aufgerufen werden !!!!!!!!!!!!!!!!!
         APIRequests.getInstance(this);
 
         pokemons = new ArrayList<>();
+        /*
         pokemons.add("test1");
         pokemons.add("test2");
         pokemons.add("test3");
+        */
 
 
-        try {
-            APIRequests.getInstance(this).getAllPoke();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-        APIRequests.getInstance().result.setListener(new JsonListener.ChangeListener() {
+        // Das beides muss immer nacheinander passieren.
+        APIRequests.getInstance().requestGet("pokemon?limit=5");
+        APIRequests.getInstance().listen.observe(this, new Observer<JSONObject>() {
             @Override
-            public void onChange() {
-            pokemons=APIRequests.getInstance().pokemonList;
-
+            public void onChanged(JSONObject jsonObject) {
+                Log.e("b4OnChange","succ");
+                try {
+                    Log.e("inChange","succ");
+                    pokemons = jp.getAllPoke(jsonObject);
+                    spinner.setAdapter(new ArrayAdapter<>(MainActivity.this,
+                            android.R.layout.simple_spinner_dropdown_item,pokemons));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
-
-
-
-
 
 
         //Start spinner
         //Assign variable
         spinner = findViewById(R.id.spinner);
         textView = findViewById(R.id.textView);
-        spinner.setAdapter(new ArrayAdapter<>(MainActivity.this,
-                android.R.layout.simple_spinner_dropdown_item,pokemons));
+
 
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -97,13 +101,7 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*try {
-                    pokemons = APIRequests.getInstance().getAllPoke();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }*/
-                spinner.setAdapter(new ArrayAdapter<>(MainActivity.this,
-                        android.R.layout.simple_spinner_dropdown_item,pokemons));
+                testNewApi();
             }
         });
         //ende spinner
@@ -116,6 +114,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+    // total sinnlos, war nur dafür da um z testen ob das rirchtige jsonobject geladen wird
+    public void testNewApi() {
+        APIRequests.getInstance(this).requestGet("pokemon?limit=10");
+        APIRequests.getInstance().listen.observe(this, new Observer<JSONObject>() {
+            @Override
+            public void onChanged(JSONObject jsonObject) {
+                Log.e("b4OnChange","succ");
+                try {
+                    Log.e("inChange","succ");
+                    pokemons = jp.getAllPoke(jsonObject);
+                    spinner.setAdapter(new ArrayAdapter<>(MainActivity.this,
+                            android.R.layout.simple_spinner_dropdown_item,pokemons));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
 }

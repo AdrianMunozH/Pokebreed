@@ -3,6 +3,8 @@ package com.example.pokebreed;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.lifecycle.MutableLiveData;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -15,16 +17,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 public class APIRequests {
     final private String baseurl = "https://pokeapi.co/api/v2/";
     RequestQueue requestQueue;
     private static APIRequests instance = null;
-    JsonListener result = new JsonListener();
-    List<String> pokemonList = new ArrayList<>();
+
 
     //test
     public JSONObject jsonObject;
+    MutableLiveData<JSONObject> listen = new MutableLiveData<>();
+    JsonListener result = new JsonListener();
+    List<String> pokemonList = new ArrayList<>();
 
     public APIRequests(Context context) {
         requestQueue = Volley.newRequestQueue(context);
@@ -49,21 +55,24 @@ public class APIRequests {
         this.jsonObject = jsonObject;
     }
 
+    /*
     public void getAllPoke() throws JSONException {
         requestGet("pokemon?limit=800");
+        listen.observer(context, new Observer() {
+            @Override
+            public void update(Observable observable, Object o) {
 
-        result.setListener(new JsonListener.ChangeListener() {
+            }
+        });
+
+        result.setListener(new JsonListener.OnChangeListener() {
             @Override
             public void onChange() {
 
                 Log.e("onChange: ", "yes");
                 try {
-
-
                     JSONArray jsonArray = jsonObject.getJSONArray("results");
-
-
-                    for (int i = 0; i < jsonArray.length();i++) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject pokemon = jsonArray.getJSONObject(i);
                         String name = pokemon.getString("name");
                         pokemonList.add(name);
@@ -76,8 +85,9 @@ public class APIRequests {
 
 
 
-
     }
+
+     */
 
     public void requestGet(String urlEnd) {
         String url = baseurl.concat(urlEnd);
@@ -86,9 +96,8 @@ public class APIRequests {
             @Override
             public void onResponse(JSONObject response) {
                 setJsonObject(response);
-                result.setJson(response);
+                listen.setValue(jsonObject);
                 Log.e("REST","rest erfolgreich" + response.toString());
-
             }
         }, new Response.ErrorListener() {
             @Override

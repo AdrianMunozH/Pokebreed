@@ -4,7 +4,7 @@ import org.json.JSONObject;
 
 public class JsonListener {
     private JSONObject json=null;
-    private ChangeListener listener;
+    private OnChangeListener listener;
 
     public JSONObject getJson(){
         return json;
@@ -15,15 +15,15 @@ public class JsonListener {
         if(listener!=null) listener.onChange();
     }
 
-    public ChangeListener getListener(){
+    public OnChangeListener getListener(){
         return listener;
     }
 
-    public void setListener(ChangeListener listener){
+    public void setListener(OnChangeListener listener){
         this.listener=listener;
     }
 
-    public interface ChangeListener{
+    public interface OnChangeListener{
         void onChange();
     }
 }
