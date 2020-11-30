@@ -36,20 +36,29 @@ public class MainActivity extends AppCompatActivity {
         //API Instance für komplette App
         APIRequests.getInstance(this);
 
+        pokemons = new ArrayList<>();
+        pokemons.add("test1");
+        pokemons.add("test2");
+        pokemons.add("test3");
 
 
         try {
-            if (APIRequests.getInstance().getAllPoke() != null)
-                pokemons = APIRequests.getInstance().getAllPoke();
-            else {
-                pokemons = new ArrayList<>();
-                pokemons.add("test1");
-                pokemons.add("test2");
-                pokemons.add("test3");
-            }
+            APIRequests.getInstance(this).getAllPoke();
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+
+        APIRequests.getInstance().result.setListener(new JsonListener.ChangeListener() {
+            @Override
+            public void onChange() {
+            pokemons=APIRequests.getInstance().pokemonList;
+
+            }
+        });
+
+
+
 
 
 
@@ -88,11 +97,11 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
+                /*try {
                     pokemons = APIRequests.getInstance().getAllPoke();
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }
+                }*/
                 spinner.setAdapter(new ArrayAdapter<>(MainActivity.this,
                         android.R.layout.simple_spinner_dropdown_item,pokemons));
             }
@@ -103,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                APIRequests.getInstance().getEggGroup("1");
+                //APIRequests.getInstance().getEggGroup("1");
             }
         });
 

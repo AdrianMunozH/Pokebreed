@@ -2,9 +2,7 @@ package com.example.pokebreed;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 
-import com.android.volley.Network;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -22,6 +20,8 @@ public class APIRequests {
     final private String baseurl = "https://pokeapi.co/api/v2/";
     RequestQueue requestQueue;
     private static APIRequests instance = null;
+    JsonListener result = new JsonListener();
+    List<String> pokemonList = new ArrayList<>();
 
     //test
     public JSONObject jsonObject;
@@ -49,29 +49,46 @@ public class APIRequests {
         this.jsonObject = jsonObject;
     }
 
-    public List<String> getAllPoke() throws JSONException {
-        List<String> allPoke= new ArrayList<>();
-        try {
-            JSONArray jsonArray = requestGet("pokemon?limit=800").getJSONArray("results");
-            for (int i = 0; i < jsonArray.length();i++) {
-                JSONObject pokemon = jsonArray.getJSONObject(i);
-                String name = pokemon.getString("name");
-                allPoke.add(name);
+    public void getAllPoke() throws JSONException {
+        requestGet("pokemon?limit=800");
+
+        result.setListener(new JsonListener.ChangeListener() {
+            @Override
+            public void onChange() {
+
+                Log.e("onChange: ", "yes");
+                try {
+
+
+                    JSONArray jsonArray = jsonObject.getJSONArray("results");
+
+
+                    for (int i = 0; i < jsonArray.length();i++) {
+                        JSONObject pokemon = jsonArray.getJSONObject(i);
+                        String name = pokemon.getString("name");
+                        pokemonList.add(name);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return allPoke;
+        });
+
+
+
+
     }
 
-    public JSONObject requestGet(String urlEnd) {
+    public void requestGet(String urlEnd) {
         String url = baseurl.concat(urlEnd);
 
         JsonObjectRequest json = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 setJsonObject(response);
+                result.setJson(response);
                 Log.e("REST","rest erfolgreich" + response.toString());
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -81,10 +98,10 @@ public class APIRequests {
             }
         });
         requestQueue.add(json);
-        return jsonObject;
+
     }
     
-    public List<String> getEggGroup (String name) {
+   /* public List<String> getEggGroup (String name) {
         String url= "/pokemon-species/" + name;
         List<String> eggGroupEntries = new ArrayList<>();
         JSONArray eggGrp;
@@ -98,5 +115,5 @@ public class APIRequests {
             e.printStackTrace();
         }
         return eggGroupEntries;
-    }
+    }*/
 }
