@@ -3,6 +3,7 @@ package com.example.pokebreed;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -42,12 +43,6 @@ public class MainActivity extends AppCompatActivity {
         APIRequests.getInstance(this);
 
         pokemons = new ArrayList<>();
-        /*
-        pokemons.add("test1");
-        pokemons.add("test2");
-        pokemons.add("test3");
-        */
-
 
         // Das beides muss immer nacheinander passieren.
         APIRequests.getInstance().requestGet("pokemon?limit=5");
@@ -110,14 +105,21 @@ public class MainActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //APIRequests.getInstance().getEggGroup("1");
+                nextActivity();
             }
         });
 
     }
-    // total sinnlos, war nur dafür da um z testen ob das rirchtige jsonobject geladen wird
+
+    private void nextActivity() {
+        Intent intent = new Intent(this,ProtoAttackWesen.class);
+        intent.putExtra("pokeName",textView.getText().toString());
+        startActivity(intent);
+    }
+
+    // total sinnlos, war nur dafür da um z testen ob das richtige jsonobject geladen wird
     public void testNewApi() {
-        APIRequests.getInstance(this).requestGet("pokemon?limit=10");
+        APIRequests.getInstance(this).requestGet(APIRequests.getInstance().getPokemonList());
         APIRequests.getInstance().listen.observe(this, new Observer<JSONObject>() {
             @Override
             public void onChanged(JSONObject jsonObject) {

@@ -29,8 +29,6 @@ public class APIRequests {
     //test
     public JSONObject jsonObject;
     MutableLiveData<JSONObject> listen = new MutableLiveData<>();
-    JsonListener result = new JsonListener();
-    List<String> pokemonList = new ArrayList<>();
 
     public APIRequests(Context context) {
         requestQueue = Volley.newRequestQueue(context);
@@ -109,20 +107,10 @@ public class APIRequests {
         requestQueue.add(json);
 
     }
-    
-   /* public List<String> getEggGroup (String name) {
-        String url= "/pokemon-species/" + name;
-        List<String> eggGroupEntries = new ArrayList<>();
-        JSONArray eggGrp;
-        try {
-            eggGrp = requestGet(url).getJSONArray("egg_groups");
-            for (int i = 0;i < eggGrp.length(); i++) {
-                JSONObject entry = eggGrp.getJSONObject(i);
-                eggGroupEntries.add(entry.getString("name"));
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return eggGroupEntries;
-    }*/
+    public String getPokemonList() {
+        return "pokemon?limit=800";
+    }
+    public String getPokemon(String name) {
+        return "pokemon/" + name;
+    }
 }
