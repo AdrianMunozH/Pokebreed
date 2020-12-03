@@ -113,4 +113,8 @@ public class APIRequests {
     public String getPokemon(String name) {
         return "pokemon/" + name;
     }
+
+    public String getPokemonOfType(String type) {
+        return "type/"+type;
+    }
 }

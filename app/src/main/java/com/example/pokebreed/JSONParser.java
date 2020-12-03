@@ -26,6 +26,9 @@ public class JSONParser {
         }
         return pokemonList;
     }
+    public List<String> getPokemon(JSONObject jsonObject) {
+        return null;
+    }
 
     public List<String> getAllAbilities(JSONObject jsonObject) throws JSONException {
         List<String> abilityList = new ArrayList<>();
@@ -46,6 +49,23 @@ public class JSONParser {
             movesList.add(move.getString("name"));
         }
         return  movesList;
+    }
+    public List<String> getPokemonOfType(JSONObject jsonObject) throws JSONException {
+        List<String> pokemonList = new ArrayList<>();
+        JSONArray pokemon = jsonObject.getJSONArray("pokemon");
+        Log.e("ofType",pokemon.toString());
+        for (int i = 0; i < pokemon.length();i++) {
+            JSONObject poke = pokemon.getJSONObject(i).getJSONObject("pokemon");
+            Log.e("TypePokemon",poke.toString());
+            pokemonList.add(poke.getString("name"));
+        }
+        return  pokemonList;
+    }
+    public String getPicture(JSONObject jsonObject) throws JSONException {
+        String pictureUrl;
+        JSONObject pokemon = jsonObject.getJSONObject("sprites");
+        pictureUrl = pokemon.getString("front_default");
+        return pictureUrl;
     }
     /*
     public List<String> getEggGroup (String name,JSONObject jsonObject) {
