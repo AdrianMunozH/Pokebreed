@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         //API Instance für komplette App
         // !!!!!!!!!! muss nur einmal mit this aufgerufen werden !!!!!!!!!!!!!!!!!
         APIRequests.getInstance(this);
-
+        // die listen müssen init werden auch wenn wir sie später ersetzen
         pokemons = new ArrayList<>();
 
         // Das beides muss immer nacheinander passieren.
@@ -49,12 +49,8 @@ public class MainActivity extends AppCompatActivity {
         APIRequests.getInstance().listen.observe(this, new Observer<JSONObject>() {
             @Override
             public void onChanged(JSONObject jsonObject) {
-                Log.e("b4OnChange","succ");
                 try {
-                    Log.e("inChange","succ");
-                    pokemons = jp.getAllPoke(jsonObject);
-                    spinner.setAdapter(new ArrayAdapter<>(MainActivity.this,
-                            android.R.layout.simple_spinner_dropdown_item,pokemons));
+                    getAllPokemon(jsonObject);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -72,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
            @Override
            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+               // das funktioniert nicht wirklich außer wir machen immer das erste Element unserer Liste leer.
                if (position == 0){
                    //Display toast message
                    Toast.makeText(getApplicationContext(),
@@ -116,8 +113,13 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("pokeName",textView.getText().toString());
         startActivity(intent);
     }
+    public void getAllPokemon(JSONObject jsonObject) throws JSONException {
 
-    // total sinnlos, war nur dafür da um z testen ob das richtige jsonobject geladen wird
+        pokemons = jp.getAllPoke(jsonObject);
+        spinner.setAdapter(new ArrayAdapter<>(MainActivity.this,
+                android.R.layout.simple_spinner_dropdown_item,pokemons));
+    }
+    // total sinnlos, war nur dafür da um z testen ob das richtige jsonobject geladen wird -- delete later
     public void testNewApi() {
         APIRequests.getInstance(this).requestGet(APIRequests.getInstance().getPokemonList());
         APIRequests.getInstance().listen.observe(this, new Observer<JSONObject>() {

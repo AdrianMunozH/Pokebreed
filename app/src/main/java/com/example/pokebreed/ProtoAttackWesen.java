@@ -24,7 +24,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//aus dieser Klasse sollen die funktionaliäten übernommen werden und dann gelöscht werden
 public class ProtoAttackWesen extends AppCompatActivity {
     private Spinner sAttack;
     private Spinner sWesen;
@@ -48,29 +48,27 @@ public class ProtoAttackWesen extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.imageView);
         attacks = new ArrayList<>();
 
+        // hier kriegen wir die daten aus der letzten Activity
         Intent intent = getIntent();
         pokemon = intent.getStringExtra("pokeName");
 
+        // nur als test um zu checken ob das richtige pokemon übergeben wurde
         tvAttack.setText(pokemon);
 
 
-        // source code und doc ---  https://github.com/bumptech/glide
-        //Glide.with(this).load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png").into(imageView);
 
-
+        //die pokemon daten sollten parallel in die pokemon klasse als neues objekt hinzugefügt werden
         APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemon(pokemon));
         APIRequests.getInstance().listen.observe(this, new Observer<JSONObject>() {
             @Override
             public void onChanged(JSONObject jsonObject) {
                 try {
-                    Log.e("onChangedAttack","succ");
-                    attacks = jp.getAllAttacks(jsonObject);
                     loadPicture(jsonObject);
+                    getPokemonAttacks(jsonObject);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                sAttack.setAdapter(new ArrayAdapter<>(ProtoAttackWesen.this,
-                        android.R.layout.simple_spinner_dropdown_item,attacks));
+
             }
         });
 
@@ -98,7 +96,7 @@ public class ProtoAttackWesen extends AppCompatActivity {
             }
         });
 
-
+        // hierfür ist der parser noch nicht fertig um den typ rauszufinden
         typePoke = new ArrayList<>();
         APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemonOfType("grass"));
         APIRequests.getInstance().listen.observe(this, new Observer<JSONObject>() {
@@ -106,12 +104,11 @@ public class ProtoAttackWesen extends AppCompatActivity {
             public void onChanged(JSONObject jsonObject) {
                 try {
                     Log.e("onChangedType","succ");
-                    typePoke = jp.getPokemonOfType(jsonObject);
+                    getPokemonOfType(jsonObject);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                sWesen.setAdapter(new ArrayAdapter<>(ProtoAttackWesen.this,
-                        android.R.layout.simple_spinner_dropdown_item,typePoke));
+
             }
         });
 
@@ -140,8 +137,19 @@ public class ProtoAttackWesen extends AppCompatActivity {
         });
 
     }
+    public void getPokemonOfType(JSONObject jsonObject) throws JSONException {
+        typePoke = jp.getPokemonOfType(jsonObject);
+        sWesen.setAdapter(new ArrayAdapter<>(ProtoAttackWesen.this,
+                android.R.layout.simple_spinner_dropdown_item,typePoke));
+    }
     public void loadPicture(JSONObject jsonObject) throws JSONException {
         // source code und doc ---  https://github.com/bumptech/glide
         Glide.with(this).load(jp.getPicture(jsonObject)).into(imageView);
+    }
+
+    public void getPokemonAttacks(JSONObject jsonObject) throws JSONException {
+        attacks = jp.getAllAttacks(jsonObject);
+        sAttack.setAdapter(new ArrayAdapter<>(ProtoAttackWesen.this,
+                android.R.layout.simple_spinner_dropdown_item,attacks));
     }
 }
