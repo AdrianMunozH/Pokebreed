@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Initialise variable
     private Spinner spinner;
-    private TextView textView;
+    private String sNumber;
     JSONParser jp = new JSONParser();
 
     //Button Attacken // Popupfenster attacken activity
@@ -72,7 +72,8 @@ public class MainActivity extends AppCompatActivity {
         //Start spinner
         //Assign variable
         spinner = findViewById(R.id.spinner);
-        textView = findViewById(R.id.textView);
+
+
 
 
 
@@ -85,14 +86,14 @@ public class MainActivity extends AppCompatActivity {
                    Toast.makeText(getApplicationContext(),
                           "Please Select one",Toast.LENGTH_SHORT).show();
                    //set empty value on textview
-                   textView.setText("");
+
                }else{
                    //get selected value
                    String sNumber = parent.getItemAtPosition(position).toString();
                    //set selected value on textview
-                   textView.setText(sNumber);
-               }
 
+               }
+               sNumber = parent.getItemAtPosition(position).toString();
            }
 
            @Override
@@ -153,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void nextActivity() {
         Intent intent = new Intent(this,ProtoAttackWesen.class);
-        intent.putExtra("pokeName",textView.getText().toString());
+        intent.putExtra("pokeName",sNumber.toString());
         startActivity(intent);
     }
     public void getAllPokemon(JSONObject jsonObject) throws JSONException {
