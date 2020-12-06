@@ -57,7 +57,14 @@
         android:text="Next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/button_attacken"
+        android:layout_width="180dp"
+        android:layout_height="47dp"
+        android:text="Attacken"
+        tools:layout_editor_absoluteX="212dp"
+        tools:layout_editor_absoluteY="541dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
