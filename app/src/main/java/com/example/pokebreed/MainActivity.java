@@ -41,12 +41,9 @@ public class MainActivity extends AppCompatActivity {
 
     //Button Attacken // Popupfenster attacken activity
     private Button attack_button;
-    public Activity context;
 
-    //create constructor
-    public MainActivity(Activity context) {
-        this.context = context;
-    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +117,38 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        //----------------------Anfang Attacken pop up fenster
+        attack_button = (Button) findViewById(R.id.button_attacken);
+        attack_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog = new Dialog(MainActivity.this);
+                //set content view
+                dialog.setContentView(R.layout.attacken_pop_up);
+                //Initialise width
+                int width = WindowManager.LayoutParams.MATCH_PARENT;
+                //Initialise height
+                int height = WindowManager.LayoutParams.WRAP_CONTENT;
+                //Set layout
+                dialog.getWindow().setLayout(width, height);
+                //Show dialog
+                dialog.show();
+
+
+                Button btUpdate = dialog.findViewById(R.id.bt_update);
+
+                btUpdate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Dismiss dialog
+                        dialog.dismiss();
+                    }
+
+                });
+            }
+        });
+        //----------------Ende popup fenster
     }
 
     private void nextActivity() {
@@ -150,38 +179,5 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-        //----------------------Anfang Attacken pop up fenster
-        attack_button = (Button) findViewById(R.id.button_attacken);
-        attack_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Dialog dialog = new Dialog(context);
-                //set content view
-                dialog.setContentView(R.layout.attacken_pop_up);
-                //Initialise width
-                int width = WindowManager.LayoutParams.MATCH_PARENT;
-                //Initialise height
-                int height = WindowManager.LayoutParams.WRAP_CONTENT;
-                //Set layout
-                dialog.getWindow().setLayout(width, height);
-                //Show dialog
-                dialog.show();
-
-
-                Button btUpdate = dialog.findViewById(R.id.bt_update);
-
-                btUpdate.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //Dismiss dialog
-                        dialog.dismiss();
-                    }
-
-                });
-            }
-        });
-        //----------------Ende popup fenster
-
     }
 }

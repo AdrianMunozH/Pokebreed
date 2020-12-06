@@ -63,8 +63,10 @@
         android:id="@+id/button_attacken"
         android:layout_width="180dp"
         android:layout_height="47dp"
+        android:layout_marginTop="147dp"
+        android:layout_marginEnd="19dp"
         android:text="Attacken"
-        tools:layout_editor_absoluteX="212dp"
-        tools:layout_editor_absoluteY="541dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
