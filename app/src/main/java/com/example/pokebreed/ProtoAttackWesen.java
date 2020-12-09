@@ -65,6 +65,7 @@ public class ProtoAttackWesen extends AppCompatActivity {
                 try {
                     loadPicture(jsonObject);
                     getPokemonAttacks(jsonObject);
+                    jp.getAllAbilities(jsonObject);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

@@ -5,23 +5,16 @@ import androidx.lifecycle.Observer;
 
 import android.content.Intent;
 
-import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.android.volley.*;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -56,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         pokemons = new ArrayList<>();
 
         // Das beides muss immer nacheinander passieren.
-        APIRequests.getInstance().requestGet("pokemon?limit=5");
+        APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemonList());
         APIRequests.getInstance().listen.observe(this, new Observer<JSONObject>() {
             @Override
             public void onChanged(JSONObject jsonObject) {
@@ -101,14 +94,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        Button button = findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                testNewApi();
-            }
-        });
-        //ende spinner
 
         Button button2 = findViewById(R.id.button2);
         button2.setOnClickListener(new View.OnClickListener() {
@@ -117,6 +102,17 @@ public class MainActivity extends AppCompatActivity {
                 nextActivity();
             }
         });
+        /*
+        Button button = findViewById(R.id.btnAttack);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                testNewApi();
+            }
+        });
+        //ende spinner
+
+
 
 
         //----------------------Anfang Attacken pop up fenster
@@ -150,10 +146,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //----------------Ende popup fenster
+        */
+
     }
 
+
+
     private void nextActivity() {
-        Intent intent = new Intent(this,ProtoAttackWesen.class);
+        Intent intent = new Intent(this,PokemonStats.class);
         intent.putExtra("pokeName",sNumber.toString());
         startActivity(intent);
     }
