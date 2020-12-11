@@ -1,9 +1,11 @@
 package com.example.pokebreed;
 
 import android.content.Context;
+import android.util.ArrayMap;
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -17,8 +19,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
-import java.util.Observer;
 
 public class APIRequests {
     final private String baseurl = "https://pokeapi.co/api/v2/";
@@ -27,11 +29,25 @@ public class APIRequests {
 
 
     //test
+    private JSONObject allPokemon;
+    private JSONObject pokemon;
+    private JSONObject types;
+
+
+    private Map<String,MutableLiveData> listeners = new ArrayMap<>();
+
+
+
     public JSONObject jsonObject;
-    MutableLiveData<JSONObject> listen = new MutableLiveData<>();
+    private MutableLiveData<JSONObject> listen = new MutableLiveData<>();
 
     public APIRequests(Context context) {
+
         requestQueue = Volley.newRequestQueue(context);
+        listeners.put("pokemon", new MutableLiveData());
+        listeners.put("allPokemon", new MutableLiveData());
+        listeners.put("types", new MutableLiveData());
+
     }
 
     public static synchronized APIRequests getInstance(Context context) {
@@ -87,14 +103,18 @@ public class APIRequests {
 
      */
 
-    public void requestGet(String urlEnd) {
+    public Map<String, MutableLiveData> getListeners() {
+        return listeners;
+    }
+
+    public void requestGet(String urlEnd, final String listenerKey) {
         String url = baseurl.concat(urlEnd);
 
         JsonObjectRequest json = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                setJsonObject(response);
-                listen.setValue(jsonObject);
+                //setJsonObject(response);
+                listeners.get(listenerKey).setValue(response);
                 Log.e("REST","rest erfolgreich" + response.toString());
             }
         }, new Response.ErrorListener() {
@@ -113,7 +133,6 @@ public class APIRequests {
     public String getPokemon(String name) {
         return "pokemon/" + name;
     }
-
     public String getPokemonOfType(String type) {
         return "type/"+type;
     }
