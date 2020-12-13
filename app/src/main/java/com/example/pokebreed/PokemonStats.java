@@ -29,6 +29,7 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
     private String pokemon;
     private TextView pokemonName;
     private JSONParser jp;
+    private Spinner movesSpinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +45,8 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
 
         pokemonName.setText(pokemon);
 
-
+        //moves Spinner
+        movesSpinner = findViewById(R.id.spFähigkeiten);
 
         //DVValues Spinner
         final Spinner KPSpinner= findViewById(R.id.spinnerKP);
@@ -69,6 +71,9 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
         SpeSpinner.setAdapter(adapter);
         SpeSpinner.setOnItemSelectedListener(this);
 
+        //moves APIGet
+
+
         //SetAllBestBTN
         Button AllBest= findViewById(R.id.AllBest);
         AllBest.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +96,7 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
             public void onChanged(JSONObject jsonObject) {
                 try {
                     loadPicture(jsonObject);
+                    getPokemonAbilities(jsonObject);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -114,5 +120,11 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    public void getPokemonAbilities(JSONObject jsonObject) throws JSONException {
+        List<String> abilities = jp.getAllAbilities(jsonObject);
+        movesSpinner.setAdapter(new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item,abilities));
     }
 }
