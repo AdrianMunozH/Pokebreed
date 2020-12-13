@@ -1,6 +1,7 @@
 package com.example.pokebreed;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 import android.content.Intent;
@@ -53,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
         pokemons = new ArrayList<>();
 
         // Das beides muss immer nacheinander passieren.
-        APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemonList(),"allPokemon");
-        APIRequests.getInstance().getListeners().get("allPokemon").observe(this, new Observer<JSONObject>() {
+        MutableLiveData allPokelistener = APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemonList());
+        allPokelistener.observe(this, new Observer<JSONObject>() {
             @Override
             public void onChanged(JSONObject jsonObject) {
                 try {
@@ -160,8 +161,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void apiLoadPicture() {
-        APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemon(sNumber),"pokemon");
-        APIRequests.getInstance().getListeners().get("pokemon").observe(this, new Observer<JSONObject>() {
+        MutableLiveData picListener = APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemon(sNumber));
+        picListener.observe(this, new Observer<JSONObject>() {
             @Override
             public void onChanged(JSONObject jsonObject) {
                 try {
@@ -191,8 +192,8 @@ public class MainActivity extends AppCompatActivity {
     }
     // total sinnlos, war nur dafür da um z testen ob das richtige jsonobject geladen wird -- delete later
     public void testNewApi() {
-        APIRequests.getInstance(this).requestGet(APIRequests.getInstance().getPokemonList(),"allPokemon");
-        APIRequests.getInstance().getListeners().get("allPokemon").observe(this, new Observer<JSONObject>() {
+        MutableLiveData allPokeListener = APIRequests.getInstance(this).requestGet(APIRequests.getInstance().getPokemonList());
+        allPokeListener.observe(this, new Observer<JSONObject>() {
             @Override
             public void onChanged(JSONObject jsonObject) {
                 Log.e("b4OnChange","succ");

@@ -1,6 +1,7 @@
 package com.example.pokebreed;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 import android.content.Intent;
@@ -84,8 +85,8 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
         });
 
 
-        APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemon(pokemon),"pokemon");
-        APIRequests.getInstance().getListeners().get("pokemon").observe(this, new Observer<JSONObject>() {
+        MutableLiveData pokeListener = APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemon(pokemon));
+        pokeListener.observe(this, new Observer<JSONObject>() {
             @Override
             public void onChanged(JSONObject jsonObject) {
                 try {
