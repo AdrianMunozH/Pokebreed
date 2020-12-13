@@ -54,11 +54,12 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="98dp"
-        android:layout_height="21dp"
-        android:layout_marginStart="28dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
         android:layout_marginTop="64dp"
-        android:text="Überschrift"
+        android:text="Determinant Values"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnAttack" />
 
@@ -66,9 +67,9 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="36dp"
         android:layout_marginTop="24dp"
-        android:text="TextView"
+        android:text="KP"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -76,9 +77,9 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="24dp"
-        android:text="TextView"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="14dp"
+        android:text="Attack"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -86,9 +87,9 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
-        android:text="TextView"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="14dp"
+        android:text="Defense"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -96,9 +97,9 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="28dp"
-        android:text="TextView"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="13dp"
+        android:text="Sp. Attack"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -106,9 +107,9 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="36dp"
-        android:text="TextView"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="13dp"
+        android:text="Sp. Defense"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -116,9 +117,9 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
-        android:text="TextView"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="13dp"
+        android:text="Speed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -133,57 +134,67 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
-        android:id="@+id/spinner4"
-        android:layout_width="200dp"
+        android:id="@+id/spinnerSpDef"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="57dp"
-        android:layout_marginTop="33dp"
-        app:layout_constraintStart_toEndOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/spinner7" />
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerSpAtk" />
 
     <Spinner
-        android:id="@+id/spinner9"
-        android:layout_width="200dp"
+        android:id="@+id/spinnerKP"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="172dp"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/spFähigkeiten" />
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Spinner
-        android:id="@+id/spinner5"
-        android:layout_width="200dp"
+        android:id="@+id/spinnerAtk"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="59dp"
-        android:layout_marginTop="22dp"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/spinner9" />
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerKP" />
 
     <Spinner
-        android:id="@+id/spinner6"
-        android:layout_width="200dp"
+        android:id="@+id/spinnerDef"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="58dp"
-        android:layout_marginTop="35dp"
-        app:layout_constraintStart_toEndOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/spinner5" />
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerAtk" />
 
     <Spinner
-        android:id="@+id/spinner7"
-        android:layout_width="200dp"
+        android:id="@+id/spinnerSpAtk"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="61dp"
-        android:layout_marginTop="19dp"
-        app:layout_constraintStart_toEndOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/spinner6" />
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerDef" />
 
     <Spinner
-        android:id="@+id/spinner8"
-        android:layout_width="200dp"
+        android:id="@+id/spinnerSpe"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="57dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/spinner4" />
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerSpDef" />
+
+    <Button
+        android:id="@+id/AllBest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="8dp"
+        android:text="Set All Best"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerKP"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

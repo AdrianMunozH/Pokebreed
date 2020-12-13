@@ -49,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
         pokemons = new ArrayList<>();
 
         // Das beides muss immer nacheinander passieren.
-        APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemonList());
-        APIRequests.getInstance().listen.observe(this, new Observer<JSONObject>() {
+        APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemonList(),"allPokemon");
+        APIRequests.getInstance().getListeners().get("allPokemon").observe(this, new Observer<JSONObject>() {
             @Override
             public void onChanged(JSONObject jsonObject) {
                 try {
@@ -165,8 +165,8 @@ public class MainActivity extends AppCompatActivity {
     }
     // total sinnlos, war nur dafür da um z testen ob das richtige jsonobject geladen wird -- delete later
     public void testNewApi() {
-        APIRequests.getInstance(this).requestGet(APIRequests.getInstance().getPokemonList());
-        APIRequests.getInstance().listen.observe(this, new Observer<JSONObject>() {
+        APIRequests.getInstance(this).requestGet(APIRequests.getInstance().getPokemonList(),"pokemon");
+        APIRequests.getInstance().getListeners().get("pokemon").observe(this, new Observer<JSONObject>() {
             @Override
             public void onChanged(JSONObject jsonObject) {
                 Log.e("b4OnChange","succ");
