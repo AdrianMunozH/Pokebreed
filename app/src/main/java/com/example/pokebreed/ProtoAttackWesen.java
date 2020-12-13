@@ -58,8 +58,8 @@ public class ProtoAttackWesen extends AppCompatActivity {
 
 
         //die pokemon daten sollten parallel in die pokemon klasse als neues objekt hinzugefügt werden
-        APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemon(pokemon));
-        APIRequests.getInstance().listen.observe(this, new Observer<JSONObject>() {
+        APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemon(pokemon),"pokemon");
+        APIRequests.getInstance().getListeners().get("pokemon").observe(this, new Observer<JSONObject>() {
             @Override
             public void onChanged(JSONObject jsonObject) {
                 try {
@@ -99,8 +99,8 @@ public class ProtoAttackWesen extends AppCompatActivity {
 
         // hierfür ist der parser noch nicht fertig um den typ rauszufinden
         typePoke = new ArrayList<>();
-        APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemonOfType("grass"));
-        APIRequests.getInstance().listen.observe(this, new Observer<JSONObject>() {
+        APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemonOfType("grass"),"types");
+        APIRequests.getInstance().getListeners().get("types").observe(this, new Observer<JSONObject>() {
             @Override
             public void onChanged(JSONObject jsonObject) {
                 try {

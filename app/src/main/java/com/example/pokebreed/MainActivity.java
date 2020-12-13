@@ -13,8 +13,11 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Button Attacken // Popupfenster attacken activity
     private Button attack_button;
+    private ImageView imageView;
 
 
 
@@ -49,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
         pokemons = new ArrayList<>();
 
         // Das beides muss immer nacheinander passieren.
-        APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemonList());
-        APIRequests.getInstance().listen.observe(this, new Observer<JSONObject>() {
+        APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemonList(),"allPokemon");
+        APIRequests.getInstance().getListeners().get("allPokemon").observe(this, new Observer<JSONObject>() {
             @Override
             public void onChanged(JSONObject jsonObject) {
                 try {
@@ -61,18 +65,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        imageView = (ImageView) findViewById(R.id.pokemonPicMain);
 
         //Start spinner
         //Assign variable
         spinner = findViewById(R.id.spinner);
 
 
-
-
-
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
            @Override
            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+               sNumber = parent.getItemAtPosition(position).toString();
                // das funktioniert nicht wirklich außer wir machen immer das erste Element unserer Liste leer.
                if (position == 0){
                    //Display toast message
@@ -82,11 +85,14 @@ public class MainActivity extends AppCompatActivity {
 
                }else{
                    //get selected value
-                   String sNumber = parent.getItemAtPosition(position).toString();
+                   //String sNumber = parent.getItemAtPosition(position).toString();
                    //set selected value on textview
 
+
+                   apiLoadPicture();
+
                }
-               sNumber = parent.getItemAtPosition(position).toString();
+
            }
 
            @Override
@@ -102,6 +108,11 @@ public class MainActivity extends AppCompatActivity {
                 nextActivity();
             }
         });
+
+
+
+
+        //delete this ende
         /*
         Button button = findViewById(R.id.btnAttack);
         button.setOnClickListener(new View.OnClickListener() {
@@ -150,7 +161,24 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void apiLoadPicture() {
+        APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemon(sNumber),"pokemon");
+        APIRequests.getInstance().getListeners().get("pokemon").observe(this, new Observer<JSONObject>() {
+            @Override
+            public void onChanged(JSONObject jsonObject) {
+                try {
+                    loadPicture(jsonObject);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
+    public void loadPicture(JSONObject jsonObject) throws JSONException {
+        // source code und doc ---  https://github.com/bumptech/glide
+        Glide.with(this).load(jp.getPicture(jsonObject)).into(imageView);
+    }
 
     private void nextActivity() {
         Intent intent = new Intent(this,PokemonStats.class);
@@ -165,8 +193,8 @@ public class MainActivity extends AppCompatActivity {
     }
     // total sinnlos, war nur dafür da um z testen ob das richtige jsonobject geladen wird -- delete later
     public void testNewApi() {
-        APIRequests.getInstance(this).requestGet(APIRequests.getInstance().getPokemonList());
-        APIRequests.getInstance().listen.observe(this, new Observer<JSONObject>() {
+        APIRequests.getInstance(this).requestGet(APIRequests.getInstance().getPokemonList(),"allPokemon");
+        APIRequests.getInstance().getListeners().get("allPokemon").observe(this, new Observer<JSONObject>() {
             @Override
             public void onChanged(JSONObject jsonObject) {
                 Log.e("b4OnChange","succ");

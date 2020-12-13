@@ -39,8 +39,8 @@ public class PokemonStats extends AppCompatActivity {
 
         pokemonName.setText(pokemon);
 
-        APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemon(pokemon));
-        APIRequests.getInstance().listen.observe(this, new Observer<JSONObject>() {
+        APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemon(pokemon),"pokemon");
+        APIRequests.getInstance().getListeners().get("pokemon").observe(this, new Observer<JSONObject>() {
             @Override
             public void onChanged(JSONObject jsonObject) {
                 try {
