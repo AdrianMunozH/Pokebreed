@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -18,6 +19,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AlertDialogLayout;
+import androidx.lifecycle.Observer;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class pop_up_attacken extends AppCompatActivity  {
 
@@ -28,15 +36,33 @@ public class pop_up_attacken extends AppCompatActivity  {
     String sNumber; String sNumber2;
     String sNumber3; String sNumber4;
 
+    public List<String> attackenListe;
+    JSONParser jp = new JSONParser();
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        APIRequests.getInstance(this);
+
         spinner1 = findViewById(R.id.spinner_1);
         spinner2 = findViewById(R.id.spinner_2);
         spinner3 = findViewById(R.id.spinner_3);
         spinner4 = findViewById(R.id.spinner_4);
 
+        attackenListe = new ArrayList<>();
 
+
+        APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemonList());
+        APIRequests.getInstance().listen.observe(this, new Observer<JSONObject>() {
+            @Override
+            public void onChanged(JSONObject jsonObject) {
+                try {
+                    getAllAttacken(jsonObject);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -144,5 +170,21 @@ public class pop_up_attacken extends AppCompatActivity  {
             }
         });
 
+
+
+    }
+
+    //spinner laden
+    public void getAllAttacken(JSONObject jsonObject) throws JSONException {
+
+        attackenListe = jp.getAllPoke(jsonObject);
+        spinner1.setAdapter(new ArrayAdapter<>(pop_up_attacken.this,
+                android.R.layout.simple_spinner_dropdown_item,attackenListe));
+        spinner2.setAdapter(new ArrayAdapter<>(pop_up_attacken.this,
+                android.R.layout.simple_spinner_dropdown_item,attackenListe));
+        spinner3.setAdapter(new ArrayAdapter<>(pop_up_attacken.this,
+                android.R.layout.simple_spinner_dropdown_item,attackenListe));
+        spinner4.setAdapter(new ArrayAdapter<>(pop_up_attacken.this,
+                android.R.layout.simple_spinner_dropdown_item,attackenListe));
     }
 }
