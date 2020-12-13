@@ -19,4 +19,32 @@
         <item>best (31)</item>
     </string-array>
 
+    <string-array name="Natures">
+        <item>Hardy</item>
+        <item>Lonely (+Atk, -Def)</item>
+        <item>Brave (+Atk, -Spe)</item>
+        <item>Adamant (+Atk, -Sp. Atk)</item>
+        <item>Naughty (+Atk, -Sp. Def)</item>
+        <item>Docile</item>
+        <item>Bold (+Def, -Atk)</item>
+        <item>Relaxed (+Def, -Spe)</item>
+        <item>Impish (+Def, -Sp. Atk)</item>
+        <item>Lax (+Def, -Sp. Def)</item>
+        <item>Serious</item>
+        <item>Timid (+Spe, -Atk)</item>
+        <item>Hasty (+Spe, -Def)</item>
+        <item>Jolly (+Spe, -Sp. Atk)</item>
+        <item>Naive (+Spe, -Sp.  Def)</item>
+        <item>Bashful</item>
+        <item>Modest (+Sp. Atk, -Atk)</item>
+        <item>Mild (+Sp. Atk, -Spe)</item>
+        <item>Quiet (+Sp. Atk, -Spe)</item>
+        <item>Rash (+Sp. Atk, -Sp. Def)</item>
+        <item>Quirky</item>
+        <item>Calm (+Sp. Def, -Atk)</item>
+        <item>Gentle (+Sp. Def, -Def)</item>
+        <item>Sassy (+Sp. Def, -Spe)</item>
+        <item>Careful (+Sp.Def, -Sp. Atk)</item>
+    </string-array>
+
 </resources>

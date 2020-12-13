@@ -45,16 +45,21 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
 
         pokemonName.setText(pokemon);
 
+
+        //Button
+        Button AllBest= findViewById(R.id.AllBest);
         //moves Spinner
         movesSpinner = findViewById(R.id.spFähigkeiten);
 
-        //DVValues Spinner
+        // Spinner
         final Spinner KPSpinner= findViewById(R.id.spinnerKP);
         final Spinner AtkSpinner= findViewById(R.id.spinnerAtk);
         final Spinner DefSpinner= findViewById(R.id.spinnerDef);
         final Spinner SpAtkSpinner= findViewById(R.id.spinnerSpAtk);
         final Spinner SpDefSpinner= findViewById(R.id.spinnerSpDef);
         final Spinner SpeSpinner= findViewById(R.id.spinnerSpe);
+
+        final Spinner NatureSpinner = findViewById(R.id.spWesen);
         //Adapter
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.DVValues,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -71,11 +76,20 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
         SpeSpinner.setAdapter(adapter);
         SpeSpinner.setOnItemSelectedListener(this);
 
-        //moves APIGet
+        ArrayAdapter<CharSequence> natureAdapter = ArrayAdapter.createFromResource(this,R.array.Natures,android.R.layout.simple_spinner_item);
+        natureAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        NatureSpinner.setAdapter(natureAdapter);
+
+
+
+
+
+
+
 
 
         //SetAllBestBTN
-        Button AllBest= findViewById(R.id.AllBest);
+
         AllBest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,7 +128,7 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String text = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(),text,Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
