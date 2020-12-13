@@ -43,6 +43,47 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
 
         pokemonName.setText(pokemon);
 
+
+
+        //DVValues Spinner
+        final Spinner KPSpinner= findViewById(R.id.spinnerKP);
+        final Spinner AtkSpinner= findViewById(R.id.spinnerAtk);
+        final Spinner DefSpinner= findViewById(R.id.spinnerDef);
+        final Spinner SpAtkSpinner= findViewById(R.id.spinnerSpAtk);
+        final Spinner SpDefSpinner= findViewById(R.id.spinnerSpDef);
+        final Spinner SpeSpinner= findViewById(R.id.spinnerSpe);
+        //Adapter
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.DVValues,android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        KPSpinner.setAdapter(adapter);
+        KPSpinner.setOnItemSelectedListener(this);
+        AtkSpinner.setAdapter(adapter);
+        AtkSpinner.setOnItemSelectedListener(this);
+        DefSpinner.setAdapter(adapter);
+        DefSpinner.setOnItemSelectedListener(this);
+        SpAtkSpinner.setAdapter(adapter);
+        SpAtkSpinner.setOnItemSelectedListener(this);
+        SpDefSpinner.setAdapter(adapter);
+        SpDefSpinner.setOnItemSelectedListener(this);
+        SpeSpinner.setAdapter(adapter);
+        SpeSpinner.setOnItemSelectedListener(this);
+
+        //SetAllBestBTN
+        Button AllBest= findViewById(R.id.AllBest);
+        AllBest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                KPSpinner.setSelection(5);
+                AtkSpinner.setSelection(5);
+                DefSpinner.setSelection(5);
+                SpAtkSpinner.setSelection(5);
+                SpDefSpinner.setSelection(5);
+                SpeSpinner.setSelection(5);
+
+            }
+        });
+
+
         APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemon(pokemon),"pokemon");
         APIRequests.getInstance().getListeners().get("pokemon").observe(this, new Observer<JSONObject>() {
             @Override
