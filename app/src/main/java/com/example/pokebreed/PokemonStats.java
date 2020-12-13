@@ -1,6 +1,7 @@
 package com.example.pokebreed;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -19,43 +21,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class PokemonStats extends AppCompatActivity {
+public class PokemonStats extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private ImageView imageView;
     private List<String> attacks;
     private String pokemon;
     private TextView pokemonName;
     private JSONParser jp;
-    private Spinner spinnerwes;
-    private List<String> wesen = new ArrayList<>( Arrays.asList("Robust",
-            "Sanft",
-            "Zaghaft",
-            "Kauzig",
-            "Ernst",
-            "Solo: -Vert. +Angr.",
-            "Hart: -Sp.Angr. +Angr.",
-            "Frech: -Sp.Vert. +Angr.",
-            "Mutig: -Init. +Angr.",
-            "Kühn: -Angr. +Vert.",
-            "pfiffig: -Sp.Angr. +Vert.",
-            "Lasch: -Sp.Vert. +Vert.",
-            "Locker: -Init. +Vert.",
-            "Mäßig: -Angr. +Sp.Angr.",
-            "Mild: -Vert. +Sp.Angr.",
-            "Hitzig: -Sp.Vert. +Sp.Angr.",
-            "Ruhig: -Init. +Sp.Angr.",
-            "Still: -Angr. +Sp.Vert."),
-            "Zart: -Vert. +Sp.Vert.",
-            "Sacht: -Sp.Angr. +Sp.Vert.",
-            "Forsch: -Init. +Sp.Vert.",
-            "Scheu: -Angr. +Init.",
-            "Hastig: -Vert. +Init.",
-            "Froh: -Sp.Angr. +Init.",
-            "Naiv: -Sp.Vert. +Init."
-    );
-
+    private Spinner movesSpinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,41 +45,61 @@ public class PokemonStats extends AppCompatActivity {
 
         pokemonName.setText(pokemon);
 
-        APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemon(pokemon));
-        APIRequests.getInstance().listen.observe(this, new Observer<JSONObject>() {
+        //moves Spinner
+        movesSpinner = findViewById(R.id.spFähigkeiten);
+
+        //DVValues Spinner
+        final Spinner KPSpinner= findViewById(R.id.spinnerKP);
+        final Spinner AtkSpinner= findViewById(R.id.spinnerAtk);
+        final Spinner DefSpinner= findViewById(R.id.spinnerDef);
+        final Spinner SpAtkSpinner= findViewById(R.id.spinnerSpAtk);
+        final Spinner SpDefSpinner= findViewById(R.id.spinnerSpDef);
+        final Spinner SpeSpinner= findViewById(R.id.spinnerSpe);
+        //Adapter
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.DVValues,android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        KPSpinner.setAdapter(adapter);
+        KPSpinner.setOnItemSelectedListener(this);
+        AtkSpinner.setAdapter(adapter);
+        AtkSpinner.setOnItemSelectedListener(this);
+        DefSpinner.setAdapter(adapter);
+        DefSpinner.setOnItemSelectedListener(this);
+        SpAtkSpinner.setAdapter(adapter);
+        SpAtkSpinner.setOnItemSelectedListener(this);
+        SpDefSpinner.setAdapter(adapter);
+        SpDefSpinner.setOnItemSelectedListener(this);
+        SpeSpinner.setAdapter(adapter);
+        SpeSpinner.setOnItemSelectedListener(this);
+
+        //moves APIGet
+
+
+        //SetAllBestBTN
+        Button AllBest= findViewById(R.id.AllBest);
+        AllBest.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onChanged(JSONObject jsonObject) {
-                try {
-                    loadPicture(jsonObject);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+            public void onClick(View v) {
+                KPSpinner.setSelection(5);
+                AtkSpinner.setSelection(5);
+                DefSpinner.setSelection(5);
+                SpAtkSpinner.setSelection(5);
+                SpDefSpinner.setSelection(5);
+                SpeSpinner.setSelection(5);
 
             }
         });
 
-        spinnerwes = findViewById(R.id.spWesen);
-        spinnerwes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+        MutableLiveData pokeListener = APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemon(pokemon));
+        pokeListener.observe(this, new Observer<JSONObject>() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // das funktioniert nicht wirklich außer wir machen immer das erste Element unserer Liste leer.
-                if (position == 0){
-                    //Display toast message
-                    Toast.makeText(getApplicationContext(),
-                            "Please Select one",Toast.LENGTH_SHORT).show();
-                    //set empty value on textview
-
-                }else{
-                    //get selected value
-                    String sNumber = parent.getItemAtPosition(position).toString();
-                    //set selected value on textview
-
+            public void onChanged(JSONObject jsonObject) {
+                try {
+                    loadPicture(jsonObject);
+                    getPokemonAbilities(jsonObject);
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-                sNumber = parent.getItemAtPosition(position).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
@@ -116,5 +110,21 @@ public class PokemonStats extends AppCompatActivity {
         Glide.with(this).load(jp.getPicture(jsonObject)).into(imageView);
     }
 
+    //Für die DV Spinner
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String text = parent.getItemAtPosition(position).toString();
+        Toast.makeText(parent.getContext(),text,Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    public void getPokemonAbilities(JSONObject jsonObject) throws JSONException {
+        List<String> abilities = jp.getAllAbilities(jsonObject);
+        movesSpinner.setAdapter(new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item,abilities));
+    }
 }

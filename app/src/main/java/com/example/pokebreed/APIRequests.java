@@ -27,26 +27,21 @@ public class APIRequests {
     RequestQueue requestQueue;
     private static APIRequests instance = null;
 
+    //wird nur wieder implementiert wenn fehler auftauchen
+    //private Map<String,MutableLiveData> listeners = new ArrayMap<>();
 
-    //test
-    private JSONObject allPokemon;
-    private JSONObject pokemon;
-    private JSONObject types;
-
-
-    private Map<String,MutableLiveData> listeners = new ArrayMap<>();
-
-
-
-    public JSONObject jsonObject;
-    private MutableLiveData<JSONObject> listen = new MutableLiveData<>();
 
     public APIRequests(Context context) {
 
         requestQueue = Volley.newRequestQueue(context);
+
+        // Werden erstmal auskommentiert weil sie zu kompleziert und nicht nötig sind.
+        /*
         listeners.put("pokemon", new MutableLiveData());
         listeners.put("allPokemon", new MutableLiveData());
         listeners.put("types", new MutableLiveData());
+
+         */
 
     }
 
@@ -64,44 +59,7 @@ public class APIRequests {
     }
 
 
-    public void setJsonObject(JSONObject jsonObject) {
-        Log.e("setter", jsonObject.toString());
-        this.jsonObject = jsonObject;
-    }
-
     /*
-    public void getAllPoke() throws JSONException {
-        requestGet("pokemon?limit=800");
-        listen.observer(context, new Observer() {
-            @Override
-            public void update(Observable observable, Object o) {
-
-            }
-        });
-
-        result.setListener(new JsonListener.OnChangeListener() {
-            @Override
-            public void onChange() {
-
-                Log.e("onChange: ", "yes");
-                try {
-                    JSONArray jsonArray = jsonObject.getJSONArray("results");
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject pokemon = jsonArray.getJSONObject(i);
-                        String name = pokemon.getString("name");
-                        pokemonList.add(name);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-
-
-    }
-
-     */
 
     public Map<String, MutableLiveData> getListeners() {
         return listeners;
@@ -126,6 +84,27 @@ public class APIRequests {
         });
         requestQueue.add(json);
 
+    }
+    */
+
+    public MutableLiveData<JSONObject> requestGet(String urlEnd) {
+        final MutableLiveData listener = new MutableLiveData();
+        String url = baseurl.concat(urlEnd);
+
+        JsonObjectRequest json = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                listener.setValue(response);
+                Log.e("REST","rest erfolgreich" + response.toString());
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.err.println(error);
+            }
+        });
+        requestQueue.add(json);
+        return listener;
     }
     public String getPokemonList() {
         return "pokemon?limit=800";

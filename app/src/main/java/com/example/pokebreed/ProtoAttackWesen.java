@@ -1,6 +1,7 @@
 package com.example.pokebreed;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 import android.content.Intent;
@@ -58,8 +59,8 @@ public class ProtoAttackWesen extends AppCompatActivity {
 
 
         //die pokemon daten sollten parallel in die pokemon klasse als neues objekt hinzugefügt werden
-        APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemon(pokemon));
-        APIRequests.getInstance().listen.observe(this, new Observer<JSONObject>() {
+        MutableLiveData pokemonListener = APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemon(pokemon));
+        pokemonListener.observe(this, new Observer<JSONObject>() {
             @Override
             public void onChanged(JSONObject jsonObject) {
                 try {
@@ -99,8 +100,8 @@ public class ProtoAttackWesen extends AppCompatActivity {
 
         // hierfür ist der parser noch nicht fertig um den typ rauszufinden
         typePoke = new ArrayList<>();
-        APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemonOfType("grass"));
-        APIRequests.getInstance().listen.observe(this, new Observer<JSONObject>() {
+        MutableLiveData typeListener = APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemonOfType("grass"));
+        typeListener.observe(this, new Observer<JSONObject>() {
             @Override
             public void onChanged(JSONObject jsonObject) {
                 try {
