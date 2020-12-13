@@ -5,10 +5,14 @@ import androidx.lifecycle.Observer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -18,7 +22,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PokemonStats extends AppCompatActivity {
+public class PokemonStats extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private ImageView imageView;
     private List<String> attacks;
     private String pokemon;
@@ -58,5 +62,15 @@ public class PokemonStats extends AppCompatActivity {
         Glide.with(this).load(jp.getPicture(jsonObject)).into(imageView);
     }
 
+    //Für die DV Spinner
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String text = parent.getItemAtPosition(position).toString();
+        Toast.makeText(parent.getContext(),text,Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }

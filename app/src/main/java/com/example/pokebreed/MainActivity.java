@@ -72,6 +72,9 @@ public class MainActivity extends AppCompatActivity {
         spinner = findViewById(R.id.spinner);
 
 
+
+
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
            @Override
            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -85,14 +88,14 @@ public class MainActivity extends AppCompatActivity {
 
                }else{
                    //get selected value
-                   //String sNumber = parent.getItemAtPosition(position).toString();
+                   String sNumber = parent.getItemAtPosition(position).toString();
                    //set selected value on textview
 
 
                    apiLoadPicture();
 
                }
-
+               sNumber = parent.getItemAtPosition(position).toString();
            }
 
            @Override
@@ -108,11 +111,6 @@ public class MainActivity extends AppCompatActivity {
                 nextActivity();
             }
         });
-
-
-
-
-        //delete this ende
         /*
         Button button = findViewById(R.id.btnAttack);
         button.setOnClickListener(new View.OnClickListener() {

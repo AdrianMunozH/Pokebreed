@@ -4,4 +4,19 @@
         <item>First</item>
         <item>Second</item>
     </string-array>
+
+    <string name="spinnertitle">
+        Select Pokemon
+    </string>
+
+
+    <string-array name="DVValues">
+        <item>no good (0)</item>
+        <item>decent (1-15)</item>
+        <item>pretty good (16-25)</item>
+        <item>very good (26-29)</item>
+        <item>fantastic (30)</item>
+        <item>best (31)</item>
+    </string-array>
+
 </resources>
