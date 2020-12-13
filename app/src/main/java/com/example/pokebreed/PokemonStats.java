@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -30,6 +33,7 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
     private TextView pokemonName;
     private JSONParser jp;
     private Spinner movesSpinner;
+    private Button attack_button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,6 +121,40 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
 
             }
         });
+
+        //----------------------Anfang Attacken pop up fenster
+        attack_button = (Button) findViewById(R.id.btnAttack);
+        attack_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("popup", "hat geklappt");
+                final Dialog dialog = new Dialog(PokemonStats.this);
+                //set content view
+                dialog.setContentView(R.layout.attacken_pop_up);
+                //Initialise width
+                int width = WindowManager.LayoutParams.MATCH_PARENT;
+                //Initialise height
+                int height = WindowManager.LayoutParams.WRAP_CONTENT;
+                //Set layout
+                dialog.getWindow().setLayout(width, height);
+                //Show dialog
+                dialog.show();
+
+
+                Button btUpdate = dialog.findViewById(R.id.bt_update);
+
+                btUpdate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Dismiss dialog
+                        dialog.dismiss();
+                    }
+
+                });
+            }
+        });
+        //----------------Ende popup fenster
+
     }
 
     public void loadPicture(JSONObject jsonObject) throws JSONException {

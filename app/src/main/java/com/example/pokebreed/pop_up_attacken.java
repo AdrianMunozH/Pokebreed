@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +15,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AlertDialogLayout;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 import org.json.JSONException;
@@ -36,6 +39,7 @@ public class pop_up_attacken extends AppCompatActivity  {
     String sNumber; String sNumber2;
     String sNumber3; String sNumber4;
 
+    TextView  pokemonName ;
     public List<String> attackenListe;
     JSONParser jp = new JSONParser();
 
@@ -50,13 +54,17 @@ public class pop_up_attacken extends AppCompatActivity  {
         spinner4 = findViewById(R.id.spinner_4);
 
         attackenListe = new ArrayList<>();
+        pokemonName = (TextView) findViewById(R.id.pokemonName);
+        String sText = pokemonName.getText().toString().trim();
+        Log.e("stext", "stext geklappt" + sText);
 
 
-        APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemonList());
-        APIRequests.getInstance().listen.observe(this, new Observer<JSONObject>() {
+        MutableLiveData allPokelistener = APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemon(sText));
+        allPokelistener.observe(this, new Observer<JSONObject>() {
             @Override
             public void onChanged(JSONObject jsonObject) {
                 try {
+                    Log.e("sp1 onchanged", "hat geklappt");
                     getAllAttacken(jsonObject);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -177,7 +185,9 @@ public class pop_up_attacken extends AppCompatActivity  {
     //spinner laden
     public void getAllAttacken(JSONObject jsonObject) throws JSONException {
 
+
         attackenListe = jp.getAllPoke(jsonObject);
+        Log.e("spinnerstuff", "hat geklappt"+ attackenListe.get(0));
         spinner1.setAdapter(new ArrayAdapter<>(pop_up_attacken.this,
                 android.R.layout.simple_spinner_dropdown_item,attackenListe));
         spinner2.setAdapter(new ArrayAdapter<>(pop_up_attacken.this,
