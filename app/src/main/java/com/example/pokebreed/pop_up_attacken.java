@@ -46,6 +46,7 @@ public class pop_up_attacken extends AppCompatActivity  {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.attacken_pop_up);
         APIRequests.getInstance(this);
 
         spinner1 = findViewById(R.id.spinner_1);
