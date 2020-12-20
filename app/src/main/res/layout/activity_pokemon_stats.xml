@@ -20,24 +20,15 @@
         android:id="@+id/pokemonPic"
         android:layout_width="200dp"
         android:layout_height="200dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <Button
-        android:id="@+id/btnAttack"
-        android:layout_width="160dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="16dp"
-        android:text="Attacken"
-        app:layout_constraintStart_toEndOf="@+id/pokemonPic"
-        app:layout_constraintTop_toBottomOf="@+id/spFähigkeiten" />
-
     <Spinner
         android:id="@+id/spWesen"
-        android:layout_width="160dp"
-        android:layout_height="30dp"
+        android:layout_width="163dp"
+        android:layout_height="44dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="24dp"
         app:layout_constraintStart_toEndOf="@+id/pokemonPic"
@@ -45,10 +36,10 @@
 
     <Spinner
         android:id="@+id/spFähigkeiten"
-        android:layout_width="160dp"
-        android:layout_height="30dp"
+        android:layout_width="162dp"
+        android:layout_height="39dp"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toEndOf="@+id/pokemonPic"
         app:layout_constraintTop_toBottomOf="@+id/spWesen" />
 
@@ -56,12 +47,12 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="308dp"
         android:text="Determinant Values"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAttack" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView4"
@@ -196,5 +187,16 @@
         android:text="Set All Best"
         app:layout_constraintBottom_toTopOf="@+id/spinnerKP"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+        android:id="@+id/spinner_attacken"
+        android:layout_width="162dp"
+        android:layout_height="46dp"
+        app:layout_constraintBottom_toTopOf="@+id/AllBest"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.915"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spFähigkeiten"
+        app:layout_constraintVertical_bias="0.168" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
