@@ -32,8 +32,12 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
     private String pokemon;
     private TextView pokemonName;
     private JSONParser jp;
+    private JSONParser jd;
     private Spinner movesSpinner;
-    private Button attack_button;
+    private Spinner spinnerattacken;
+    String sNumber;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,17 +47,18 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
         pokemonName = (TextView) findViewById(R.id.pokemonName);
         attacks = new ArrayList<>();
         jp = new JSONParser();
+        jd = new JSONParser();
         // hier kriegen wir die daten aus der letzten Activity
         Intent intent = getIntent();
         pokemon = intent.getStringExtra("pokeName");
-
         pokemonName.setText(pokemon);
-
 
         //Button
         Button AllBest= findViewById(R.id.AllBest);
         //moves Spinner
         movesSpinner = findViewById(R.id.spFähigkeiten);
+        //attackenspinner
+        spinnerattacken = findViewById(R.id.spinner_attacken);
 
         // Spinner
         final Spinner KPSpinner= findViewById(R.id.spinnerKP);
@@ -83,15 +88,6 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
         ArrayAdapter<CharSequence> natureAdapter = ArrayAdapter.createFromResource(this,R.array.Natures,android.R.layout.simple_spinner_item);
         natureAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         NatureSpinner.setAdapter(natureAdapter);
-
-
-
-
-
-
-
-
-
         //SetAllBestBTN
 
         AllBest.setOnClickListener(new View.OnClickListener() {
@@ -115,6 +111,7 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
                 try {
                     loadPicture(jsonObject);
                     getPokemonAbilities(jsonObject);
+                    getAllAttacken(jsonObject);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -122,40 +119,38 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-        //----------------------Anfang Attacken pop up fenster
-        attack_button = (Button) findViewById(R.id.btnAttack);
-        attack_button.setOnClickListener(new View.OnClickListener() {
+        // Attacken
+
+        //----------------------Anfang Attacken Spinner
+        spinnerattacken.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                Log.e("popup", "hat geklappt");
-                final Dialog dialog = new Dialog(PokemonStats.this);
-                //set content view
-                dialog.setContentView(R.layout.attacken_pop_up);
-                //Initialise width
-                int width = WindowManager.LayoutParams.MATCH_PARENT;
-                //Initialise height
-                int height = WindowManager.LayoutParams.WRAP_CONTENT;
-                //Set layout
-                dialog.getWindow().setLayout(width, height);
-                //Show dialog
-                dialog.show();
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // das funktioniert nicht wirklich außer wir machen immer das erste Element unserer Liste leer.
+                if (position == 0) {
+                    //Display toast message
+                    Toast.makeText(getApplicationContext(),
+                            "Please Select one", Toast.LENGTH_SHORT).show();
+                    //set empty value on textview
 
+                } else {
+                    //get selected value
+                    String sNumber = parent.getItemAtPosition(position).toString();
+                    //set selected value on textview
 
-                Button btUpdate = dialog.findViewById(R.id.bt_update);
+                }
 
-                btUpdate.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //Dismiss dialog
-                        dialog.dismiss();
-                    }
+                sNumber = parent.getItemAtPosition(position).toString();
+            }
 
-                });
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
-        //----------------Ende popup fenster
 
     }
+
+
 
     public void loadPicture(JSONObject jsonObject) throws JSONException {
         // source code und doc ---  https://github.com/bumptech/glide
@@ -171,6 +166,13 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+    //attacken
+    public void getAllAttacken(JSONObject jsonObject) throws JSONException {
+        attacks = jd.getAllAttacks(jsonObject);
+        spinnerattacken.setAdapter(new ArrayAdapter<>(PokemonStats.this,
+                android.R.layout.simple_spinner_dropdown_item,attacks));
 
     }
 
