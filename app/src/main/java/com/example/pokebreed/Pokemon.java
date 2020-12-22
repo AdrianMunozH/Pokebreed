@@ -1,122 +1,152 @@
 package com.example.pokebreed;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pokemon {
-    private String name;
+public class Pokemon implements Serializable {
     private int id;
+    private String name;
+    private String ability;
+    private String nature;
+    private String moves;
     private List<String> eggGroups = new ArrayList<>();
-    private List<String> moves=new ArrayList<>();
-    private List<String> abilitys = new ArrayList<>();
-    private String spriteURL;
     private List<String> types=new ArrayList<>();
 
 
     //DVs(Stats) 0-31
-    private int kp;
-    private int attack;
-    private int defense;
-    private int specialAttack;
-    private int specialDefense;
-    private int speed;
+    private String kp;
+    private String attack;
+    private String defense;
+    private String specialAttack;
+    private String specialDefense;
+    private String speed;
+
+    //others
+    boolean calculateStats;
 
     //Constructors
-    public Pokemon(String name) {
-        this.name = name;
+
+    public Pokemon(String name){
+        this.name=name;
     }
 
-    public Pokemon(int id) {
+
+
+    //Setters
+    public void setId(int id) {
         this.id = id;
     }
 
-    //Getter & Setter
-    public List<String> getEggGroups() {
-        return eggGroups;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAbility(String ability) {
+        this.ability = ability;
+    }
+
+    public void setNature(String nature) {
+        this.nature = nature;
     }
 
     public void setEggGroups(List<String> eggGroups) {
         this.eggGroups = eggGroups;
     }
 
-    public List<String> getMoves() {
-        return moves;
-    }
-
-    public void setMoves(List<String> moves) {
+    public void setMoves(String moves) {
         this.moves = moves;
-    }
-
-    public List<String> getAbilitys() {
-        return abilitys;
-    }
-
-    public void setAbilitys(List<String> abilitys) {
-        this.abilitys = abilitys;
-    }
-
-    public String getSpriteURL() {
-        return spriteURL;
-    }
-
-    public void setSpriteURL(String spriteURL) {
-        this.spriteURL = spriteURL;
-    }
-
-    public List<String> getTypes() {
-        return types;
     }
 
     public void setTypes(List<String> types) {
         this.types = types;
     }
 
-    public int getKp() {
-        return kp;
-    }
-
-    public void setKp(int kp) {
+    public void setKp(String kp) {
         this.kp = kp;
     }
 
-    public int getAttack() {
-        return attack;
-    }
-
-    public void setAttack(int attack) {
+    public void setAttack(String attack) {
         this.attack = attack;
     }
 
-    public int getDefense() {
-        return defense;
-    }
-
-    public void setDefense(int defense) {
+    public void setDefense(String defense) {
         this.defense = defense;
     }
 
-    public int getSpecialAttack() {
-        return specialAttack;
-    }
-
-    public void setSpecialAttack(int specialAttack) {
+    public void setSpecialAttack(String specialAttack) {
         this.specialAttack = specialAttack;
     }
 
-    public int getSpecialDefense() {
-        return specialDefense;
-    }
-
-    public void setSpecialDefense(int specialDefense) {
+    public void setSpecialDefense(String specialDefense) {
         this.specialDefense = specialDefense;
     }
 
-    public int getSpeed() {
+    public void setSpeed(String speed) {
+        this.speed = speed;
+    }
+
+    public void setCalculateStats(boolean calculateStats) {
+        this.calculateStats = calculateStats;
+    }
+
+    //Getters
+
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAbility() {
+        return ability;
+    }
+
+    public String getNature() {
+        return nature;
+    }
+
+    public List<String> getEggGroups() {
+        return eggGroups;
+    }
+
+    public String getMoves() {
+        return moves;
+    }
+
+    public List<String> getTypes() {
+        return types;
+    }
+
+    public String getKp() {
+        return kp;
+    }
+
+    public String getAttack() {
+        return attack;
+    }
+
+    public String getDefense() {
+        return defense;
+    }
+
+    public String getSpecialAttack() {
+        return specialAttack;
+    }
+
+    public String getSpecialDefense() {
+        return specialDefense;
+    }
+
+    public String getSpeed() {
         return speed;
     }
 
-    public void setSpeed(int speed) {
-        this.speed = speed;
+    public boolean isCalculateStats() {
+        return calculateStats;
     }
 }
