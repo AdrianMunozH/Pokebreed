@@ -67,6 +67,26 @@ public class JSONParser {
         pictureUrl = pokemon.getString("front_default");
         return pictureUrl;
     }
+
+    public List<String> getEggGroups(JSONObject jsonObject) throws JSONException {
+        List<String> eggGroupEntries = new ArrayList<>();
+        JSONArray eggGrp = jsonObject.getJSONArray("egg_groups");
+        for (int i = 0;i < eggGrp.length(); i++) {
+            JSONObject entry = eggGrp.getJSONObject(i);
+            eggGroupEntries.add(entry.getString("name"));
+        }
+        return eggGroupEntries;
+    }
+    public List<String> getPokemonEggGroups(JSONObject jsonObject) throws JSONException {
+        List<String> pokemonOfEggGrp = new ArrayList<>();
+        JSONArray eggGrp = jsonObject.getJSONArray("pokemon_species");
+        for(int i = 0; i < eggGrp.length(); i++) {
+            JSONObject pokeName = eggGrp.getJSONObject(i);
+            pokemonOfEggGrp.add(pokeName.getString("name"));
+        }
+        return pokemonOfEggGrp;
+    }
+
     /*
     public List<String> getEggGroup (String name,JSONObject jsonObject) {
         String url= "/pokemon-species/" + name;
@@ -83,6 +103,7 @@ public class JSONParser {
         }
         return eggGroupEntries;
     }
-
      */
+
+
 }
