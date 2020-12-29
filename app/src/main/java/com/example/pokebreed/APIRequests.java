@@ -115,4 +115,6 @@ public class APIRequests {
     public String getPokemonOfType(String type) {
         return "type/"+type;
     }
+    public String getEggGroups(String name){return "pokemon-species/"+ name;}
+    public  String getPokemonEggGroup(String eggGroup){return "egg-group/"+eggGroup;}
 }

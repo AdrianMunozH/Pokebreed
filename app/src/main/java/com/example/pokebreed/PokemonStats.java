@@ -48,6 +48,9 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
     //Dv
     List<String> dvs= new ArrayList<>();
 
+    //Egg Groups
+    List<String> egg_groups= new ArrayList<>();
+
     //other
     boolean transferDvs=false;
 
@@ -55,6 +58,9 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pokemon_stats);
+
+        egg_groups.add("plant");
+        egg_groups.add("monster");
 
         imageView = (ImageView) findViewById(R.id.pokemonPic);
         pokemonName = (TextView) findViewById(R.id.pokemonName);
@@ -213,12 +219,14 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
                 ability=abilitySpinner.getSelectedItem().toString();
                 nature=NatureSpinner.getSelectedItem().toString();
 
-                setPokemon(id,nature,ability,move,dvs,transferDvs);
+                setPokemon(id,nature,ability,move,dvs,egg_groups,transferDvs);
 
                 Log.e("Current Pokemon: ",currentPokemon.getName());
                 Log.e("Nature: ",currentPokemon.getNature());
                 Log.e("Ability: ",currentPokemon.getAbility());
                 Log.e("Move: ",currentPokemon.getMoves());
+                Log.e("Move: ",currentPokemon.getEggGroups().get(0));
+                Log.e("Move: ",currentPokemon.getEggGroups().get(1));
 
                 Log.e("KP: ",currentPokemon.getKp());
                 Log.e("Attack: ",currentPokemon.getAttack());
@@ -280,12 +288,13 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
     }
 
 
-    public void setPokemon(int id, String nature, String ability, String move,List<String> dvValues, boolean transferDvs ){
+    public void setPokemon(int id, String nature, String ability, String move,List<String> dvValues,List<String> eggGroups, boolean transferDvs ){
         currentPokemon.setId(id);
         currentPokemon.setNature(nature);
         currentPokemon.setAbility(ability);
         currentPokemon.setMoves(move);
         currentPokemon.setCalculateStats(transferDvs);
+        currentPokemon.setEggGroups(eggGroups);
         //DV
 
             currentPokemon.setKp(dvValues.get(0));
