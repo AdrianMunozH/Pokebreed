@@ -68,16 +68,17 @@ public class JSONParser {
         return pictureUrl;
     }
 
-    public List<String> getEggGroups(JSONObject jsonObject) throws JSONException {
+    public List<String> getSpeciesEggGroups(JSONObject jsonObject) throws JSONException {
         List<String> eggGroupEntries = new ArrayList<>();
         JSONArray eggGrp = jsonObject.getJSONArray("egg_groups");
         for (int i = 0;i < eggGrp.length(); i++) {
             JSONObject entry = eggGrp.getJSONObject(i);
             eggGroupEntries.add(entry.getString("name"));
         }
+        Log.e( "getSpeciesEggGroups: ",eggGroupEntries.get(0) );
         return eggGroupEntries;
     }
-    public List<String> getPokemonEggGroups(JSONObject jsonObject) throws JSONException {
+    public List<String> getPokemonOfEggGroup(JSONObject jsonObject) throws JSONException {
         List<String> pokemonOfEggGrp = new ArrayList<>();
         JSONArray eggGrp = jsonObject.getJSONArray("pokemon_species");
         for(int i = 0; i < eggGrp.length(); i++) {
@@ -86,6 +87,28 @@ public class JSONParser {
         }
         return pokemonOfEggGrp;
     }
+
+    public List<String> getEvoPokemon(JSONObject jsonObject) throws JSONException {
+        List<String> pokemonOfEvo = new ArrayList<>();
+        JSONArray PokeEvo1 = jsonObject.getJSONObject("chain").getJSONArray("evolves_to");
+            JSONObject pokeName = PokeEvo1.getJSONObject(0).getJSONObject("species");
+            JSONObject pokename1= PokeEvo1.getJSONObject(0).getJSONArray("evolves_to").getJSONObject(0).getJSONObject("species");
+
+            pokemonOfEvo.add(pokeName.getString("name"));
+            pokemonOfEvo.add(pokename1.getString("name"));
+
+        return pokemonOfEvo;
+    }
+
+
+
+    public String getItem(JSONObject jsonObject) throws JSONException {
+        String item;
+
+        item = jsonObject.getString("name");
+        return item;
+    }
+
 
     /*
     public List<String> getEggGroup (String name,JSONObject jsonObject) {

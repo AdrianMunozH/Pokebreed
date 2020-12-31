@@ -59,8 +59,7 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pokemon_stats);
 
-        egg_groups.add("plant");
-        egg_groups.add("monster");
+
 
         imageView = (ImageView) findViewById(R.id.pokemonPic);
         pokemonName = (TextView) findViewById(R.id.pokemonName);
@@ -141,7 +140,7 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
         });
 
 
-        MutableLiveData pokeListener = APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemon(pokemon));
+        MutableLiveData pokeListener = APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemon(currentPokemon.getName()));
         pokeListener.observe(this, new Observer<JSONObject>() {
             @Override
             public void onChanged(JSONObject jsonObject) {
@@ -155,6 +154,24 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
 
             }
         });
+
+
+
+        MutableLiveData speciesListener = APIRequests.getInstance().requestGet(APIRequests.getInstance().getSpeciesEggGroups(currentPokemon.getName()));
+        speciesListener.observe(this, new Observer<JSONObject>() {
+            @Override
+            public void onChanged(JSONObject jsonObject) {
+                try {
+                    Log.e("onChanged", "yes" );
+                    getEggGroups(jsonObject);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+
 
         // Attacken
 
@@ -225,8 +242,14 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
                 Log.e("Nature: ",currentPokemon.getNature());
                 Log.e("Ability: ",currentPokemon.getAbility());
                 Log.e("Move: ",currentPokemon.getMoves());
-                Log.e("Move: ",currentPokemon.getEggGroups().get(0));
-                Log.e("Move: ",currentPokemon.getEggGroups().get(1));
+
+                Log.e("Egg-Group Size: ",String.valueOf(currentPokemon.getEggGroups().size()));
+                Log.e("Egg-Group1: ",currentPokemon.getEggGroups().get(0));
+
+                if(currentPokemon.getEggGroups().size()>1){
+                    Log.e("Egg-Group2: ",currentPokemon.getEggGroups().get(1));
+                }
+
 
                 Log.e("KP: ",currentPokemon.getKp());
                 Log.e("Attack: ",currentPokemon.getAttack());
@@ -288,6 +311,11 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
     }
 
 
+    public void getEggGroups(JSONObject jsonObject)throws JSONException{
+        egg_groups = jp.getSpeciesEggGroups(jsonObject);
+    }
+
+
     public void setPokemon(int id, String nature, String ability, String move,List<String> dvValues,List<String> eggGroups, boolean transferDvs ){
         currentPokemon.setId(id);
         currentPokemon.setNature(nature);
@@ -311,6 +339,7 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
     public void nextActivity(){
         Intent intent = new Intent(this,ResultPokemon.class);
         intent.putExtra("childSelection",currentPokemon);
+        intent.putExtra("transferDVs",transferDvs);
         startActivity(intent);
     }
 }

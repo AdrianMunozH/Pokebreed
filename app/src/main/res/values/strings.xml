@@ -20,6 +20,7 @@
     </string-array>
 
     <string-array name="Natures">
+        <item>Random</item>
         <item>Hardy</item>
         <item>Lonely (+Atk, -Def)</item>
         <item>Brave (+Atk, -Spe)</item>
