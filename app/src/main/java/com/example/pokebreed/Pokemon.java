@@ -23,6 +23,9 @@ public class Pokemon implements Serializable {
     private String specialDefense;
     private String speed;
 
+    //evolutionchain url
+    private String evoUrl;
+
     //others
     boolean calculateStats;
 
@@ -91,6 +94,8 @@ public class Pokemon implements Serializable {
         this.calculateStats = calculateStats;
     }
 
+    public void setEvoUrl(String evoUrl) { this.evoUrl = evoUrl; }
+
     //Getters
 
 
@@ -149,4 +154,6 @@ public class Pokemon implements Serializable {
     public boolean isCalculateStats() {
         return calculateStats;
     }
+
+    public String getEvoUrl() { return evoUrl; }
 }

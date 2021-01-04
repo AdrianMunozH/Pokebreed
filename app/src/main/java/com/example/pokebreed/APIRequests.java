@@ -117,6 +117,7 @@ public class APIRequests {
     }
     public String getSpeciesEggGroups(String name){return "pokemon-species/"+ name;}
     public String getPokemonOfEggGroup(String eggGroup){return "egg-group/"+eggGroup;}
-    public String getEvoPokemon(int id){return "evolution-chain/"+id;}
+    public String getEvoPokemon(String url){return url;}
     public String getItem(int itemId){return "item/"+itemId;}
+    public String getEvolutionChainUrl(String name){return "pokemon-species/"+name; }
 }

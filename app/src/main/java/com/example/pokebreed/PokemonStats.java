@@ -51,6 +51,9 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
     //Egg Groups
     List<String> egg_groups= new ArrayList<>();
 
+    //EvoUrl
+    String evourl;
+
     //other
     boolean transferDvs=false;
 
@@ -172,6 +175,20 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
         });
 
 
+        MutableLiveData evoChainListener = APIRequests.getInstance().requestGet(APIRequests.getInstance().getEvolutionChainUrl(currentPokemon.getName()));
+        evoChainListener.observe(this, new Observer<JSONObject>() {
+            @Override
+            public void onChanged(JSONObject jsonObject) {
+                try {
+                    getEvolutionChainUrl(jsonObject);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+
 
         // Attacken
 
@@ -236,7 +253,14 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
                 ability=abilitySpinner.getSelectedItem().toString();
                 nature=NatureSpinner.getSelectedItem().toString();
 
-                setPokemon(id,nature,ability,move,dvs,egg_groups,transferDvs);
+
+
+
+
+
+
+
+                setPokemon(id,nature,ability,move,dvs,egg_groups,transferDvs,evourl);
 
                 Log.e("Current Pokemon: ",currentPokemon.getName());
                 Log.e("Nature: ",currentPokemon.getNature());
@@ -258,10 +282,18 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
                 Log.e("Special Defense: ",currentPokemon.getSpecialDefense());
                 Log.e("Speeed: ",currentPokemon.getSpeed());
 
+                Log.e( "EvoChainUrl ",currentPokemon.getEvoUrl() );
+
                 if(currentPokemon.isCalculateStats())Log.e("Transfer Dvs: ","true");
                 if(!currentPokemon.isCalculateStats())Log.e("Transfer Dvs: ","false");
 
-                nextActivity();
+                if(currentPokemon.getEggGroups().get(0).equals("no-eggs")){
+                    Toast t_unEggG = Toast.makeText(PokemonStats.this,"Please choose another Pokemon", Toast.LENGTH_SHORT);
+                    t_unEggG.show();
+                }else{
+                    nextActivity();
+                }
+
 
             }
         });
@@ -315,14 +347,19 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
         egg_groups = jp.getSpeciesEggGroups(jsonObject);
     }
 
+    public void getEvolutionChainUrl(JSONObject jsonObject)throws JSONException{
+        evourl = jp.getEvolutionChainUrl(jsonObject);
+    }
 
-    public void setPokemon(int id, String nature, String ability, String move,List<String> dvValues,List<String> eggGroups, boolean transferDvs ){
+
+    public void setPokemon(int id, String nature, String ability, String move,List<String> dvValues,List<String> eggGroups, boolean transferDvs,String evoUrl ){
         currentPokemon.setId(id);
         currentPokemon.setNature(nature);
         currentPokemon.setAbility(ability);
         currentPokemon.setMoves(move);
         currentPokemon.setCalculateStats(transferDvs);
         currentPokemon.setEggGroups(eggGroups);
+        currentPokemon.setEvoUrl(evoUrl);
         //DV
 
             currentPokemon.setKp(dvValues.get(0));

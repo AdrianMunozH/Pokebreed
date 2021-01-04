@@ -109,6 +109,14 @@ public class JSONParser {
         return item;
     }
 
+    public String getEvolutionChainUrl(JSONObject jsonObject) throws JSONException {
+        String url;
+
+        url = jsonObject.getJSONObject("evolution_chain").getString("url");
+        Log.e( "getEvolutionChainUrl: ",url.substring(26) );
+        return url.substring(26) ;
+    }
+
 
     /*
     public List<String> getEggGroup (String name,JSONObject jsonObject) {
