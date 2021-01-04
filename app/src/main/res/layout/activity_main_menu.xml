@@ -15,6 +15,7 @@
         android:layout_marginStart="124dp"
         android:layout_marginTop="30dp"
         android:text="History"
+        android:background="@drawable/button_round"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newPokemon" />
 
@@ -24,17 +25,19 @@
         android:layout_height="50dp"
         android:layout_marginStart="124dp"
         android:layout_marginTop="33dp"
+        android:background="@drawable/button_round"
         android:text="New Pokemon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <Button
-        android:id="@+id/newPokemon3"
+        android:id="@+id/info"
         android:layout_width="180dp"
         android:layout_height="50dp"
         android:layout_marginStart="124dp"
         android:layout_marginTop="30dp"
         android:text="Information"
+        android:background="@drawable/button_round"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pokeHistory" />
 
@@ -43,10 +46,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="152dp"
+        android:layout_marginTop="80dp"
         android:layout_marginBottom="59dp"
         app:layout_constraintBottom_toTopOf="@+id/newPokemon"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12"
+        app:layout_constraintTop_toTopOf="@+id/textView12"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_logo"
         tools:srcCompat="@drawable/ic_logo" />
@@ -69,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:text="Dark Mode"
+        android:text="Darkmode"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

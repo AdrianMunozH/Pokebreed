@@ -6,8 +6,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,6 +21,9 @@ public class MainMenu extends AppCompatActivity {
     private static final String PREF_DARK_THEME = "dark_theme";
     Switch modeswitch;
     ConstraintLayout layout;
+    private Button newPokemon;
+    private Button history;
+    private Button info;
 
 
     @Override
@@ -27,21 +33,50 @@ public class MainMenu extends AppCompatActivity {
 
         if(useDarkTheme) {
             setTheme(R.style.AppTheme_Dark_NoActionBar);
-
-
         }
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+
+
         layout= findViewById(R.id.myMainLayout);
+        newPokemon = findViewById(R.id.newPokemon);
+        history = findViewById(R.id.pokeHistory);
+        info = findViewById(R.id.info);
+
+
+        newPokemon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                nextActivity(MainActivity.class);
+
+            }
+        });
+
+
+        /*
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                nextActivity(his.class);
+            }
+        });
+         */
+
+
+
+
         modeswitch= findViewById(R.id.modeSwitch);
         if(useDarkTheme){
             //Dark Mode
-            modeswitch.setText("Switch to Light Mode");
-            //layout.setBackgroundResource();
+            //
+            // modeswitch.setText("Ltmode");
+            layout.setBackgroundResource(R.drawable.nightmode);
         }else{
+            layout.setBackgroundResource(R.drawable.daymode);
             //Light Mode
-            modeswitch.setText("Switch to DarkMode");
+            //modeswitch.setText("Darkmode");
 
         }
 
@@ -54,6 +89,11 @@ public class MainMenu extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void nextActivity(Class nextClass) {
+        Intent intent = new Intent(this,nextClass);
+        startActivity(intent);
     }
 
 
