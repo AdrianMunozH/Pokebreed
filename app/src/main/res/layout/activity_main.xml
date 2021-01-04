@@ -27,10 +27,10 @@
 
     <ImageView
         android:id="@+id/pokemonPicMain"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="48dp"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        android:layout_marginStart="46dp"
+        android:background="#00FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner"
         tools:srcCompat="@tools:sample/avatars" />
@@ -45,12 +45,90 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ListView
-        android:layout_width="300dp"
-        android:layout_height="100dp"
+    <TextView
+        android:id="@+id/tvHP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        android:textStyle="normal|bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvType1" />
+
+    <TextView
+        android:id="@+id/tvSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        android:textStyle="normal|bold"
+        app:layout_constraintStart_toEndOf="@+id/tvType1"
+        app:layout_constraintTop_toBottomOf="@+id/tvType2" />
+
+    <TextView
+        android:id="@+id/tvSD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        android:textStyle="normal|bold"
+        app:layout_constraintStart_toEndOf="@+id/tvType1"
+        app:layout_constraintTop_toBottomOf="@+id/tvDefense" />
+
+    <TextView
+        android:id="@+id/tvSA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        android:textStyle="normal|bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvAttack" />
+
+    <TextView
+        android:id="@+id/tvAttack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        android:textStyle="normal|bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvHP" />
+
+    <TextView
+        android:id="@+id/tvType1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:text="TextView"
+        android:textStyle="normal|bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pokemonPicMain" />
+
+    <TextView
+        android:id="@+id/tvType2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="84dp"
+        android:text="TextView"
+        android:textStyle="normal|bold"
+        app:layout_constraintStart_toEndOf="@+id/tvType1"
+        app:layout_constraintTop_toBottomOf="@+id/pokemonPicMain" />
+
+    <TextView
+        android:id="@+id/tvDefense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        android:textStyle="normal|bold"
+        app:layout_constraintStart_toEndOf="@+id/tvType1"
+        app:layout_constraintTop_toBottomOf="@+id/tvSpeed" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,16 +6,14 @@ import androidx.lifecycle.Observer;
 
 import android.content.Intent;
 
-import android.app.Dialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -33,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Initialise variable
     private Spinner spinner;
-    private String sNumber;
+    private String currentPokemon;
     JSONParser jp = new JSONParser();
 
     //Button Attacken // Popupfenster attacken activity
@@ -72,14 +70,11 @@ public class MainActivity extends AppCompatActivity {
         //Assign variable
         spinner = findViewById(R.id.spinner);
 
-
-
-
-
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
            @Override
            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-               sNumber = parent.getItemAtPosition(position).toString();
+               currentPokemon = parent.getItemAtPosition(position).toString();
+               apiLoadPicture();
                // das funktioniert nicht wirklich außer wir machen immer das erste Element unserer Liste leer.
                if (position == 0){
                    //Display toast message
@@ -93,10 +88,9 @@ public class MainActivity extends AppCompatActivity {
                    //set selected value on textview
 
 
-                   apiLoadPicture();
+
 
                }
-               sNumber = parent.getItemAtPosition(position).toString();
            }
 
            @Override
@@ -112,61 +106,43 @@ public class MainActivity extends AppCompatActivity {
                 nextActivity();
             }
         });
-        /*
-        Button button = findViewById(R.id.btnAttack);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                testNewApi();
-            }
-        });
-        //ende spinner
 
+    }
 
-
-
-        //----------------------Anfang Attacken pop up fenster
-        attack_button = (Button) findViewById(R.id.button_attacken);
-        attack_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Dialog dialog = new Dialog(MainActivity.this);
-                //set content view
-                dialog.setContentView(R.layout.attacken_pop_up);
-                //Initialise width
-                int width = WindowManager.LayoutParams.MATCH_PARENT;
-                //Initialise height
-                int height = WindowManager.LayoutParams.WRAP_CONTENT;
-                //Set layout
-                dialog.getWindow().setLayout(width, height);
-                //Show dialog
-                dialog.show();
-
-
-                Button btUpdate = dialog.findViewById(R.id.bt_update);
-
-                btUpdate.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //Dismiss dialog
-                        dialog.dismiss();
-                    }
-
-                });
-            }
-        });
-        //----------------Ende popup fenster
-        */
+    private void loadStats(JSONObject jsonObject) throws JSONException {
+        TextView tvHP = (TextView) findViewById(R.id.tvHP);
+        TextView tvSpeed = (TextView) findViewById(R.id.tvSpeed);
+        TextView tvAttack = (TextView) findViewById(R.id.tvAttack);
+        TextView tvDefense = (TextView) findViewById(R.id.tvDefense);
+        TextView tvSA = (TextView) findViewById(R.id.tvSA);
+        TextView tvSD = (TextView) findViewById(R.id.tvSD);
+        TextView tvType1 = (TextView) findViewById(R.id.tvType1);
+        TextView tvType2 = (TextView) findViewById(R.id.tvType2);
+        TextView[] tvArr = {tvHP,tvAttack,tvDefense,tvSA,tvSD,tvSpeed};
+        List<String> stats = jp.getBaseStats(jsonObject);
+        List<String> types = jp.getType(jsonObject);
+        String[] statStrings = getResources().getStringArray(R.array.Stats);
+        for (int i = 0; i < tvArr.length ; i++) {
+            tvArr[i].setText(statStrings[i] + " " + stats.get(i));
+        }
+        if(types.size() == 1) {
+            tvType2.setText("");
+            tvType1.setText("Type: " + types.get(0));
+        } else if(types.size() == 2) {
+            tvType1.setText("Type: " + types.get(0));
+            tvType2.setText("Type: " + types.get(1));
+        }
 
     }
 
     private void apiLoadPicture() {
-        MutableLiveData picListener = APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemon(sNumber));
+        MutableLiveData picListener = APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemon(currentPokemon));
         picListener.observe(this, new Observer<JSONObject>() {
             @Override
             public void onChanged(JSONObject jsonObject) {
                 try {
                     loadPicture(jsonObject);
+                    loadStats(jsonObject);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -178,34 +154,19 @@ public class MainActivity extends AppCompatActivity {
         // source code und doc ---  https://github.com/bumptech/glide
         Glide.with(this).load(jp.getPicture(jsonObject)).into(imageView);
     }
+    private void baseStats(JSONObject jsonObject) throws JSONException {
+        List arr = jp.getBaseStats(jsonObject);
 
+    }
     private void nextActivity() {
         Intent intent = new Intent(this,PokemonStats.class);
-        intent.putExtra("pokeName",sNumber.toString());
+        intent.putExtra("pokeName", currentPokemon.toString());
         startActivity(intent);
     }
     public void getAllPokemon(JSONObject jsonObject) throws JSONException {
-
         pokemons = jp.getAllPoke(jsonObject);
         spinner.setAdapter(new ArrayAdapter<>(MainActivity.this,
                 android.R.layout.simple_spinner_dropdown_item,pokemons));
     }
-    // total sinnlos, war nur dafür da um z testen ob das richtige jsonobject geladen wird -- delete later
-    public void testNewApi() {
-        MutableLiveData allPokeListener = APIRequests.getInstance(this).requestGet(APIRequests.getInstance().getPokemonList());
-        allPokeListener.observe(this, new Observer<JSONObject>() {
-            @Override
-            public void onChanged(JSONObject jsonObject) {
-                Log.e("b4OnChange","succ");
-                try {
-                    Log.e("inChange","succ");
-                    pokemons = jp.getAllPoke(jsonObject);
-                    spinner.setAdapter(new ArrayAdapter<>(MainActivity.this,
-                            android.R.layout.simple_spinner_dropdown_item,pokemons));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+
 }

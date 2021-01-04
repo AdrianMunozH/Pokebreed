@@ -50,6 +50,24 @@ public class JSONParser {
         }
         return  movesList;
     }
+    public List<String> getBaseStats(JSONObject jsonObject) throws JSONException {
+        List<String> baseStats = new ArrayList<>();
+        JSONArray bstats = jsonObject.getJSONArray("stats");
+        for (int i = 0; i < bstats.length() ; i++) {
+            JSONObject stat = bstats.getJSONObject(i);
+            baseStats.add(stat.getString("base_stat"));
+        }
+        return baseStats;
+    }
+    public List<String> getType(JSONObject jsonObject) throws JSONException {
+        List<String> types = new ArrayList<>();
+        JSONArray arrTypes = jsonObject.getJSONArray("types");
+        for (int i = 0; i < arrTypes.length() ; i++) {
+            JSONObject type = arrTypes.getJSONObject(i).getJSONObject("type");
+            types.add(type.getString("name"));
+        }
+        return types;
+    }
     public List<String> getPokemonOfType(JSONObject jsonObject) throws JSONException {
         List<String> pokemonList = new ArrayList<>();
         JSONArray pokemon = jsonObject.getJSONArray("pokemon");
