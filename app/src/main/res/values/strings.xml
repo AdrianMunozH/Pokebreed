@@ -8,6 +8,14 @@
     <string name="spinnertitle">
         Select Pokemon
     </string>
+    <string-array name="Stats">
+        <item>HP:</item>
+        <item>Speed</item>
+        <item>Attack</item>
+        <item>Defense</item>
+        <item>special-attack</item>
+        <item>special-defense</item>
+    </string-array>
 
 
     <string-array name="DVValues">
