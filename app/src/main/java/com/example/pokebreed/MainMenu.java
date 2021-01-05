@@ -33,6 +33,9 @@ public class MainMenu extends AppCompatActivity {
 
         if(useDarkTheme) {
             setTheme(R.style.AppTheme_Dark_NoActionBar);
+        } else {
+            // Theme.AppCompat.Light.NoActionBar
+            setTheme(R.style.Theme_AppCompat_Light_NoActionBar);
         }
 
         super.onCreate(savedInstanceState);
