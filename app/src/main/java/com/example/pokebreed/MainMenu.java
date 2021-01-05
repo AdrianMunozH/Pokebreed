@@ -4,6 +4,7 @@ import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -26,6 +27,7 @@ public class MainMenu extends AppCompatActivity {
     private Button info;
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
@@ -74,7 +76,7 @@ public class MainMenu extends AppCompatActivity {
         if(useDarkTheme){
             //Dark Mode
             //
-            modeswitch.setText("Litemode");
+            modeswitch.setText("@string/Lightmode");
             layout.setBackgroundResource(R.drawable.nightmode);
         }else{
             //Light Mode

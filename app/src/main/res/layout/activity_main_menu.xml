@@ -14,8 +14,8 @@
         android:layout_height="50dp"
         android:layout_marginStart="124dp"
         android:layout_marginTop="30dp"
-        android:text="History"
         android:background="@drawable/button_round"
+        android:text="@string/History"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newPokemon" />
 
@@ -26,7 +26,7 @@
         android:layout_marginStart="124dp"
         android:layout_marginTop="120dp"
         android:background="@drawable/button_round"
-        android:text="New Pokemon"
+        android:text="@string/newPokemon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
@@ -36,8 +36,8 @@
         android:layout_height="50dp"
         android:layout_marginStart="124dp"
         android:layout_marginTop="30dp"
-        android:text="Information"
         android:background="@drawable/button_round"
+        android:text="@string/Information"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pokeHistory" />
 
@@ -73,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:text="Darkmode"
+        android:text="@string/Darkmode"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
