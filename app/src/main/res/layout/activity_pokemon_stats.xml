@@ -51,7 +51,7 @@
         android:layout_marginStart="49dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="49dp"
-        android:text="selectedPokemon"
+        android:text="@string/selectedPokemon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/pokemonPic"
         app:layout_constraintTop_toTopOf="parent" />
@@ -89,7 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
         android:layout_marginTop="52dp"
-        android:text="Determinant Values"
+        android:text="@string/Determinatedvalues"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/transCheck"
         app:layout_constraintTop_toBottomOf="@+id/pokemonPic" />
@@ -100,7 +100,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="24dp"
-        android:text="KP"
+        android:text="@string/Hp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -110,7 +110,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="14dp"
-        android:text="Attack"
+        android:text="@string/Attack"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -120,7 +120,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="14dp"
-        android:text="Defense"
+        android:text="@string/Defense"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -130,7 +130,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="13dp"
-        android:text="Sp. Attack"
+        android:text="@string/Sp.Attack"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -140,7 +140,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="13dp"
-        android:text="Sp. Defense"
+        android:text="@string/Sp.Defense"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -150,7 +150,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="13dp"
-        android:text="Speed"
+        android:text="@string/Speed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -226,7 +226,7 @@
         android:layout_marginStart="31dp"
         android:layout_marginBottom="8dp"
         android:background="#FFFFFF"
-        android:text="Set All Best"
+        android:text="@string/Setallbest"
         app:layout_constraintBottom_toTopOf="@+id/spinnerKP"
         app:layout_constraintStart_toEndOf="@+id/textView3" />
 

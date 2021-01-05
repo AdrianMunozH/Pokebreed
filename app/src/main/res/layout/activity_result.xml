@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="152dp"
         android:layout_marginTop="5dp"
-        android:text="Mother"
+        android:text="@string/Mother"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
         android:layout_marginTop="5dp"
-        android:text="Father"
+        android:text="@string/Father"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView18" />
@@ -80,9 +80,9 @@
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="117dp"
-        android:layout_marginTop="5dp"
-        android:text="Spe"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/Speed"
         app:layout_constraintStart_toEndOf="@+id/textView15"
         app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
@@ -102,7 +102,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
-        android:text="Def"
+        android:text="@string/Defense"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
@@ -110,9 +110,9 @@
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="121dp"
-        android:layout_marginTop="14dp"
-        android:text="Sp. Atk."
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/Sp.Attack"
         app:layout_constraintStart_toEndOf="@+id/textView13"
         app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
@@ -120,9 +120,9 @@
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="4dp"
-        android:text="Learned Attack:"
+        android:text="@string/LearnedAttack"
         app:layout_constraintStart_toEndOf="@+id/MotherpokemonPic"
         app:layout_constraintTop_toBottomOf="@+id/text_View2" />
 
@@ -159,9 +159,9 @@
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="118dp"
-        android:layout_marginTop="3dp"
-        android:text="Sp. Def."
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/Sp.Defense"
         app:layout_constraintStart_toEndOf="@+id/textView14"
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
@@ -171,7 +171,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
-        android:text="Atk"
+        android:text="@string/Attack"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
@@ -181,7 +181,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="45dp"
-        android:text="KP"
+        android:text="@string/Hp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/MotherpokemonPic" />
 
@@ -210,7 +210,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
-        android:text="Def"
+        android:text="@string/Defense"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView36" />
 
@@ -220,7 +220,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="121dp"
         android:layout_marginTop="14dp"
-        android:text="Sp. Atk."
+        android:text="@string/Sp.Attack"
         app:layout_constraintStart_toEndOf="@+id/textView37"
         app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
@@ -230,7 +230,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
         android:layout_marginTop="4dp"
-        android:text="Learned Attack:"
+        android:text="@string/LearnedAttack"
         app:layout_constraintStart_toEndOf="@+id/FatherpokemonPic"
         app:layout_constraintTop_toBottomOf="@+id/Text_View34" />
 
@@ -267,9 +267,9 @@
         android:id="@+id/textView35"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="118dp"
-        android:layout_marginTop="6dp"
-        android:text="Sp. Def"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/Sp.Defense"
         app:layout_constraintStart_toEndOf="@+id/textView36"
         app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
@@ -279,7 +279,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
-        android:text="Atk"
+        android:text="@string/Attack"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView37" />
 
@@ -289,7 +289,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="45dp"
-        android:text="KP"
+        android:text="@string/Hp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/FatherpokemonPic" />
 
@@ -297,9 +297,9 @@
         android:id="@+id/textView30"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="117dp"
+        android:layout_marginStart="56dp"
         android:layout_marginTop="4dp"
-        android:text="Spe"
+        android:text="@string/Speed"
         app:layout_constraintStart_toEndOf="@+id/textView32"
         app:layout_constraintTop_toBottomOf="@+id/textView35" />
 
@@ -307,8 +307,8 @@
         android:id="@+id/m_KP_Value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="13dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="12dp"
         android:text="0"
         app:layout_constraintStart_toEndOf="@+id/textView13"
         app:layout_constraintTop_toBottomOf="@+id/textView19" />
@@ -317,8 +317,8 @@
         android:id="@+id/f_KP_Value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="13dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="12dp"
         android:text="0"
         app:layout_constraintStart_toEndOf="@+id/textView37"
         app:layout_constraintTop_toBottomOf="@+id/textView29" />
@@ -327,8 +327,8 @@
         android:id="@+id/f_SPAtk_Value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="37dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="40dp"
         android:text="0"
         app:layout_constraintStart_toEndOf="@+id/textView33"
         app:layout_constraintTop_toBottomOf="@+id/textView34" />
@@ -337,7 +337,7 @@
         android:id="@+id/f_SpDef_Value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="64dp"
         android:layout_marginTop="4dp"
         android:text="0"
         app:layout_constraintStart_toEndOf="@+id/textView33"
@@ -347,7 +347,7 @@
         android:id="@+id/f_Spe_Value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="64dp"
         android:layout_marginTop="4dp"
         android:text="0"
         app:layout_constraintStart_toEndOf="@+id/textView33"
@@ -357,7 +357,7 @@
         android:id="@+id/f_Atk_Value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="76dp"
         android:layout_marginTop="4dp"
         android:text="0"
         app:layout_constraintStart_toEndOf="@+id/textView37"
@@ -367,7 +367,7 @@
         android:id="@+id/f_Def_Value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="76dp"
         android:layout_marginTop="4dp"
         android:text="0"
         app:layout_constraintStart_toEndOf="@+id/textView37"
@@ -377,8 +377,8 @@
         android:id="@+id/m_SPAtk_Value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="37dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="36dp"
         android:text="0"
         app:layout_constraintStart_toEndOf="@+id/textView16"
         app:layout_constraintTop_toBottomOf="@+id/textView20" />
@@ -387,7 +387,7 @@
         android:id="@+id/m_Atk_Value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="76dp"
         android:layout_marginTop="4dp"
         android:text="0"
         app:layout_constraintStart_toEndOf="@+id/textView13"
@@ -397,7 +397,7 @@
         android:id="@+id/m_Def_Value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="76dp"
         android:layout_marginTop="4dp"
         android:text="0"
         app:layout_constraintStart_toEndOf="@+id/textView13"
@@ -459,9 +459,9 @@
         android:id="@+id/textView23"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
+        android:layout_marginStart="68dp"
         android:layout_marginTop="4dp"
-        android:text="Nature:"
+        android:text="@string/Natures"
         app:layout_constraintStart_toEndOf="@+id/textView19"
         app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
@@ -481,7 +481,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
         android:layout_marginTop="4dp"
-        android:text="Nature:"
+        android:text="@string/Natures"
         app:layout_constraintStart_toEndOf="@+id/textView29"
         app:layout_constraintTop_toBottomOf="@+id/textView34" />
 
@@ -501,7 +501,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
         android:layout_marginTop="3dp"
-        android:text="Ability:"
+        android:text="@string/Ability"
         app:layout_constraintStart_toEndOf="@+id/FatherpokemonPic"
         app:layout_constraintTop_toBottomOf="@+id/imageView7" />
 
@@ -509,9 +509,9 @@
         android:id="@+id/text_View2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="3dp"
-        android:text="Ability:"
+        android:text="@string/Ability"
         app:layout_constraintStart_toEndOf="@+id/MotherpokemonPic"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
