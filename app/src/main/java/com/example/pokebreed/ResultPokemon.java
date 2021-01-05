@@ -91,9 +91,6 @@ public class ResultPokemon extends AppCompatActivity {
     //Button
     Button exit;
 
-
-    
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         SharedPreferences preferences = getSharedPreferences(MainMenu.PREFS_NAME, MODE_PRIVATE);
@@ -116,6 +113,7 @@ public class ResultPokemon extends AppCompatActivity {
 
         jp = new JSONParser();
         monsupdated=false;
+
 
         //setButton
         exit=findViewById(R.id.ExitandSafe);
@@ -316,6 +314,7 @@ public class ResultPokemon extends AppCompatActivity {
                 start_intent=setParentObjects();
 
                 if(start_intent){
+                    jp.addPokemonToHistory(child);
                     nextActivity();
                 }else{
                     showError();

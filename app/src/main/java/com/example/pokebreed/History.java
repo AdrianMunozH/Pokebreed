@@ -7,18 +7,26 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class History extends AppCompatActivity {
-    private List<Pokemon> pokemonHistory;
+    private JSONParser jp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-        pokemonHistory = new ArrayList<>();
+        /*
         Pokemon pokemon = new Pokemon("bulba");
         pokemon.setAbility("abil");
         pokemon.setAttack("atk");
@@ -26,13 +34,58 @@ public class History extends AppCompatActivity {
         pokemon.setFather(new Pokemon("vat"));
         addPokemonToHistory(pokemon);
 
+         */
+
     }
-    public void addPokemonToHistory(Pokemon pokemon) {
-        pokemonHistory.add(pokemon);
-        Log.e("pokemon json",pokemonToJson(pokemon));
+    private void loadData() {
+        FileInputStream fileInputStream = null;
+
+        try {
+            fileInputStream = openFileInput(JSONParser.FILE_NAME);
+            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            StringBuilder stringBuilder = new StringBuilder();
+            String outText;
+            while((outText = bufferedReader.readLine()) != null) {
+                stringBuilder.append(outText).append("\n");
+            }
+            // text nehmen mit stringBuilder.toString()
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(fileInputStream != null) {
+                try {
+                    fileInputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
-    public String pokemonToJson(Pokemon pokemon) {
-        Gson gson = new Gson();
-        return gson.toJson(pokemon);
+
+    private void saveData(String json) {
+        FileOutputStream fileOutputStream = null;
+
+        try {
+
+            fileOutputStream = openFileOutput(JSONParser.FILE_NAME,MODE_PRIVATE);
+            fileOutputStream.write(json.getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(fileOutputStream != null) {
+                try {
+                    fileOutputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
     }
+
 }

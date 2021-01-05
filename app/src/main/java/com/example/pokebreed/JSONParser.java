@@ -2,15 +2,22 @@ package com.example.pokebreed;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class JSONParser {
 
+    public static final String FILE_NAME = "pokemonHistory.json";
+
+    private List<Pokemon> pokemonHistory = new ArrayList<>();
 
     public List<String> getAllPoke(JSONObject jsonObject) throws JSONException {
         List<String> pokemonList = new ArrayList<>();
@@ -25,9 +32,6 @@ public class JSONParser {
             e.printStackTrace();
         }
         return pokemonList;
-    }
-    public List<String> getPokemon(JSONObject jsonObject) {
-        return null;
     }
 
     public List<String> getAllAbilities(JSONObject jsonObject) throws JSONException {
@@ -134,6 +138,23 @@ public class JSONParser {
         Log.e( "getEvolutionChainUrl: ",url.substring(26) );
         return url.substring(26) ;
     }
+
+
+    // History
+
+    public void addPokemonToHistory(Pokemon pokemon) {
+        //saveData(pokemonToJson(pokemon));
+
+        Log.e("pokemon json",pokemonToJson(pokemon));
+    }
+    public String pokemonToJson(Pokemon pokemon) {
+        Gson gson = new Gson();
+        return gson.toJson(pokemon);
+    }
+
+
+
+
 
 
     /*

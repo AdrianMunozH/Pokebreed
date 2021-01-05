@@ -14,26 +14,6 @@ public class Pokemon implements Serializable {
     private List<String> eggGroups = new ArrayList<>();
     private List<String> types=new ArrayList<>();
 
-
-    public Pokemon getFather() {
-        return father;
-    }
-
-    public void setFather(Pokemon father) {
-        this.father = father;
-    }
-
-    public Pokemon getMother() {
-        return mother;
-    }
-
-    public void setMother(Pokemon mother) {
-        this.mother = mother;
-    }
-
-    private Pokemon father;
-    private Pokemon mother;
-
     //DVs(Stats) 0-31
     private String kp;
     private String attack;
