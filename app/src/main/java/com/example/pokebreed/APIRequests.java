@@ -27,21 +27,9 @@ public class APIRequests {
     RequestQueue requestQueue;
     private static APIRequests instance = null;
 
-    //wird nur wieder implementiert wenn fehler auftauchen
-    //private Map<String,MutableLiveData> listeners = new ArrayMap<>();
-
-
     public APIRequests(Context context) {
 
         requestQueue = Volley.newRequestQueue(context);
-
-        // Werden erstmal auskommentiert weil sie zu kompleziert und nicht nötig sind.
-        /*
-        listeners.put("pokemon", new MutableLiveData());
-        listeners.put("allPokemon", new MutableLiveData());
-        listeners.put("types", new MutableLiveData());
-
-         */
 
     }
 

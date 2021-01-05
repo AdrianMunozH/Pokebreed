@@ -60,14 +60,14 @@ public class MainMenu extends AppCompatActivity {
         });
 
 
-        /*
+
         history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nextActivity(his.class);
+                nextActivity(History.class);
             }
         });
-         */
+
 
 
 
