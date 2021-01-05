@@ -5,20 +5,20 @@
 
     <string-array name="Stats">
         <item>KP:</item>
-        <item>Schnelligkeit:</item>
+        <item>Inniative:</item>
         <item>Attacke:</item>
         <item>Verteidigung:</item>
-        <item>Special-Attacke:</item>
-        <item>Special-Verteidigung:</item>
+        <item>Spezial-Attacke:</item>
+        <item>Spezial-Verteidigung:</item>
     </string-array>
 
     <string-array name="DVValues">
-        <item>nicht gut (0)</item>
-        <item>gut (1-15)</item>
-        <item>besser (16-25)</item>
+        <item>schlecht (0)</item>
+        <item>ok (1-15)</item>
+        <item>gut (16-25)</item>
         <item>sehr gut (26-29)</item>
         <item>fantastisch (30)</item>
-        <item>am besten (31)</item>
+        <item>sensationell (31)</item>
     </string-array>
 
     <string-array name="Natures">
@@ -56,11 +56,11 @@
     <string name="Determinatedvalues">Individual Werte</string>
     <string name="Setallbest">Setz alle Beste</string>
     <string name="Hp">Kp</string>
-    <string name="Attack">Attacke</string>
+    <string name="Attack">Angriff</string>
     <string name="Defense">Verteidigung</string>
-    <string name="Sp.Attack">Sp. Attacke</string>
+    <string name="Sp.Attack">Sp. Angriff</string>
     <string name="Sp.Defense">Sp. Verteidung</string>
-    <string name="Speed">Innit</string>
+    <string name="Speed">Innitiative</string>
     <string name="SavePokemon">Pokemon speichern?</string>
     <string name="save">speichern</string>
     <string name="dontsave">nicht speichern</string>
