@@ -17,8 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 
 public class MainMenu extends AppCompatActivity {
-    private static final String PREFS_NAME = "prefs";
-    private static final String PREF_DARK_THEME = "dark_theme";
+    static final String PREFS_NAME = "prefs";
+    static final String PREF_DARK_THEME = "dark_theme";
     Switch modeswitch;
     ConstraintLayout layout;
     private Button newPokemon;
