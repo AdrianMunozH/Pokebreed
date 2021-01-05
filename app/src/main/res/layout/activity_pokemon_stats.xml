@@ -7,6 +7,43 @@
     android:background="?android:colorPrimary"
     tools:context=".PokemonStats">
 
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="27dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="76dp"
+        android:tint="#83838383"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.965"
+        app:srcCompat="@drawable/ic_ball" />
+
+    <ImageView
+        android:id="@+id/imageView15"
+        android:layout_width="27dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="52dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView16"
+        app:layout_constraintHorizontal_bias="0.009"
+        app:layout_constraintStart_toEndOf="@+id/imageView14"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.965"
+        app:srcCompat="@drawable/ic_blueball" />
+
+    <ImageView
+        android:id="@+id/imageView16"
+        android:layout_width="29dp"
+        android:layout_height="27dp"
+        android:layout_marginEnd="56dp"
+        android:tint="#83838383"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.965"
+        app:srcCompat="@drawable/ic_masterball" />
+
     <TextView
         android:id="@+id/pokemonName"
         android:layout_width="wrap_content"
