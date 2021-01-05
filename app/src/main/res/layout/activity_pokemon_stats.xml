@@ -188,6 +188,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="31dp"
         android:layout_marginBottom="8dp"
+        android:background="#FFFFFF"
         android:text="Set All Best"
         app:layout_constraintBottom_toTopOf="@+id/spinnerKP"
         app:layout_constraintStart_toEndOf="@+id/textView3" />
@@ -209,5 +210,13 @@
         android:layout_marginBottom="18dp"
         app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/masterball"
+        tools:layout_editor_absoluteX="175dp"
+        tools:layout_editor_absoluteY="493dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
