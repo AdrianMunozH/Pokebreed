@@ -84,16 +84,13 @@ public class ResultPokemon extends AppCompatActivity {
     ArrayAdapter FatherItemAdapter;
     ArrayAdapter MotherItemAdapter;
 
-    //other
-    private static final String PREFS_NAME = "prefs";
-    private static final String PREF_DARK_THEME = "dark_theme";
 
     
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        boolean useDarkTheme = preferences.getBoolean(PREF_DARK_THEME, false);
+        SharedPreferences preferences = getSharedPreferences(MainMenu.PREFS_NAME, MODE_PRIVATE);
+        boolean useDarkTheme = preferences.getBoolean(MainMenu.PREF_DARK_THEME, false);
 
         if(useDarkTheme) {
             setTheme(R.style.AppTheme_Dark_NoActionBar);
