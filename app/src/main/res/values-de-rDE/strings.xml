@@ -14,7 +14,7 @@
 
     <string-array name="DVValues">
         <item>schlecht (0)</item>
-        <item>ok (1-15)</item>
+        <item>nicht übel (1-15)</item>
         <item>gut (16-25)</item>
         <item>sehr gut (26-29)</item>
         <item>fantastisch (30)</item>
@@ -22,6 +22,7 @@
     </string-array>
 
     <string-array name="Natures">
+        <item>Wähle Wesen</item>
         <item>Random</item>
         <item>Robust</item>
         <item>Solo (+Atk, -Def)</item>
