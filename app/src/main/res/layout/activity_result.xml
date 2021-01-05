@@ -75,9 +75,11 @@
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
+        android:layout_marginStart="84dp"
         android:layout_marginTop="4dp"
         android:text="@string/Speed"
+        app:layout_constraintEnd_toStartOf="@+id/m_Spe_Value"
+        app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toEndOf="@+id/textView15"
         app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
@@ -154,7 +156,7 @@
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
+        android:layout_marginStart="96dp"
         android:layout_marginTop="4dp"
         android:text="@string/Sp.Defense"
         app:layout_constraintStart_toEndOf="@+id/textView14"
@@ -213,11 +215,11 @@
         android:id="@+id/textView33"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="121dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="16dp"
         android:text="@string/Sp.Attack"
         app:layout_constraintStart_toEndOf="@+id/textView37"
-        app:layout_constraintTop_toBottomOf="@+id/textView29" />
+        app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
     <TextView
         android:id="@+id/textView34"
@@ -265,6 +267,8 @@
         android:layout_marginStart="88dp"
         android:layout_marginTop="4dp"
         android:text="@string/Sp.Defense"
+        app:layout_constraintEnd_toStartOf="@+id/f_SpDef_Value"
+        app:layout_constraintHorizontal_bias="0.171"
         app:layout_constraintStart_toEndOf="@+id/textView36"
         app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
@@ -292,9 +296,11 @@
         android:id="@+id/textView30"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
+        android:layout_marginStart="76dp"
         android:layout_marginTop="4dp"
         android:text="@string/Speed"
+        app:layout_constraintEnd_toStartOf="@+id/f_Spe_Value"
+        app:layout_constraintHorizontal_bias="0.111"
         app:layout_constraintStart_toEndOf="@+id/textView32"
         app:layout_constraintTop_toBottomOf="@+id/textView35" />
 
@@ -305,6 +311,8 @@
         android:layout_marginStart="76dp"
         android:layout_marginTop="12dp"
         android:text="0"
+        app:layout_constraintEnd_toStartOf="@+id/textView16"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView13"
         app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
@@ -313,8 +321,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="76dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:text="0"
+        app:layout_constraintEnd_toStartOf="@+id/textView33"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView37"
         app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
@@ -323,29 +333,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:text="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.008"
         app:layout_constraintStart_toEndOf="@+id/textView33"
-        app:layout_constraintTop_toBottomOf="@+id/textView34" />
+        app:layout_constraintTop_toBottomOf="@+id/FatherNature" />
 
     <TextView
         android:id="@+id/f_SpDef_Value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
         android:layout_marginTop="4dp"
+        android:layout_marginEnd="120dp"
         android:text="0"
-        app:layout_constraintStart_toEndOf="@+id/textView33"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/f_SPAtk_Value" />
 
     <TextView
         android:id="@+id/f_Spe_Value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
         android:layout_marginTop="4dp"
+        android:layout_marginEnd="120dp"
         android:text="0"
-        app:layout_constraintStart_toEndOf="@+id/textView33"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/f_SpDef_Value" />
 
     <TextView
@@ -355,6 +367,8 @@
         android:layout_marginStart="76dp"
         android:layout_marginTop="4dp"
         android:text="0"
+        app:layout_constraintEnd_toStartOf="@+id/textView35"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView37"
         app:layout_constraintTop_toBottomOf="@+id/f_KP_Value" />
 
@@ -362,10 +376,11 @@
         android:id="@+id/f_Def_Value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
         android:layout_marginTop="4dp"
         android:text="0"
-        app:layout_constraintStart_toEndOf="@+id/textView37"
+        app:layout_constraintEnd_toStartOf="@+id/textView30"
+        app:layout_constraintHorizontal_bias="0.531"
+        app:layout_constraintStart_toEndOf="@+id/textView32"
         app:layout_constraintTop_toBottomOf="@+id/f_Atk_Value" />
 
     <TextView
@@ -373,10 +388,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="12dp"
         android:text="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView16"
-        app:layout_constraintTop_toBottomOf="@+id/textView20" />
+        app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
     <TextView
         android:id="@+id/m_Atk_Value"
@@ -385,6 +402,8 @@
         android:layout_marginStart="76dp"
         android:layout_marginTop="4dp"
         android:text="0"
+        app:layout_constraintEnd_toStartOf="@+id/textView17"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView13"
         app:layout_constraintTop_toBottomOf="@+id/m_KP_Value" />
 
@@ -392,19 +411,21 @@
         android:id="@+id/m_Def_Value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
         android:layout_marginTop="4dp"
         android:text="0"
-        app:layout_constraintStart_toEndOf="@+id/textView13"
+        app:layout_constraintEnd_toStartOf="@+id/textView18"
+        app:layout_constraintStart_toEndOf="@+id/textView15"
         app:layout_constraintTop_toBottomOf="@+id/m_Atk_Value" />
 
     <TextView
         android:id="@+id/m_SPDef_Value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="11dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:text="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView17"
         app:layout_constraintTop_toBottomOf="@+id/m_SPAtk_Value" />
 
@@ -412,10 +433,10 @@
         android:id="@+id/m_Spe_Value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="11dp"
         android:layout_marginTop="4dp"
+        android:layout_marginEnd="160dp"
         android:text="0"
-        app:layout_constraintStart_toEndOf="@+id/textView17"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/m_SPDef_Value" />
 
     <Spinner
