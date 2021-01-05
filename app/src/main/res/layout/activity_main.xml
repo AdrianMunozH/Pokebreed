@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?android:colorPrimary"
     tools:context=".MainActivity">
 
     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
@@ -17,13 +18,15 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="280dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="40dp"
         android:layout_marginBottom="30dp"
-        android:text="Next"
+        android:background="@drawable/button_fullround"
+        android:text="❯"
+
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/pokemonPicMain"
@@ -51,7 +54,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
         android:layout_marginTop="16dp"
-        android:text="TextView"
         android:textStyle="normal|bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvType1" />
@@ -62,7 +64,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="84dp"
         android:layout_marginTop="16dp"
-        android:text="TextView"
         android:textStyle="normal|bold"
         app:layout_constraintStart_toEndOf="@+id/tvType1"
         app:layout_constraintTop_toBottomOf="@+id/tvType2" />
@@ -73,7 +74,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="84dp"
         android:layout_marginTop="16dp"
-        android:text="TextView"
         android:textStyle="normal|bold"
         app:layout_constraintStart_toEndOf="@+id/tvType1"
         app:layout_constraintTop_toBottomOf="@+id/tvDefense" />
@@ -84,7 +84,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
         android:layout_marginTop="16dp"
-        android:text="TextView"
         android:textStyle="normal|bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvAttack" />
@@ -95,7 +94,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
         android:layout_marginTop="16dp"
-        android:text="TextView"
         android:textStyle="normal|bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvHP" />
@@ -105,7 +103,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:text="TextView"
         android:textStyle="normal|bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pokemonPicMain" />
@@ -115,7 +112,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="84dp"
-        android:text="TextView"
         android:textStyle="normal|bold"
         app:layout_constraintStart_toEndOf="@+id/tvType1"
         app:layout_constraintTop_toBottomOf="@+id/pokemonPicMain" />
@@ -126,7 +122,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="84dp"
         android:layout_marginTop="16dp"
-        android:text="TextView"
         android:textStyle="normal|bold"
         app:layout_constraintStart_toEndOf="@+id/tvType1"
         app:layout_constraintTop_toBottomOf="@+id/tvSpeed" />

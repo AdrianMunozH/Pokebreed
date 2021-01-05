@@ -71,12 +71,12 @@ public class MainMenu extends AppCompatActivity {
         if(useDarkTheme){
             //Dark Mode
             //
-            // modeswitch.setText("Ltmode");
+            modeswitch.setText("Litemode");
             layout.setBackgroundResource(R.drawable.nightmode);
         }else{
-            layout.setBackgroundResource(R.drawable.daymode);
             //Light Mode
-            //modeswitch.setText("Darkmode");
+            layout.setBackgroundResource(R.drawable.daymode);
+            modeswitch.setText("Darkmode");
 
         }
 

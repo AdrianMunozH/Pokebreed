@@ -4,10 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 
 import android.content.SharedPreferences;
+import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -119,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     private void loadStats(JSONObject jsonObject) throws JSONException {
         TextView tvHP = (TextView) findViewById(R.id.tvHP);
         TextView tvSpeed = (TextView) findViewById(R.id.tvSpeed);
@@ -132,15 +138,42 @@ public class MainActivity extends AppCompatActivity {
         List<String> stats = jp.getBaseStats(jsonObject);
         List<String> types = jp.getType(jsonObject);
         String[] statStrings = getResources().getStringArray(R.array.Stats);
+        int prevstat=0;
+        int roundpassed=0;
+        int defaultColor= tvArr[0].getCurrentTextColor();;
+        for (TextView t:tvArr) {
+            t.setTextColor(defaultColor);
+        }
         for (int i = 0; i < tvArr.length ; i++) {
             tvArr[i].setText(statStrings[i] + " " + stats.get(i));
+
+            if(i==0) {
+
+                tvArr[i].setTextColor(getColor(android.R.color.holo_red_light));
+                prevstat=Integer.parseInt(stats.get(i));
+                roundpassed++;
+
+            }else if(prevstat<Integer.parseInt(stats.get(i))){
+
+                //Log.e( "prevstat set to:",prevstat+"(Value="+ statStrings[i] + " )");
+                prevstat=Integer.parseInt(stats.get(i));
+                tvArr[i].setTextColor(getColor(android.R.color.holo_red_light));
+                tvArr[i-roundpassed].setTextColor(defaultColor);
+
+            }else{
+                roundpassed++;
+            }
+
+            Log.e( "loadStats: ",statStrings[i]+""+prevstat+"" );
         }
+        prevstat=0;
+        roundpassed=0;
         if(types.size() == 1) {
             tvType2.setText("");
             tvType1.setText("Type: " + types.get(0));
         } else if(types.size() == 2) {
-            tvType1.setText("Type: " + types.get(0));
-            tvType2.setText("Type: " + types.get(1));
+            tvType1.setText("Type 1: " + types.get(0));
+            tvType2.setText("Type 2: " + types.get(1));
         }
 
     }
@@ -178,5 +211,9 @@ public class MainActivity extends AppCompatActivity {
         spinner.setAdapter(new ArrayAdapter<>(MainActivity.this,
                 android.R.layout.simple_spinner_dropdown_item,pokemons));
     }
+
+
+
+
 
 }

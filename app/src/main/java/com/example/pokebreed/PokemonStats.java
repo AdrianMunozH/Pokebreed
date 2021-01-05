@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -56,9 +57,19 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
 
     //other
     boolean transferDvs=false;
+    private static final String PREFS_NAME = "prefs";
+    private static final String PREF_DARK_THEME = "dark_theme";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        boolean useDarkTheme = preferences.getBoolean(PREF_DARK_THEME, false);
+
+        if(useDarkTheme) {
+            setTheme(R.style.AppTheme_Dark_NoActionBar);
+        }
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pokemon_stats);
 
@@ -72,7 +83,7 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
         // hier kriegen wir die daten aus der letzten Activity
         Intent intent = getIntent();
         pokemon = intent.getStringExtra("pokeName");
-        pokemonName.setText(pokemon);
+        pokemonName.setText("You Choose: "+pokemon.substring(0,1).toUpperCase()+pokemon.substring(1));
 
         currentPokemon=new Pokemon(pokemon);
 

@@ -10,11 +10,11 @@
     </string>
     <string-array name="Stats">
         <item>HP:</item>
-        <item>Speed</item>
-        <item>Attack</item>
-        <item>Defense</item>
-        <item>special-attack</item>
-        <item>special-defense</item>
+        <item>Speed:</item>
+        <item>Attack:</item>
+        <item>Defense:</item>
+        <item>Special-Attack:</item>
+        <item>Special-Defense:</item>
     </string-array>
 
 
