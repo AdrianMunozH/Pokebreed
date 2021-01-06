@@ -23,6 +23,9 @@ import com.bumptech.glide.Glide;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -314,7 +317,7 @@ public class ResultPokemon extends AppCompatActivity {
                 start_intent=setParentObjects();
 
                 if(start_intent){
-                    jp.addPokemonToHistory(child);
+                    saveData(jp.pokemonToJson(child));
                     nextActivity();
                 }else{
                     showError();
@@ -732,7 +735,28 @@ public class ResultPokemon extends AppCompatActivity {
     }
 
 
+    private void saveData(String json) {
+        FileOutputStream fileOutputStream = null;
 
+        try {
+            fileOutputStream = openFileOutput(JSONParser.FILE_NAME,MODE_PRIVATE);
+            // vorher lesen ???
+            fileOutputStream.write(json.getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(fileOutputStream != null) {
+                try {
+                    fileOutputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
 
 
 
