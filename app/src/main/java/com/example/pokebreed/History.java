@@ -29,33 +29,36 @@ public class History extends AppCompatActivity {
     private JSONParser jp;
     private JSONObject jsonObject;
     private TextView tv;
+    private TextView delete1;
+    private TextView delete2;
     private List<Pokemon> recentlyAdded = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-
+        jp = new JSONParser();
         tv = findViewById(R.id.jsonText);
-        /*
-        Pokemon pokemon = new Pokemon("bulba");
-        pokemon.setAbility("abil");
-        pokemon.setAttack("atk");
-        pokemon.setMother(new Pokemon("mut"));
-        pokemon.setFather(new Pokemon("vat"));
-        addPokemonToHistory(pokemon);
 
-         */
+        //deleteLater
+        delete1 = findViewById(R.id.delete1);
+        delete2 = findViewById(R.id.delete2);
+
          jsonObject =  loadData();
+        Log.e("history name of jsonObject", jsonObject.toString());
 
-         tv.setText(jsonObject.toString());
+        List<Pokemon> pokemonHistory = new ArrayList<>();
+         try {
+            pokemonHistory = jp.getPokemonHistory(jsonObject);
+         } catch (JSONException e) {
+            e.printStackTrace();
+         }
+         delete1.setText(pokemonHistory.get(0).getName());
+         delete2.setText(pokemonHistory.get(1).getName());
+
+        tv.setText(pokemonHistory.get(0).getName() + " : " + pokemonHistory.get(1).getName());
 
     }
-
-    public List<Pokemon> getRecentlyAdded() {
-        return recentlyAdded;
-    }
-
 
     public JSONObject loadData() {
         FileInputStream fileInputStream = null;
