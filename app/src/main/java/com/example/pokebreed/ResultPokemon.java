@@ -313,7 +313,7 @@ public class ResultPokemon extends AppCompatActivity {
 
             }
         });
-        // check wich Pokemon can learn the selected attack
+        // check which Pokemon can learn the selected attack
 
         exit.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -89,7 +89,7 @@ public class MainMenu extends AppCompatActivity {
         if(useDarkTheme){
             //Dark Mode
             //
-            modeswitch.setText("@string/Lightmode");
+            modeswitch.setText("Lightmode");
             layout.setBackgroundResource(R.drawable.nightmode);
         }else{
             //Light Mode
