@@ -176,7 +176,7 @@ public class ResultPokemon extends AppCompatActivity {
 
         MotherItemsList.add("Select Item");
         FatherItemList.add("Select Item");
-        FullItemList.add("Select Item");
+
 
 
 
@@ -280,22 +280,25 @@ public class ResultPokemon extends AppCompatActivity {
                     FatherItemAdapter.clear();
                     for (String s:FullItemList) {
                         FatherItemAdapter.add(s);
-                        FatherItemAdapter.remove("everstone");
+                        FatherItemAdapter.notifyDataSetChanged();
                     }
+                    if (FullItemList.contains("destiny-knot"))FatherItemAdapter.remove("everstone");
                 }else if(parent.getItemAtPosition(position).equals("destiny-knot")){
                     Father_Item_Spinner.setSelection(1);
                     MotherNature.setText("no matter");
                     FatherItemAdapter.clear();
                     for (String s:FullItemList) {
                         FatherItemAdapter.add(s);
-                        FatherItemAdapter.remove("destiny-knot");
+                        FatherItemAdapter.notifyDataSetChanged();
                     }
+                    if(FullItemList.contains("destiny-knot"))FatherItemAdapter.remove("destiny-knot");
                 }else{
 
                     MotherNature.setText("-");
                     FatherItemAdapter.clear();
                     for (String s:FullItemList) {
                         FatherItemAdapter.add(s);
+                        FatherItemAdapter.notifyDataSetChanged();
                     }
                 }
 
@@ -322,6 +325,7 @@ public class ResultPokemon extends AppCompatActivity {
                         MotherItemAdapter.add(s);
                         MotherAdapter.remove("everstone");
                     }
+                    if(FullItemList.contains("everstone"))MotherAdapter.remove("everstone");
 
                 }else if(parent.getItemAtPosition(position).equals("destiny-knot")){
                     if(FullItemList.size()>2)Mother_Item_Spinner.setSelection(1);
@@ -329,8 +333,9 @@ public class ResultPokemon extends AppCompatActivity {
                     MotherItemAdapter.clear();
                     for (String s:MotherItemsList) {
                         MotherItemAdapter.add(s);
-                        MotherAdapter.remove("destiny-knot");
+
                     }
+                    if(FullItemList.contains("destiny-knot"))MotherAdapter.remove("destiny-knot");
                 }else{
                     FatherNature.setText("-");
                     Log.e( "FatherItemList ",MotherItemsList.toString() );
@@ -458,6 +463,7 @@ public class ResultPokemon extends AppCompatActivity {
     public void getItem(JSONObject jsonObject)throws JSONException{
 
         FullItemList.add(jp.getItem(jsonObject));
+        FullItemList.add(0,"Select Item");
         Log.e( "FullItemList",FullItemList.toString() );
         MotherItemsList.add(jp.getItem(jsonObject));
         FatherItemList.add(jp.getItem(jsonObject));
