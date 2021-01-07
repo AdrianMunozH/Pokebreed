@@ -91,6 +91,12 @@ public class JSONParser {
         pictureUrl = pokemon.getString("front_default");
         return pictureUrl;
     }
+    public String getPictureItem(JSONObject jsonObject) throws JSONException {
+        String pictureUrl;
+        JSONObject pokemon = jsonObject.getJSONObject("sprites");
+        pictureUrl = pokemon.getString("default");
+        return pictureUrl;
+    }
 
     public List<String> getSpeciesEggGroups(JSONObject jsonObject) throws JSONException {
         List<String> eggGroupEntries = new ArrayList<>();
@@ -144,12 +150,6 @@ public class JSONParser {
 
     // History
 
-    public void addPokemonToHistory(Pokemon pokemon) throws JSONException {
-        //context fehlt
-        History h = new History();
-        rewriteHistory(h.loadData(),pokemonToJson(pokemon));
-        Log.e("pokemon json",pokemonToJson(pokemon).toString());
-    }
     public JSONObject pokemonToJson(Pokemon pokemon) throws JSONException {
         Gson gson = new Gson();
         JSONObject jsonObject = new JSONObject(gson.toJson(pokemon));
