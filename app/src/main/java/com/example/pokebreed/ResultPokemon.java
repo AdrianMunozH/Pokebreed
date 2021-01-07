@@ -636,6 +636,11 @@ public class ResultPokemon extends AppCompatActivity {
         Glide.with(this).load(jp.getPicture(jsonObject)).into(imageView);
     }
 
+    public void loadItemPicture(JSONObject jsonObject, ImageView imageView) throws JSONException {
+        // source code und doc ---  https://github.com/bumptech/glide
+        Glide.with(this).load(jp.getPictureItem(jsonObject)).into(imageView);
+    }
+
     public void setMotherImage(String pokemonName){
         MutableLiveData pokeMotherPicListener = APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemon(pokemonName));
         pokeMotherPicListener.observe(this, new Observer<JSONObject>() {
@@ -659,7 +664,7 @@ public class ResultPokemon extends AppCompatActivity {
             @Override
             public void onChanged(JSONObject jsonObject) {
                 try {
-                    loadPicture(jsonObject, MotherImage);
+                    loadItemPicture(jsonObject, MotherItemImage);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -669,12 +674,12 @@ public class ResultPokemon extends AppCompatActivity {
         });
     }
     public void setFatherItemImage(String itemImage){
-        MutableLiveData pokeMotherPicListener = APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemon(itemImage));
+        MutableLiveData pokeMotherPicListener = APIRequests.getInstance().requestGet(APIRequests.getInstance().getItem(itemImage));
         pokeMotherPicListener.observe(this, new Observer<JSONObject>() {
             @Override
             public void onChanged(JSONObject jsonObject) {
                 try {
-                    loadPicture(jsonObject, MotherImage);
+                    loadItemPicture(jsonObject, FatherItemImage);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
