@@ -10,12 +10,20 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
+
+import org.json.JSONException;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class MainMenu extends AppCompatActivity {
     static final String PREFS_NAME = "prefs";
@@ -30,6 +38,7 @@ public class MainMenu extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setContentView(R.layout.activity_main_menu);
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         boolean useDarkTheme = preferences.getBoolean(PREF_DARK_THEME, false);
 
@@ -41,8 +50,12 @@ public class MainMenu extends AppCompatActivity {
         }
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_menu);
 
+        try {
+            historyFile();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         layout= findViewById(R.id.myMainLayout);
         newPokemon = findViewById(R.id.newPokemon);
@@ -111,5 +124,38 @@ public class MainMenu extends AppCompatActivity {
         finish();
 
         startActivity(intent);
+    }
+    private void historyFile() throws JSONException {
+        JSONParser jsonParser = new JSONParser();
+        File file = new File(JSONParser.FILE_NAME);
+        // erstellt gerade noch die Datei wenn sie existiert also muss nur einmal auskommentiert werden
+        /*
+        if(!file.exists()) {
+            saveData(jsonParser.createHistoryFile().toString());
+        }
+
+         */
+    }
+    public void saveData(String json) {
+        FileOutputStream fileOutputStream = null;
+        Log.e("saveData MainMenue", "kk");
+        try {
+            fileOutputStream = openFileOutput(JSONParser.FILE_NAME,MODE_PRIVATE);
+            // vorher lesen ???
+            fileOutputStream.write(json.getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(fileOutputStream != null) {
+                try {
+                    fileOutputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
     }
 }
