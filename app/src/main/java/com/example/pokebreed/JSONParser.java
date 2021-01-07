@@ -3,7 +3,9 @@ package com.example.pokebreed;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,7 +20,6 @@ public class JSONParser {
 
     public static final String FILE_NAME = "pokemonHistory.json";
 
-    private List<Pokemon> pokemonHistory = new ArrayList<>();
 
     public List<String> getAllPoke(JSONObject jsonObject) throws JSONException {
         List<String> pokemonList = new ArrayList<>();
@@ -169,4 +170,21 @@ public class JSONParser {
         Log.e("createHistoryFile", jsonObject.toString());
         return jsonObject;
     }
+    public List<Pokemon> getPokemonHistory (JSONObject jsonObject) throws JSONException {
+        JSONArray jsonArray = jsonObject.getJSONArray("pokemonHistory");
+        List<Pokemon> pokemonHistory = new ArrayList<>();
+
+        JsonParser parser = new JsonParser();
+
+        Gson gson = new Gson();
+        for(int i = 0; i < jsonArray.length(); i++) {
+            String mJsonString = jsonArray.getJSONObject(i).toString();
+            JsonElement mJson =  parser.parse(mJsonString);
+            Pokemon temp = gson.fromJson(mJson,Pokemon.class);
+            pokemonHistory.add(temp);
+        }
+        Log.e("getPokemonHistory", String.valueOf(pokemonHistory.isEmpty()));
+        return pokemonHistory;
+    }
+
 }
