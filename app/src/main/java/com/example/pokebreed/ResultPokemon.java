@@ -66,6 +66,7 @@ public class ResultPokemon extends AppCompatActivity {
     int SelectedMotherPos;
 
     private ImageView MotherImage;
+    private ImageView MotherItemImage;
         //Father
     TextView FatherKP;
     TextView FatherAtk;
@@ -84,6 +85,7 @@ public class ResultPokemon extends AppCompatActivity {
 
 
     private ImageView FatherImage;
+    private ImageView FatherItemImage;
     boolean monsupdated;
     boolean canlearnmove;
 
@@ -168,6 +170,9 @@ public class ResultPokemon extends AppCompatActivity {
         //ImageViews
         FatherImage =(ImageView) findViewById(R.id.FatherpokemonPic);
         MotherImage=(ImageView) findViewById(R.id.MotherpokemonPic);
+        FatherItemImage= findViewById(R.id.fItemImage);
+        MotherItemImage = findViewById(R.id.mItemImage);
+
 
         MotherItemsList.add("Select Item");
         FatherItemList.add("Select Item");
@@ -344,7 +349,7 @@ public class ResultPokemon extends AppCompatActivity {
 
             }
         });
-        // check which Pokemon can learn the selected attack
+
 
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
