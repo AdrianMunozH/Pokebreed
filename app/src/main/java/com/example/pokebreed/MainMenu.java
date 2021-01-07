@@ -41,13 +41,13 @@ public class MainMenu extends AppCompatActivity {
     private Button history;
     private Button info;
 
-    private ImageView langImage;
+    
 
 
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_main_menu);
+
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         boolean useDarkTheme = preferences.getBoolean(PREF_DARK_THEME, false);
 
@@ -58,7 +58,10 @@ public class MainMenu extends AppCompatActivity {
             setTheme(R.style.Theme_AppCompat_Light_NoActionBar);
         }
 
+
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main_menu);
+
 
         try {
             historyFile();
@@ -70,14 +73,9 @@ public class MainMenu extends AppCompatActivity {
         newPokemon = findViewById(R.id.newPokemon);
         history = findViewById(R.id.pokeHistory);
         info = findViewById(R.id.info);
-        langImage= findViewById(R.id.langchange);
 
-        langImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setAppLocale("de");
-            }
-        });
+
+
 
 
 
@@ -178,16 +176,7 @@ public class MainMenu extends AppCompatActivity {
     }
 
 
-    private void setAppLocale(String localecCode){
-        Resources res = getResources();
-        DisplayMetrics dm = res.getDisplayMetrics();
-        Configuration conf = res.getConfiguration();
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.JELLY_BEAN_MR1){
-            conf.setLocale(new Locale(localecCode.toLowerCase()));
-        }else{
-            res.updateConfiguration(conf,dm);
-        }
-    }
+
 
 
 }
