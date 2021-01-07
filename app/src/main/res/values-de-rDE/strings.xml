@@ -25,30 +25,30 @@
         <item>Wähle Wesen</item>
         <item>Random</item>
         <item>Robust</item>
-        <item>Solo (+Atk, -Def)</item>
-        <item>Mutig (+Atk, -Spe)</item>
-        <item>Hart (+Atk, -Sp. Atk)</item>
-        <item>Frech (+Atk, -Sp. Def)</item>
+        <item>Solo (+Angr, -Vert)</item>
+        <item>Mutig (+Angr, -Init)</item>
+        <item>Hart (+Angr, -Sp. Angr)</item>
+        <item>Frech (+Angr, -Sp. Vert)</item>
         <item>Sanft</item>
-        <item>Kühn (+Def, -Atk)</item>
-        <item>Locker (+Def, -Spe)</item>
-        <item>Pfiffig (+Def, -Sp. Atk)</item>
-        <item>Lasch (+Def, -Sp. Def)</item>
+        <item>Kühn (+Vert, -Angr)</item>
+        <item>Locker (+Vert, -Init)</item>
+        <item>Pfiffig (+Vert, -Sp. Angr)</item>
+        <item>Lasch (+Vert, -Sp. Vert)</item>
         <item>Ernst</item>
-        <item>Scheu (+Spe, -Atk)</item>
-        <item>Hastig (+Spe, -Def)</item>
-        <item>Froh (+Spe, -Sp. Atk)</item>
-        <item>Naiv (+Spe, -Sp.  Def)</item>
+        <item>Scheu (+Init, -Angr)</item>
+        <item>Hastig (+Init, -Vert)</item>
+        <item>Froh (+Init, -Sp. Angr)</item>
+        <item>Naiv (+Init, -Sp.  Vert)</item>
         <item>Kauzig</item>
-        <item>Mähßig (+Sp. Atk, -Atk)</item>
-        <item>Mild (+Sp. Atk, -Dev)</item>
-        <item>Ruhig (+Sp. Atk, -Spe)</item>
-        <item>Hitzig (+Sp. Atk, -Sp. Def)</item>
+        <item>Mähßig (+Sp. Angr, -Angr)</item>
+        <item>Mild (+Sp. Angr, -Vert)</item>
+        <item>Ruhig (+Sp. Angr, -Init)</item>
+        <item>Hitzig (+Sp. Angr, -Sp. Vert)</item>
         <item>Zaghaft</item>
-        <item>Still (+Sp. Def, -Atk)</item>
-        <item>Zart (+Sp. Def, -Def)</item>
-        <item>Forsch (+Sp. Def, -Spe)</item>
-        <item>Sacht (+Sp.Def, -Sp. Atk)</item>
+        <item>Still (+Sp. Vert, -Angr)</item>
+        <item>Zart (+Sp. Vert, -Vert)</item>
+        <item>Forsch (+Sp. Vert, -Init)</item>
+        <item>Sacht (+Sp.Def, -Sp. Angr)</item>
     </string-array>
     <string name="DVValues">DVWerte</string>
     <string name="Natures">Wesen</string>
