@@ -294,6 +294,8 @@ public class ResultPokemon extends AppCompatActivity {
                         FatherItemAdapter.notifyDataSetChanged();
                     }
                     if(FullItemList.contains("destiny-knot"))FatherItemAdapter.remove("destiny-knot");
+                }else if(position==1){
+                    MotherItemImage.setImageDrawable(null);
                 }else{
 
                     MotherNature.setText("-");
@@ -304,8 +306,8 @@ public class ResultPokemon extends AppCompatActivity {
                     }
                 }
 
-
                 setMotherItemImage(parent.getItemAtPosition(position).toString());
+
             }
 
             @Override
@@ -313,6 +315,9 @@ public class ResultPokemon extends AppCompatActivity {
 
             }
         });
+
+
+
 
         Father_Item_Spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

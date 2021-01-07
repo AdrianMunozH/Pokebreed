@@ -7,9 +7,13 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,12 +22,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 
+import com.bumptech.glide.load.engine.Resource;
+
 import org.json.JSONException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Locale;
 
 public class MainMenu extends AppCompatActivity {
     static final String PREFS_NAME = "prefs";
@@ -33,6 +40,8 @@ public class MainMenu extends AppCompatActivity {
     private Button newPokemon;
     private Button history;
     private Button info;
+
+    private ImageView langImage;
 
 
     @SuppressLint("SetTextI18n")
@@ -61,6 +70,15 @@ public class MainMenu extends AppCompatActivity {
         newPokemon = findViewById(R.id.newPokemon);
         history = findViewById(R.id.pokeHistory);
         info = findViewById(R.id.info);
+        langImage= findViewById(R.id.langchange);
+
+        langImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setAppLocale("de");
+            }
+        });
+
 
 
         newPokemon.setOnClickListener(new View.OnClickListener() {
@@ -158,4 +176,18 @@ public class MainMenu extends AppCompatActivity {
         }
 
     }
+
+
+    private void setAppLocale(String localecCode){
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.JELLY_BEAN_MR1){
+            conf.setLocale(new Locale(localecCode.toLowerCase()));
+        }else{
+            res.updateConfiguration(conf,dm);
+        }
+    }
+
+
 }
