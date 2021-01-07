@@ -641,6 +641,36 @@ public class ResultPokemon extends AppCompatActivity {
             }
         });
     }
+    public void setMotherItemImage(String itemImage){
+        MutableLiveData pokeMotherPicListener = APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemon(itemImage));
+        pokeMotherPicListener.observe(this, new Observer<JSONObject>() {
+            @Override
+            public void onChanged(JSONObject jsonObject) {
+                try {
+                    loadPicture(jsonObject, MotherImage);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+    }
+    public void setFatherItemImage(String itemImage){
+        MutableLiveData pokeMotherPicListener = APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemon(itemImage));
+        pokeMotherPicListener.observe(this, new Observer<JSONObject>() {
+            @Override
+            public void onChanged(JSONObject jsonObject) {
+                try {
+                    loadPicture(jsonObject, MotherImage);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+    }
 
     public void setFatherImage(String pokemonName){
         MutableLiveData pokeMotherPicListener = APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemon(pokemonName));
