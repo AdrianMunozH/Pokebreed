@@ -56,6 +56,9 @@
         <item>Sassy (+Sp. Vert, -Init)</item>
         <item>Careful (+Sp.Vert, -Sp. Angr)</item>
     </string-array>
+
+
+
     <string name="Pokemon" translatable="false">Pokemon</string>
     <string name="DVValues">DVValues</string>
     <string name="Natures">Natures</string>
@@ -81,6 +84,7 @@
     <string name="Father">Father</string>
     <string name="LearnedAttack">Learned Attack</string>
     <string name="Ability">Ability</string>
+    <string name="DvInfo">For your selected Dv\'s get as close as possible to:</string>
 
 
 </resources>

@@ -56,12 +56,7 @@ public class ResultPokemon extends AppCompatActivity {
 
     //DV DisplayTextViews
         //Mother
-    TextView MotherKP;
-    TextView MotherAtk;
-    TextView MotherDef;
-    TextView MotherSPAtk;
-    TextView MotherSPDef;
-    TextView MotherSpe;
+
     TextView MotherNature;
     TextView MotherAbility;
     TextView MotherMove;
@@ -153,12 +148,6 @@ public class ResultPokemon extends AppCompatActivity {
 
 
         //SetTextViews
-        MotherKP = findViewById(R.id.m_KP_Value);
-        MotherAtk = findViewById(R.id.m_Atk_Value);
-        MotherDef = findViewById(R.id.m_Def_Value);
-        MotherSPAtk = findViewById(R.id.m_SPAtk_Value);
-        MotherSPDef = findViewById(R.id.m_SPDef_Value);
-        MotherSpe = findViewById(R.id.m_Spe_Value);
         MotherNature = findViewById(R.id.MotherNature);
         MotherAbility = findViewById(R.id.m_ability);
         MotherMove = findViewById(R.id.m_attack);
@@ -553,12 +542,7 @@ public class ResultPokemon extends AppCompatActivity {
 
     public void getDVValues(){
         if(transferDVs){
-            MotherKP.setText(child.getKp());
-            MotherAtk.setText(child.getAttack());
-            MotherDef.setText(child.getDefense());
-            MotherSPAtk.setText(child.getSpecialAttack());
-            MotherSPDef.setText(child.getSpecialDefense());
-            MotherSpe.setText(child.getSpeed());
+
 
             FatherKP.setText(child.getKp());
             FatherAtk.setText(child.getAttack());
@@ -568,12 +552,7 @@ public class ResultPokemon extends AppCompatActivity {
             FatherSpe.setText(child.getSpeed());
         }else{
 
-            MotherKP.setText("-");
-            MotherAtk.setText("-");
-            MotherDef.setText("-");
-            MotherSPAtk.setText("-");
-            MotherSPDef.setText("-");
-            MotherSpe.setText("-");
+
 
             FatherKP.setText("-");
             FatherAtk.setText("-");

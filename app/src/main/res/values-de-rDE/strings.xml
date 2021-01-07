@@ -74,5 +74,6 @@
     <string name="Father">Vater</string>
     <string name="LearnedAttack">gelernte Attacke</string>
     <string name="Ability">Fähigkeit</string>
+    <string name="DvInfo">Versuche so gut es geht an folgende Dv Werte ranzukommen:</string>
 
 </resources>
