@@ -294,7 +294,7 @@ public class ResultPokemon extends AppCompatActivity {
 
             }
         });
-        // check wich Pokemon can learn the selected attack
+        // check which Pokemon can learn the selected attack
 
     }
 
@@ -612,16 +612,5 @@ public class ResultPokemon extends AppCompatActivity {
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
 
 }
