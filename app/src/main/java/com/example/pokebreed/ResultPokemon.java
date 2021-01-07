@@ -88,6 +88,7 @@ public class ResultPokemon extends AppCompatActivity {
     private ImageView FatherItemImage;
     boolean monsupdated;
     boolean canlearnmove;
+    boolean useEverstone=false;
 
 
     //Adapter
@@ -115,6 +116,7 @@ public class ResultPokemon extends AppCompatActivity {
         setContentView(R.layout.activity_result);
         child = (Pokemon) getIntent().getSerializableExtra("childSelection");
         transferDVs =getIntent().getBooleanExtra("transferDVs",false);
+        useEverstone = getIntent().getBooleanExtra("useEverstone",false);
         Log.e("Result Child Name: ",child.getName());
         Toast t_selectMother = Toast.makeText(this,"Please Select Your Mother", Toast.LENGTH_SHORT);
         t_selectMother.show();
@@ -463,7 +465,7 @@ public class ResultPokemon extends AppCompatActivity {
     public void getItem(JSONObject jsonObject)throws JSONException{
 
         FullItemList.add(jp.getItem(jsonObject));
-        FullItemList.add(0,"Select Item");
+
         Log.e( "FullItemList",FullItemList.toString() );
         MotherItemsList.add(jp.getItem(jsonObject));
         FatherItemList.add(jp.getItem(jsonObject));
@@ -602,7 +604,7 @@ public class ResultPokemon extends AppCompatActivity {
             });
         }
 
-        if(!child.getNature().equals("Random")){
+        if(useEverstone){
             MutableLiveData EverstoneListener = APIRequests.getInstance().requestGet(APIRequests.getInstance().getItem(206));
             EverstoneListener.observe(this, new Observer<JSONObject>() {
                 @Override
@@ -616,6 +618,9 @@ public class ResultPokemon extends AppCompatActivity {
 
                 }
             }) ;
+
+
+            FullItemList.add(0,"Select Item");
         }
         FatherItemAdapter.clear();
         for (String s:FatherItemList) {
