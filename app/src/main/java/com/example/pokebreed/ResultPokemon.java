@@ -35,9 +35,10 @@ public class ResultPokemon extends AppCompatActivity {
     private JSONParser jp;
 
 
-    List<String> possible_mons = new ArrayList<>();
+    List<String> possible_dadMons = new ArrayList<>();
     List<String> possible_mumMons = new ArrayList<>();
-    List<String> parent_mons = new ArrayList<>();
+    List<String> parent_mons_withAttack = new ArrayList<>();
+    List<String> dittoList=new ArrayList<>();
     List<String> MotherItemsList = new ArrayList<>();
     List<String> FatherItemList = new ArrayList<>();
     List<String> FullItemList = new ArrayList<>();
@@ -84,6 +85,8 @@ public class ResultPokemon extends AppCompatActivity {
 
     private ImageView FatherImage;
     boolean monsupdated;
+    boolean canlearnmove;
+
 
     //Adapter
     ArrayAdapter FatherAdapter;
@@ -177,9 +180,17 @@ public class ResultPokemon extends AppCompatActivity {
         FullItemList.add("Select Item");
 
 
+
+
         getDVValues();
         getItems();
         getMotherMons();
+        getFatherMons();
+
+        getDittoMons();
+
+
+
 
 
         Mother_Spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -194,9 +205,31 @@ public class ResultPokemon extends AppCompatActivity {
                 if(selectedMonName.equals("ditto")){
                     MotherAbility.setText("no matter");
                     FatherAbility.setText(child.getAbility());
-                }else{
+                    MotherMove.setText("-");
+
+                    FatherAdapter.clear();
+
+                    for (String s: dittoList) {
+                        FatherAdapter.add(s);
+                        FatherAdapter.notifyDataSetChanged();
+                    }
+
+
+                }else {
+
+
+                    FatherAdapter.clear();
+
+                    for (String s : possible_dadMons) {
+                        FatherAdapter.add(s);
+                        FatherAdapter.notifyDataSetChanged();
+                    }
+
                     MotherAbility.setText(child.getAbility());
-                }
+
+                }//end else
+
+
                 SelectedMother=selectedMonName;
                 SelectedMotherPos=position;
 
@@ -204,7 +237,7 @@ public class ResultPokemon extends AppCompatActivity {
                 //Set Mother Image
                 setMotherImage(SelectedMother);
 
-                getFatherMons();
+
 
             }
 
@@ -221,6 +254,10 @@ public class ResultPokemon extends AppCompatActivity {
                 if(!Mother_Spinner.getSelectedItem().equals("ditto")){
                     MotherAbility.setText(child.getAbility());
                     FatherAbility.setText("no matter");
+                    mutableAttack(parent.getItemAtPosition(position).toString());
+                }else{
+                    FatherMove.setText(child.getMoves());
+                    //mutableAttack(parent.getItemAtPosition(position).toString());
                 }
                 //set father Image
                 setFatherImage(parent.getItemAtPosition(position).toString());
@@ -332,47 +369,20 @@ public class ResultPokemon extends AppCompatActivity {
 
 
     public void getEggGroups(JSONObject jsonObject)throws JSONException{
-        if(SelectedMother.equals("ditto")){
+
+            possible_dadMons = jp.getPokemonOfEggGroup(jsonObject);
 
 
-            possible_mons=possible_mumMons;
-
-            possible_mons.set(0,"Select Father");
-            possible_mons.remove("ditto");
-            FatherAdapter.clear();
-
-        }else if(SelectedMotherPos==0){
-            possible_mons.clear();
-            FatherAdapter.clear();
-            possible_mons.add(0,"Select Mother first");
-        }else{
-            possible_mons = jp.getPokemonOfEggGroup(jsonObject);
-            //possible_mons.add(0,"ditto");
-            Log.e( "Possible Mons: ",possible_mons.toString());
-        }
-
-
-
-        for (String s:possible_mons) {
-            FatherAdapter.add(s);
-            FatherAdapter.notifyDataSetChanged();
-        }
-
-        if(!child.getMoves().equals("none")&&!monsupdated){
-            monsupdated=true;
-            getAllPokemonWithMove(possible_mons);
-        }
-
-        if(SelectedMother.equals("ditto"))monsupdated=false;
-
-
+            Log.e( "Possible Mons: ", possible_dadMons.toString());
+            Log.e( "Possible Dad Mons with Attack: ",parent_mons_withAttack.toString());
     }
 
     public void getPossibleMom(JSONObject jsonObject)throws JSONException{
 
         possible_mumMons = jp.getEvoPokemon(jsonObject);
+        Log.e( "getPossibleMom: ",possible_mumMons.toString() );
         possible_mumMons.add(0,"Select Mother");
-        possible_mumMons.add(1,child.getName());
+        //possible_mumMons.add(1,child.getName());
         possible_mumMons.add("ditto");
         Log.e( "Possible Mons Count: ",possible_mumMons.toString());
 
@@ -380,6 +390,11 @@ public class ResultPokemon extends AppCompatActivity {
          MotherAdapter.add(s);
         }
 
+    }
+
+    public void getPossibleDittoMons(JSONObject jsonObject) throws JSONException {
+        dittoList = jp.getEvoPokemon(jsonObject);
+        dittoList.add(0,"Select Father");
     }
 
     public void getItem(JSONObject jsonObject)throws JSONException{
@@ -459,6 +474,22 @@ public class ResultPokemon extends AppCompatActivity {
             });
 
         }//end else
+    }
+
+    public void getDittoMons(){
+        MutableLiveData PokemonEvoListener = APIRequests.getInstance().requestGet(APIRequests.getInstance().getEvoPokemon(child.getEvoUrl()));
+        PokemonEvoListener.observe(this, new Observer<JSONObject>() {
+            @Override
+            public void onChanged(JSONObject jsonObject) {
+                try {
+                    Log.e("onChanged", "Mother" );
+                    getPossibleDittoMons(jsonObject);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
     }
 
     public void getDVValues(){
@@ -590,51 +621,51 @@ public class ResultPokemon extends AppCompatActivity {
     }
 
 
-    public void getAllPokemonWithMove(List<String> PokemonList){
+    public void canPokemonLearnMove( String PokemonName){
 
-
-        for ( String pokemon: PokemonList){
-
-            mutableAttack(pokemon);
-
-        }
+        Log.e( "canPokemonLearnMove: ","yes" );
+        mutableAttack(PokemonName);
 
 
     }
 
-    public void getAllAttacken(JSONObject jsonObject,String pokemon) throws JSONException {
-        List<String> attacks= new ArrayList<>();
+    public void getAllMoves(JSONObject jsonObject) throws JSONException {
+        List<String> attacks;
 
         attacks = jp.getAllAttacks(jsonObject);
 
+        Log.e( "getAllAttacken: ",attacks.toString() );
 
         if(attacks.contains(child.getMoves())){
-            Log.e( "ParentMons ",child.getMoves()+": "+pokemon );
-            parent_mons.add(pokemon);
-            Log.e( "ParentMons",parent_mons.toString() );
-            FatherAdapter.clear();
-            for (String s:parent_mons) {
-                FatherAdapter.add(s);
-                FatherAdapter.notifyDataSetChanged();
-            }
-        };
+            Log.e( Father_Item_Spinner.getSelectedItem().toString()+"can learn:",child.getMoves() );
+            FatherMove.setText(child.getMoves());
+            MotherMove.setText("-");
+
+    }else{
+        MotherMove.setText(child.getMoves());
+        FatherMove.setText("-");
+    }
 
 
 
     }
 
 
-    public void mutableAttack(final String pokemon){
-        MutableLiveData pokeMoveListener = APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemon(pokemon));
-        pokeMoveListener.observe(this, new Observer<JSONObject>() {
+    public void mutableAttack(String pokemon){
+
+        Log.e( "mutableAttack: ","yes" );
+
+        MutableLiveData pokemonMoveListener = APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemon(pokemon));
+        pokemonMoveListener.observe(this, new Observer<JSONObject>() {
             @Override
             public void onChanged(JSONObject jsonObject) {
                 try {
-                    getAllAttacken(jsonObject, pokemon);
+                    getAllMoves(jsonObject);
 
-
+                    Log.e( "getAllAttacken: ","erfolg" );
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Log.e( "getAllAttacken: ","error" );
                 }
 
             }

@@ -59,14 +59,12 @@ public class History extends AppCompatActivity {
                 stringBuilder.append(outText).append("\n");
             }
             Log.e("history loaddata",stringBuilder.toString());
-            JSONObject j = new JSONObject(stringBuilder.toString());
-            jp.getAllAbilities(j);
+
+
             // text nehmen mit stringBuilder.toString()
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
             e.printStackTrace();
         } finally {
             if(fileInputStream != null) {
@@ -96,11 +94,13 @@ public class History extends AppCompatActivity {
                 stringBuilder.append(outText).append("\n");
             }
             Log.e("history loaddata",stringBuilder.toString());
-
+            JSONObject j = new JSONObject(stringBuilder.toString());
             // text nehmen mit stringBuilder.toString()
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
             e.printStackTrace();
         } finally {
             if(fileInputStream != null) {

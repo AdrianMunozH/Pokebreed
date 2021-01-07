@@ -57,6 +57,7 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
 
     //other
     boolean transferDvs=false;
+    boolean calculateMove=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -265,6 +266,11 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
                 ability=abilitySpinner.getSelectedItem().toString();
                 nature=NatureSpinner.getSelectedItem().toString();
 
+                if(spinnerattacken.getSelectedItemPosition()==0 ){
+                    calculateMove=false;
+                }else{
+                    calculateMove=true;
+                }
 
 
 
@@ -272,7 +278,7 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
 
 
 
-                setPokemon(id,nature,ability,move,dvs,egg_groups,transferDvs,evourl);
+                setPokemon(id,nature,ability,move,dvs,egg_groups,transferDvs,evourl,calculateMove);
 
                 Log.e("Current Pokemon: ",currentPokemon.getName());
                 Log.e("Nature: ",currentPokemon.getNature());
@@ -298,6 +304,11 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
 
                 if(currentPokemon.isCalculateStats())Log.e("Transfer Dvs: ","true");
                 if(!currentPokemon.isCalculateStats())Log.e("Transfer Dvs: ","false");
+
+                if(currentPokemon.isCalculateMove())Log.e("calculate Move: ","true");
+                if(!currentPokemon.isCalculateMove())Log.e("calculate Move: ","false");
+
+
 
                 if(currentPokemon.getEggGroups().get(0).equals("no-eggs")){
                     Toast t_unEggG = Toast.makeText(PokemonStats.this,"Please choose another Pokemon", Toast.LENGTH_SHORT);
@@ -364,7 +375,7 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
     }
 
 
-    public void setPokemon(int id, String nature, String ability, String move,List<String> dvValues,List<String> eggGroups, boolean transferDvs,String evoUrl ){
+    public void setPokemon(int id, String nature, String ability, String move,List<String> dvValues,List<String> eggGroups, boolean transferDvs,String evoUrl,boolean calculateMove ){
         currentPokemon.setId(id);
         currentPokemon.setNature(nature);
         currentPokemon.setAbility(ability);
@@ -372,6 +383,7 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
         currentPokemon.setCalculateStats(transferDvs);
         currentPokemon.setEggGroups(eggGroups);
         currentPokemon.setEvoUrl(evoUrl);
+        currentPokemon.setCalculateMove(calculateMove);
         //DV
 
             currentPokemon.setKp(dvValues.get(0));

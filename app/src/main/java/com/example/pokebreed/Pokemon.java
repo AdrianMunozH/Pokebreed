@@ -34,6 +34,7 @@ public class Pokemon implements Serializable {
 
     //others
     boolean calculateStats;
+    boolean calculateMove;
 
     //Constructors
 
@@ -114,6 +115,10 @@ public class Pokemon implements Serializable {
         this.father = father;
     }
 
+    public void setCalculateMove(boolean calculateMove) {
+        this.calculateMove = calculateMove;
+    }
+
     //Getters
 
 
@@ -185,5 +190,9 @@ public class Pokemon implements Serializable {
 
     public Pokemon getFather() {
         return father;
+    }
+
+    public boolean isCalculateMove() {
+        return calculateMove;
     }
 }

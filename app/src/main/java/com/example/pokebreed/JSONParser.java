@@ -115,7 +115,9 @@ public class JSONParser {
         JSONArray PokeEvo1 = jsonObject.getJSONObject("chain").getJSONArray("evolves_to");
             JSONObject pokeName = PokeEvo1.getJSONObject(0).getJSONObject("species");
             JSONObject pokename1= PokeEvo1.getJSONObject(0).getJSONArray("evolves_to").getJSONObject(0).getJSONObject("species");
+            JSONObject pokenameBase =jsonObject.getJSONObject("chain").getJSONObject("species");
 
+            pokemonOfEvo.add(pokenameBase.getString("name"));
             pokemonOfEvo.add(pokeName.getString("name"));
             pokemonOfEvo.add(pokename1.getString("name"));
 
