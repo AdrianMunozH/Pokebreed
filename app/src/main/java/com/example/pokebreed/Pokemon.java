@@ -14,7 +14,6 @@ public class Pokemon implements Serializable {
     private List<String> eggGroups = new ArrayList<>();
     private List<String> types=new ArrayList<>();
 
-
     //DVs(Stats) 0-31
     private String kp;
     private String attack;
@@ -25,6 +24,13 @@ public class Pokemon implements Serializable {
 
     //evolutionchain url
     private String evoUrl;
+
+    //Parents
+    private Pokemon mother;
+    private Pokemon father;
+
+    //Item
+    private String Item;
 
     //others
     boolean calculateStats;
@@ -96,6 +102,18 @@ public class Pokemon implements Serializable {
 
     public void setEvoUrl(String evoUrl) { this.evoUrl = evoUrl; }
 
+    public void setItem(String item) {
+        Item = item;
+    }
+
+    public void setMother(Pokemon mother) {
+        this.mother = mother;
+    }
+
+    public void setFather(Pokemon father) {
+        this.father = father;
+    }
+
     //Getters
 
 
@@ -156,4 +174,16 @@ public class Pokemon implements Serializable {
     }
 
     public String getEvoUrl() { return evoUrl; }
+
+    public String getItem() {
+        return Item;
+    }
+
+    public Pokemon getMother() {
+        return mother;
+    }
+
+    public Pokemon getFather() {
+        return father;
+    }
 }

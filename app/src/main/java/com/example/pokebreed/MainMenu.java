@@ -35,6 +35,9 @@ public class MainMenu extends AppCompatActivity {
 
         if(useDarkTheme) {
             setTheme(R.style.AppTheme_Dark_NoActionBar);
+        } else {
+            // Theme.AppCompat.Light.NoActionBar
+            setTheme(R.style.Theme_AppCompat_Light_NoActionBar);
         }
 
         super.onCreate(savedInstanceState);
@@ -57,14 +60,14 @@ public class MainMenu extends AppCompatActivity {
         });
 
 
-        /*
+
         history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nextActivity(his.class);
+                nextActivity(History.class);
             }
         });
-         */
+
 
 
 

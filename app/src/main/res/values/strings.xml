@@ -28,6 +28,7 @@
     </string-array>
 
     <string-array name="Natures">
+        <item>Choose nature</item>
         <item>Random</item>
         <item>Hardy</item>
         <item>Lonely (+Angr, -Vert)</item>

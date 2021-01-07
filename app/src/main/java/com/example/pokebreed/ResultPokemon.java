@@ -1,11 +1,13 @@
 package com.example.pokebreed;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,6 +23,9 @@ import com.bumptech.glide.Glide;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +58,7 @@ public class ResultPokemon extends AppCompatActivity {
     TextView MotherSpe;
     TextView MotherNature;
     TextView MotherAbility;
-    TextView MotherAttack;
+    TextView MotherMove;
 
 
     String SelectedMother;
@@ -69,9 +74,11 @@ public class ResultPokemon extends AppCompatActivity {
     TextView FatherSpe;
     TextView FatherNature;
     TextView FatherAbility;
-    TextView FatherAttack;
+    TextView FatherMove;
 
-
+    //Parents
+    Pokemon mother;
+    Pokemon father;
 
 
 
@@ -84,8 +91,8 @@ public class ResultPokemon extends AppCompatActivity {
     ArrayAdapter FatherItemAdapter;
     ArrayAdapter MotherItemAdapter;
 
-
-    
+    //Button
+    Button exit;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -94,6 +101,9 @@ public class ResultPokemon extends AppCompatActivity {
 
         if(useDarkTheme) {
             setTheme(R.style.AppTheme_Dark_NoActionBar);
+        } else {
+            // Theme.AppCompat.Light.NoActionBar
+            setTheme(R.style.Theme_AppCompat_Light_NoActionBar);
         }
 
         super.onCreate(savedInstanceState);
@@ -106,6 +116,10 @@ public class ResultPokemon extends AppCompatActivity {
 
         jp = new JSONParser();
         monsupdated=false;
+
+
+        //setButton
+        exit=findViewById(R.id.ExitandSafe);
 
         //SetSpinner
         Mother_Spinner= findViewById(R.id.MotherSpinner);
@@ -139,7 +153,7 @@ public class ResultPokemon extends AppCompatActivity {
         MotherSpe = findViewById(R.id.m_Spe_Value);
         MotherNature = findViewById(R.id.MotherNature);
         MotherAbility = findViewById(R.id.m_ability);
-        MotherAttack= findViewById(R.id.m_attack);
+        MotherMove = findViewById(R.id.m_attack);
 
 
 
@@ -151,7 +165,7 @@ public class ResultPokemon extends AppCompatActivity {
         FatherSpe = findViewById(R.id.f_Spe_Value);
         FatherNature=findViewById(R.id.FatherNature);
         FatherAbility = findViewById(R.id.f_ability);
-        FatherAttack= findViewById(R.id.f_attack);
+        FatherMove = findViewById(R.id.f_attack);
 
 
         //ImageViews
@@ -295,6 +309,22 @@ public class ResultPokemon extends AppCompatActivity {
             }
         });
         // check which Pokemon can learn the selected attack
+
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean start_intent=false;
+                start_intent=setParentObjects();
+
+                if(start_intent){
+                    saveData(jp.pokemonToJson(child));
+                    nextActivity();
+                }else{
+                    showError();
+                }
+
+            }
+        });
 
     }
 
@@ -612,5 +642,126 @@ public class ResultPokemon extends AppCompatActivity {
 
 
     }
+
+
+    public boolean setParentObjects(){
+
+        if(Mother_Spinner.getSelectedItemPosition()!=0){
+            mother = new Pokemon(Mother_Spinner.getSelectedItem().toString());
+        }else{
+            return false;
+        }
+         if(Father_Spinner.getSelectedItemPosition()!=0){
+             father = new Pokemon(Father_Spinner.getSelectedItem().toString());
+         }else{
+             return false;
+         }
+
+
+
+
+         //Items
+        if(Mother_Item_Spinner.getSelectedItemPosition()!=0){
+            mother.setItem(Mother_Item_Spinner.getSelectedItem().toString());
+        }else{
+            return false;
+        }
+        if(Father_Item_Spinner.getSelectedItemPosition()!=0){
+            father.setItem(Father_Item_Spinner.getSelectedItem().toString());
+        }else{
+            return false;
+        }
+
+        if(child.isCalculateStats()) {
+            //Mother DVs
+            mother.setKp(child.getKp());
+            mother.setAttack(child.getAttack());
+            mother.setDefense(child.getDefense());
+            mother.setSpecialAttack(child.getSpecialAttack());
+            mother.setSpecialDefense(child.getSpecialDefense());
+            mother.setSpeed(child.getSpeed());
+
+            //fatherDvs
+            father.setKp(child.getKp());
+            father.setAttack(child.getAttack());
+            father.setDefense(child.getDefense());
+            father.setSpecialAttack(child.getSpecialAttack());
+            father.setSpecialDefense(child.getSpecialDefense());
+            father.setSpeed(child.getSpeed());
+        }else{
+            mother.setKp("-");
+            mother.setAttack("-");
+            mother.setDefense("-");
+            mother.setSpecialAttack("-");
+            mother.setSpecialDefense("-");
+            mother.setSpeed("-");
+
+            //fatherDvs
+            father.setKp("-");
+            father.setAttack("-");
+            father.setDefense("-");
+            father.setSpecialAttack("-");
+            father.setSpecialDefense("-");
+            father.setSpeed("-");
+        }
+
+        //get Nature
+        mother.setNature(MotherNature.getText().toString());
+        father.setNature(FatherNature.getText().toString());
+        //get Move
+        mother.setMoves(MotherMove.getText().toString());
+        father.setMoves(FatherMove.getText().toString());
+
+
+
+        child.setMother(mother);
+        child.setFather(father);
+
+        return true;
+
+
+
+    }
+
+
+    private void nextActivity() {
+        Intent intent = new Intent(this, MainMenu.class);
+        startActivity(intent);
+    }
+
+    public void showError(){
+        Toast error = Toast.makeText(this,"Please check your Values", Toast.LENGTH_SHORT);
+        error.show();
+    }
+
+
+    private void saveData(String json) {
+        FileOutputStream fileOutputStream = null;
+
+        try {
+            fileOutputStream = openFileOutput(JSONParser.FILE_NAME,MODE_PRIVATE);
+            // vorher lesen ???
+            fileOutputStream.write(json.getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(fileOutputStream != null) {
+                try {
+                    fileOutputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+
+
+
+
+
 
 }
