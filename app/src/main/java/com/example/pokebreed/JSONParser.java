@@ -3,6 +3,7 @@ package com.example.pokebreed;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -124,8 +125,6 @@ public class JSONParser {
         return pokemonOfEvo;
     }
 
-
-
     public String getItem(JSONObject jsonObject) throws JSONException {
         String item;
 
@@ -144,38 +143,32 @@ public class JSONParser {
 
     // History
 
-    public void addPokemonToHistory(Pokemon pokemon) {
-        //saveData(pokemonToJson(pokemon));
-
-        Log.e("pokemon json",pokemonToJson(pokemon));
+    public void addPokemonToHistory(Pokemon pokemon) throws JSONException {
+        //context fehlt
+        History h = new History();
+        rewriteHistory(h.loadData(),pokemonToJson(pokemon));
+        Log.e("pokemon json",pokemonToJson(pokemon).toString());
     }
-    public String pokemonToJson(Pokemon pokemon) {
+    public JSONObject pokemonToJson(Pokemon pokemon) throws JSONException {
         Gson gson = new Gson();
-        return gson.toJson(pokemon);
+        JSONObject jsonObject = new JSONObject(gson.toJson(pokemon));
+        return jsonObject;
     }
-
-
-
-
-
-
-    /*
-    public List<String> getEggGroup (String name,JSONObject jsonObject) {
-        String url= "/pokemon-species/" + name;
-        List<String> eggGroupEntries = new ArrayList<>();
-        JSONArray eggGrp;
-        try {
-            eggGrp = requestGet(url).getJSONArray("egg_groups");
-            for (int i = 0;i < eggGrp.length(); i++) {
-                JSONObject entry = eggGrp.getJSONObject(i);
-                eggGroupEntries.add(entry.getString("name"));
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return eggGroupEntries;
+    public void rewriteHistory(JSONObject file, JSONObject pokemon) throws JSONException {
+        JSONArray jsonArray = file.getJSONArray("pokemonHistory");
+        jsonArray.put(pokemon);
+        //context fehlt
+        ResultPokemon rp = new ResultPokemon();
+        Log.e("rewriteHitory",file.toString() + " : wurde hinzugefügt" + pokemon.toString());
+        rp.saveData(file.toString());
     }
-     */
+    public JSONObject createHistoryFile() throws JSONException {
+        JSONArray jsonArray = new JSONArray();
+        JSONObject jsonObject = new JSONObject();
 
+        jsonObject.putOpt("pokemonHistory",jsonArray);
 
+        Log.e("createHistoryFile", jsonObject.toString());
+        return jsonObject;
+    }
 }

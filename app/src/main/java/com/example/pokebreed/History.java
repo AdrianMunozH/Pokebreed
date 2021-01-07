@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.JsonReader;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -26,11 +27,16 @@ import java.util.Map;
 
 public class History extends AppCompatActivity {
     private JSONParser jp;
+    private JSONObject jsonObject;
+    private TextView tv;
+    private List<Pokemon> recentlyAdded = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
+
+        tv = findViewById(R.id.jsonText);
         /*
         Pokemon pokemon = new Pokemon("bulba");
         pokemon.setAbility("abil");
@@ -40,50 +46,20 @@ public class History extends AppCompatActivity {
         addPokemonToHistory(pokemon);
 
          */
-        loadData();
+         jsonObject =  loadData();
+
+         tv.setText(jsonObject.toString());
 
     }
-    private void loadDataJSON() {
+
+    public List<Pokemon> getRecentlyAdded() {
+        return recentlyAdded;
+    }
+
+
+    public JSONObject loadData() {
         FileInputStream fileInputStream = null;
-        Gson gson = new Gson();
-
-
-        try {
-            fileInputStream = openFileInput(JSONParser.FILE_NAME);
-            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-            JsonReader jsonReader = new JsonReader(inputStreamReader);
-            StringBuilder stringBuilder = new StringBuilder();
-            String outText;
-            while((outText = bufferedReader.readLine()) != null) {
-                stringBuilder.append(outText).append("\n");
-            }
-            Log.e("history loaddata",stringBuilder.toString());
-
-
-            // text nehmen mit stringBuilder.toString()
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if(fileInputStream != null) {
-                try {
-                    fileInputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-    }
-    public void testJson(JSONObject jsonObject) throws JSONException {
-
-    }
-
-    private void loadData() {
-        FileInputStream fileInputStream = null;
-
+        JSONObject j = new JSONObject();
         try {
             fileInputStream = openFileInput(JSONParser.FILE_NAME);
             InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
@@ -93,8 +69,10 @@ public class History extends AppCompatActivity {
             while((outText = bufferedReader.readLine()) != null) {
                 stringBuilder.append(outText).append("\n");
             }
-            Log.e("history loaddata",stringBuilder.toString());
-            JSONObject j = new JSONObject(stringBuilder.toString());
+            Log.e("history loaddata1",stringBuilder.toString());
+            j = new JSONObject(stringBuilder.toString());
+            //hier muss der jsonparser benutzt werden
+            Log.e("json object", j.toString());
             // text nehmen mit stringBuilder.toString()
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -111,7 +89,7 @@ public class History extends AppCompatActivity {
                 }
             }
         }
-
+    return j;
     }
 
 

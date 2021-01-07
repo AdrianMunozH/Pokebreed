@@ -19,13 +19,18 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -345,7 +350,7 @@ public class ResultPokemon extends AppCompatActivity {
 
             }
         });
-        // check wich Pokemon can learn the selected attack
+        // check which Pokemon can learn the selected attack
 
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -354,7 +359,12 @@ public class ResultPokemon extends AppCompatActivity {
                 start_intent=setParentObjects();
 
                 if(start_intent){
-                    saveData(jp.pokemonToJson(child));
+                    try {
+                        System.out.println("exit on click");
+                        addPokemonToHistory(child);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     nextActivity();
                 }else{
                     showError();
@@ -364,7 +374,56 @@ public class ResultPokemon extends AppCompatActivity {
         });
 
     }
-
+    public JSONObject loadData() {
+        FileInputStream fileInputStream = null;
+        JSONObject j = new JSONObject();
+        try {
+            fileInputStream = openFileInput(JSONParser.FILE_NAME);
+            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            StringBuilder stringBuilder = new StringBuilder();
+            String outText;
+            while((outText = bufferedReader.readLine()) != null) {
+                stringBuilder.append(outText).append("\n");
+            }
+            Log.e("resultpoke loaddata1",stringBuilder.toString());
+            j = new JSONObject(stringBuilder.toString());
+            //hier muss der jsonparser benutzt werden
+            Log.e("rp json object", j.toString());
+            // text nehmen mit stringBuilder.toString()
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } finally {
+            if(fileInputStream != null) {
+                try {
+                    fileInputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return j;
+    }
+    public void addPokemonToHistory(Pokemon pokemon) throws JSONException {
+        //context fehlt
+        rewriteHistory(loadData(),pokemonToJson(pokemon));
+        Log.e("pokemon json",pokemonToJson(pokemon).toString());
+    }
+    public JSONObject pokemonToJson(Pokemon pokemon) throws JSONException {
+        Gson gson = new Gson();
+        JSONObject jsonObject = new JSONObject(gson.toJson(pokemon));
+        return jsonObject;
+    }
+    public void rewriteHistory(JSONObject file, JSONObject pokemon) throws JSONException {
+        JSONArray jsonArray = file.getJSONArray("pokemonHistory");
+        jsonArray.put(pokemon);
+        Log.e("rewriteHitory",file.toString() + " : wurde hinzugefügt" + pokemon.toString());
+        saveData(file.toString());
+    }
 
 
 
@@ -766,7 +825,7 @@ public class ResultPokemon extends AppCompatActivity {
     }
 
 
-    private void saveData(String json) {
+    public void saveData(String json) {
         FileOutputStream fileOutputStream = null;
 
         try {
@@ -788,11 +847,5 @@ public class ResultPokemon extends AppCompatActivity {
         }
 
     }
-
-
-
-
-
-
 
 }
