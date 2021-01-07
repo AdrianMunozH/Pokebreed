@@ -121,13 +121,23 @@ public class JSONParser {
     public List<String> getEvoPokemon(JSONObject jsonObject) throws JSONException {
         List<String> pokemonOfEvo = new ArrayList<>();
         JSONArray PokeEvo1 = jsonObject.getJSONObject("chain").getJSONArray("evolves_to");
-            JSONObject pokeName = PokeEvo1.getJSONObject(0).getJSONObject("species");
-            JSONObject pokename1= PokeEvo1.getJSONObject(0).getJSONArray("evolves_to").getJSONObject(0).getJSONObject("species");
+            for(int i = 0;i < PokeEvo1.length();i++) {
+
+                JSONObject pokeName = PokeEvo1.getJSONObject(i).getJSONObject("species");
+                JSONArray temp = PokeEvo1.getJSONObject(i).getJSONArray("evolves_to");
+                pokemonOfEvo.add(pokeName.getString("name"));
+                for (int j = 0; j < temp.length(); j++) {
+                    JSONObject pokename1 = temp.getJSONObject(j).getJSONObject("species");
+                    pokemonOfEvo.add(pokename1.getString("name"));
+                }
+            }
+
+
             JSONObject pokenameBase =jsonObject.getJSONObject("chain").getJSONObject("species");
 
             pokemonOfEvo.add(pokenameBase.getString("name"));
-            pokemonOfEvo.add(pokeName.getString("name"));
-            pokemonOfEvo.add(pokename1.getString("name"));
+
+
 
         return pokemonOfEvo;
     }
