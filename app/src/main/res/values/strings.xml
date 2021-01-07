@@ -31,30 +31,30 @@
         <item>Choose nature</item>
         <item>Random</item>
         <item>Hardy</item>
-        <item>Lonely (+Angr, -Vert)</item>
-        <item>Brave (+Angr, -Init)</item>
-        <item>Adamant (+Angr, -Sp. Angr)</item>
-        <item>Naughty (+Angr, -Sp. Vert)</item>
+        <item>Lonely (+Atk, -Def)</item>
+        <item>Brave (+Atk, -Spe)</item>
+        <item>Adamant (+Atk, -Sp. Atk)</item>
+        <item>Naughty (+Atk, -Sp. Def)</item>
         <item>Docile</item>
-        <item>Bold (+Vert, -Angr)</item>
-        <item>Relaxed (+Vert, -Init)</item>
-        <item>Impish (+Vert, -Sp. Angr)</item>
-        <item>Lax (+Vert, -Sp. Vert)</item>
+        <item>Bold (+Def, -Atk)</item>
+        <item>Relaxed (+Def, -Spe)</item>
+        <item>Impish (+Def, -Sp. Atk)</item>
+        <item>Lax (+Def, -Sp. Def)</item>
         <item>Serious</item>
-        <item>Timid (+Init, -Angr)</item>
-        <item>Hasty (+Init, -Vert)</item>
-        <item>Jolly (+Init, -Sp. Angr)</item>
-        <item>Naive (+Init, -Sp.  Vert)</item>
+        <item>Timid (+Spe, -Atk)</item>
+        <item>Hasty (+Spe, -Def)</item>
+        <item>Jolly (+Spe, -Sp. Atk)</item>
+        <item>Naive (+Spe, -Sp.  Def)</item>
         <item>Bashful</item>
-        <item>Modest (+Sp. Angr, -Angr)</item>
-        <item>Mild (+Sp. Angr, -Vert)</item>
-        <item>Quiet (+Sp. Angr, -Init)</item>
-        <item>Rash (+Sp. Angr, -Sp. Vert)</item>
-        <item>Quirky</item>
-        <item>Calm (+Sp. Vert, -Angr)</item>
-        <item>Gentle (+Sp. Vert, -Vert)</item>
-        <item>Sassy (+Sp. Vert, -Init)</item>
-        <item>Careful (+Sp.Vert, -Sp. Angr)</item>
+        <item>Modest (+Sp. Atk, -Atk)</item>
+        <item>Mild (+Sp. Atk, -Dev)</item>
+        <item>Quiet (+Sp. Atk, -Spe)</item>
+        <item>Rash (+Sp. Atk, -Sp. Def)</item>
+        <item>Quuirky</item>
+        <item>Calm (+Sp. Def, -Atk)</item>
+        <item>Gentle (+Sp. Def, -Def)</item>
+        <item>Sassy (+Sp. Def, -Spe)</item>
+        <item>Careful (+Sp.Def, -Sp. Atk)</item>
     </string-array>
 
 
