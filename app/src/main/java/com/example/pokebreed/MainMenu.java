@@ -30,6 +30,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Locale;
 
 public class MainMenu extends AppCompatActivity {
@@ -45,7 +48,6 @@ public class MainMenu extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         boolean useDarkTheme = preferences.getBoolean(PREF_DARK_THEME, false);
 
@@ -136,15 +138,17 @@ public class MainMenu extends AppCompatActivity {
     }
     private void historyFile() throws JSONException {
         JSONParser jsonParser = new JSONParser();
-        //File file = new File(JSONParser.FILE_NAME);
+        File file = new File(getApplicationContext().getFilesDir(),JSONParser.FILE_NAME);
         // erstellt gerade noch die Datei wenn sie existiert also muss nur einmal auskommentiert werden
-/*
-        if(!file.exists()) {
+        if(file.exists()) {
+            Log.e("exists","y");
+
+        } else {
+            Log.e("exists","n");
             saveData(jsonParser.createHistoryFile().toString());
+
         }
 
-
- */
     }
     public void saveData(String json) {
         FileOutputStream fileOutputStream = null;
