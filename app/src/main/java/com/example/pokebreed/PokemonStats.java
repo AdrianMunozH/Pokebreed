@@ -58,6 +58,7 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
     //other
     boolean transferDvs=false;
     boolean calculateMove=false;
+    boolean useEverstone=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +130,21 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
         ArrayAdapter<CharSequence> natureAdapter = ArrayAdapter.createFromResource(this,R.array.Natures,android.R.layout.simple_spinner_item);
         natureAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         NatureSpinner.setAdapter(natureAdapter);
+
+        NatureSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position>=2){
+                    useEverstone=true;
+                }else {
+                    useEverstone=false;                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
 
@@ -401,6 +417,7 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
         Intent intent = new Intent(this,ResultPokemon.class);
         intent.putExtra("childSelection",currentPokemon);
         intent.putExtra("transferDVs",transferDvs);
+        intent.putExtra("useEverstone",useEverstone);
         startActivity(intent);
     }
 }

@@ -88,6 +88,7 @@ public class ResultPokemon extends AppCompatActivity {
     private ImageView FatherItemImage;
     boolean monsupdated;
     boolean canlearnmove;
+    boolean useEverstone=false;
 
 
     //Adapter
@@ -115,6 +116,7 @@ public class ResultPokemon extends AppCompatActivity {
         setContentView(R.layout.activity_result);
         child = (Pokemon) getIntent().getSerializableExtra("childSelection");
         transferDVs =getIntent().getBooleanExtra("transferDVs",false);
+        useEverstone = getIntent().getBooleanExtra("useEverstone",false);
         Log.e("Result Child Name: ",child.getName());
         Toast t_selectMother = Toast.makeText(this,"Please Select Your Mother", Toast.LENGTH_SHORT);
         t_selectMother.show();
@@ -176,7 +178,7 @@ public class ResultPokemon extends AppCompatActivity {
 
         MotherItemsList.add("Select Item");
         FatherItemList.add("Select Item");
-        FullItemList.add("Select Item");
+
 
 
 
@@ -280,27 +282,32 @@ public class ResultPokemon extends AppCompatActivity {
                     FatherItemAdapter.clear();
                     for (String s:FullItemList) {
                         FatherItemAdapter.add(s);
-                        FatherItemAdapter.remove("everstone");
+                        FatherItemAdapter.notifyDataSetChanged();
                     }
+                    if (FullItemList.contains("destiny-knot"))FatherItemAdapter.remove("everstone");
                 }else if(parent.getItemAtPosition(position).equals("destiny-knot")){
                     Father_Item_Spinner.setSelection(1);
                     MotherNature.setText("no matter");
                     FatherItemAdapter.clear();
                     for (String s:FullItemList) {
                         FatherItemAdapter.add(s);
-                        FatherItemAdapter.remove("destiny-knot");
+                        FatherItemAdapter.notifyDataSetChanged();
                     }
+                    if(FullItemList.contains("destiny-knot"))FatherItemAdapter.remove("destiny-knot");
+                }else if(position==1){
+                    MotherItemImage.setImageDrawable(null);
                 }else{
 
                     MotherNature.setText("-");
                     FatherItemAdapter.clear();
                     for (String s:FullItemList) {
                         FatherItemAdapter.add(s);
+                        FatherItemAdapter.notifyDataSetChanged();
                     }
                 }
 
-
                 setMotherItemImage(parent.getItemAtPosition(position).toString());
+
             }
 
             @Override
@@ -308,6 +315,9 @@ public class ResultPokemon extends AppCompatActivity {
 
             }
         });
+
+
+
 
         Father_Item_Spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -322,6 +332,7 @@ public class ResultPokemon extends AppCompatActivity {
                         MotherItemAdapter.add(s);
                         MotherAdapter.remove("everstone");
                     }
+                    if(FullItemList.contains("everstone"))MotherAdapter.remove("everstone");
 
                 }else if(parent.getItemAtPosition(position).equals("destiny-knot")){
                     if(FullItemList.size()>2)Mother_Item_Spinner.setSelection(1);
@@ -329,8 +340,9 @@ public class ResultPokemon extends AppCompatActivity {
                     MotherItemAdapter.clear();
                     for (String s:MotherItemsList) {
                         MotherItemAdapter.add(s);
-                        MotherAdapter.remove("destiny-knot");
+
                     }
+                    if(FullItemList.contains("destiny-knot"))MotherAdapter.remove("destiny-knot");
                 }else{
                     FatherNature.setText("-");
                     Log.e( "FatherItemList ",MotherItemsList.toString() );
@@ -458,6 +470,7 @@ public class ResultPokemon extends AppCompatActivity {
     public void getItem(JSONObject jsonObject)throws JSONException{
 
         FullItemList.add(jp.getItem(jsonObject));
+
         Log.e( "FullItemList",FullItemList.toString() );
         MotherItemsList.add(jp.getItem(jsonObject));
         FatherItemList.add(jp.getItem(jsonObject));
@@ -596,7 +609,7 @@ public class ResultPokemon extends AppCompatActivity {
             });
         }
 
-        if(!child.getNature().equals("Random")){
+        if(useEverstone){
             MutableLiveData EverstoneListener = APIRequests.getInstance().requestGet(APIRequests.getInstance().getItem(206));
             EverstoneListener.observe(this, new Observer<JSONObject>() {
                 @Override
@@ -610,6 +623,9 @@ public class ResultPokemon extends AppCompatActivity {
 
                 }
             }) ;
+
+
+            FullItemList.add(0,"Select Item");
         }
         FatherItemAdapter.clear();
         for (String s:FatherItemList) {
