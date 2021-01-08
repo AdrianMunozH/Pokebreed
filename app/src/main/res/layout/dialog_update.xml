@@ -8,19 +8,297 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/detailedHistory1"
+            android:id="@+id/savedPokemon"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="93dp"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:paddingStart="170dp"
+            android:paddingTop="40dp"
+            android:text="@string/Pokemon" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/detailedHistory2"
+            android:id="@+id/textView14"
+            android:layout_width="187dp"
+            android:layout_height="match_parent"
+            android:paddingStart="40dp"
+            android:paddingTop="40dp"
+            android:text="@string/Mother" />
+
+        <TextView
+            android:id="@+id/Name_mutter"
+            android:layout_width="258dp"
+            android:layout_height="match_parent"
+            android:paddingStart="10dp"
+            android:paddingTop="40dp"
+            android:text="-" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/textView16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="TextView" />
+            android:paddingStart="80dp"
+            android:text="Item" />
 
+        <TextView
+            android:id="@+id/Item_mutter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:text="-" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/natur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="80dp"
+            android:text="@string/Natures" />
+
+        <TextView
+            android:id="@+id/nature_mutter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:text="-" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/textView31"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="80dp"
+            android:text="@string/Attack" />
+
+        <TextView
+            android:id="@+id/attacke_mutter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:text="-" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/textView38"
+            android:layout_width="209dp"
+            android:layout_height="96dp"
+            android:paddingStart="40dp"
+            android:paddingTop="40dp"
+            android:text="@string/Father" />
+
+        <TextView
+            android:id="@+id/name_vater"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingStart="10dp"
+            android:paddingTop="40dp"
+            android:text="-" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/textView40"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="80dp"
+            android:text="Item" />
+
+        <TextView
+            android:id="@+id/item_vater"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:text="-" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/textView44"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="80dp"
+            android:text="@string/Natures" />
+
+        <TextView
+            android:id="@+id/nature_vater"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:text="-" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="335dp"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView46"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="80dp"
+            android:text="@string/Attack" />
+
+        <TextView
+            android:id="@+id/attacke_vater"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:text="-" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="322dp"
+        android:layout_height="88dp">
+
+        <TextView
+            android:id="@+id/textView60"
+            android:layout_width="178dp"
+            android:layout_height="90dp"
+            android:paddingStart="60dp"
+            android:paddingTop="40dp"
+            android:text="@string/DVValues" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/textView49"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="80dp"
+            android:text="@string/Hp" />
+
+        <TextView
+            android:id="@+id/hp_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:text="-" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="80dp"
+            android:text="@string/Attack" />
+
+        <TextView
+            android:id="@+id/attack_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:text="-" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/textView53"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="80dp"
+            android:text="@string/Defense" />
+
+        <TextView
+            android:id="@+id/defense_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:text="-" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/textView55"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="80dp"
+            android:text="@string/Sp.Attack" />
+
+        <TextView
+            android:id="@+id/spattack_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:text="-" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/textView57"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="80dp"
+            android:text="@string/Sp.Defense" />
+
+        <TextView
+            android:id="@+id/spdefense_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:text="-" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="80dp"
+            android:text="@string/Speed" />
+
+        <TextView
+            android:id="@+id/speed_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:text="-" />
     </TableRow>
 
 </TableLayout>

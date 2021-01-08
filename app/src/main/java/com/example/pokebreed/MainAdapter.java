@@ -12,8 +12,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.pokebreed.Pokemon;
-
 import java.util.List;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
@@ -61,7 +59,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                 dialog.show();
 
                 //init and assing var
-                final TextView textView = dialog.findViewById(R.id.detailedHistory1);
+                final TextView textView = dialog.findViewById(R.id.savedPokemon);
                 final TextView textView2 = dialog.findViewById(R.id.detailedHistory2);
 
                 // set text on edit text
