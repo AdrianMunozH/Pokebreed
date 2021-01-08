@@ -61,13 +61,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                 dialog.show();
 
                 //init and assing var
-                final TextView textView = dialog.findViewById(R.id.savedPokemon);
-                final TextView textView2 = dialog.findViewById(R.id.detailedHistory2);
+                //final TextView textView = dialog.findViewById(R.id.savedPokemon);
+                //final TextView textView2 = dialog.findViewById(R.id.detailedHistory2);
 
                 // set text on edit text
-                textView.setText(curP.getName());
+                //textView.setText(curP.getName());
 
-                textView2.setText("");
+                //textView2.setText("");
             }
         });
     }
