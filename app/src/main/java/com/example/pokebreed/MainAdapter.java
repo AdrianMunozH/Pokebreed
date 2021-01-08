@@ -2,7 +2,6 @@ package com.example.pokebreed;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pokebreed.Pokemon;
 
-import java.time.chrono.HijrahDate;
 import java.util.List;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
@@ -38,7 +36,6 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull final MainAdapter.ViewHolder holder, int position) {
         final String data = dataList.get(position).getName();
         holder.textView.setText(data);
-
         holder.btDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,7 +45,6 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                 notifyItemChanged(position,dataList.size());
             }
         });
-
         holder.btEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,7 +61,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                 dialog.show();
 
                 //init and assing var
-                final TextView textView = dialog.findViewById(R.id.detailedHistory1);
+                final TextView textView = dialog.findViewById(R.id.savedPokemon);
                 final TextView textView2 = dialog.findViewById(R.id.detailedHistory2);
 
                 // set text on edit text
@@ -80,9 +76,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     public int getItemCount() {
         return dataList.size();
     }
-    public List<Pokemon> getDataList() {
-        return dataList;
-    }
+
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView textView;
         ImageView btEdit,btDelete;
