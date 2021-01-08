@@ -1,6 +1,8 @@
 package com.example.pokebreed;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.JsonReader;
@@ -28,35 +30,38 @@ import java.util.Map;
 public class History extends AppCompatActivity {
     private JSONParser jp;
     private JSONObject jsonObject;
-    private TextView tv;
-    private TextView delete1;
-    private TextView delete2;
-    private List<Pokemon> recentlyAdded = new ArrayList<>();
+
+
+    RecyclerView recyclerView;
+    LinearLayoutManager linearLayoutManager;
+    MainAdapter adapter;
+    private List<Pokemon> pseudoData = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
         jp = new JSONParser();
-        tv = findViewById(R.id.jsonText);
 
-        //deleteLater
-        delete1 = findViewById(R.id.delete1);
-        delete2 = findViewById(R.id.delete2);
 
-         jsonObject =  loadData();
+
+        jsonObject =  loadData();
         Log.e("history name of jsonObject", jsonObject.toString());
-
-        List<Pokemon> pokemonHistory = new ArrayList<>();
          try {
-            pokemonHistory = jp.getPokemonHistory(jsonObject);
+            pseudoData = jp.getPokemonHistory(jsonObject);
          } catch (JSONException e) {
             e.printStackTrace();
          }
-         delete1.setText(pokemonHistory.get(0).getName());
-         delete2.setText(pokemonHistory.get(1).getName());
 
-        tv.setText(pokemonHistory.get(0).getName() + " : " + pokemonHistory.get(1).getName());
+        //real code
+
+        recyclerView = findViewById(R.id.recycler_view);
+        linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        // Das fehlt
+        adapter = new MainAdapter(History.this, pseudoData);
+        recyclerView.setAdapter(adapter);
 
     }
 

@@ -38,7 +38,7 @@ public class MainMenu extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_main_menu);
+
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         boolean useDarkTheme = preferences.getBoolean(PREF_DARK_THEME, false);
 
@@ -50,6 +50,7 @@ public class MainMenu extends AppCompatActivity {
         }
 
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main_menu);
 
         try {
             historyFile();
