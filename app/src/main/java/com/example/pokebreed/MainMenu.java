@@ -136,14 +136,15 @@ public class MainMenu extends AppCompatActivity {
     }
     private void historyFile() throws JSONException {
         JSONParser jsonParser = new JSONParser();
-        File file = new File(JSONParser.FILE_NAME);
+        //File file = new File(JSONParser.FILE_NAME);
         // erstellt gerade noch die Datei wenn sie existiert also muss nur einmal auskommentiert werden
 /*
         if(!file.exists()) {
             saveData(jsonParser.createHistoryFile().toString());
         }
 
-*/
+
+ */
     }
     public void saveData(String json) {
         FileOutputStream fileOutputStream = null;

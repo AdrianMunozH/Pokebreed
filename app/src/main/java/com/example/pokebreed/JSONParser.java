@@ -187,15 +187,15 @@ public class JSONParser {
         List<Pokemon> pokemonHistory = new ArrayList<>();
 
         JsonParser parser = new JsonParser();
-
         Gson gson = new Gson();
+        Log.e("jsonarry", String.valueOf(jsonArray.length()));
         for(int i = 0; i < jsonArray.length(); i++) {
             String mJsonString = jsonArray.getJSONObject(i).toString();
             JsonElement mJson =  parser.parse(mJsonString);
             Pokemon temp = gson.fromJson(mJson,Pokemon.class);
             pokemonHistory.add(temp);
+            Log.e("for jp", String.valueOf(i));
         }
-        Log.e("getPokemonHistory", String.valueOf(pokemonHistory.isEmpty()));
         return pokemonHistory;
     }
 

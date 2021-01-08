@@ -419,22 +419,7 @@ public class ResultPokemon extends AppCompatActivity {
         }
         return j;
     }
-    public void addPokemonToHistory(Pokemon pokemon) throws JSONException {
-        //context fehlt
-        rewriteHistory(loadData(),pokemonToJson(pokemon));
-        Log.e("pokemon json",pokemonToJson(pokemon).toString());
-    }
-    public JSONObject pokemonToJson(Pokemon pokemon) throws JSONException {
-        Gson gson = new Gson();
-        JSONObject jsonObject = new JSONObject(gson.toJson(pokemon));
-        return jsonObject;
-    }
-    public void rewriteHistory(JSONObject file, JSONObject pokemon) throws JSONException {
-        JSONArray jsonArray = file.getJSONArray("pokemonHistory");
-        jsonArray.put(pokemon);
-        Log.e("rewriteHitory",file.toString() + " : wurde hinzugefügt" + pokemon.toString());
-        saveData(file.toString());
-    }
+
 
 
 
@@ -867,6 +852,19 @@ public class ResultPokemon extends AppCompatActivity {
     }
 
 
+    // History
+    public void addPokemonToHistory(Pokemon pokemon) throws JSONException {
+        //context fehlt
+        rewriteHistory(loadData(),jp.pokemonToJson(pokemon));
+        Log.e("pokemon json",jp.pokemonToJson(pokemon).toString());
+    }
+
+    public void rewriteHistory(JSONObject file, JSONObject pokemon) throws JSONException {
+        JSONArray jsonArray = file.getJSONArray("pokemonHistory");
+        jsonArray.put(pokemon);
+        Log.e("rewriteHitory",file.toString() + " : wurde hinzugefügt" + pokemon.toString());
+        saveData(file.toString());
+    }
     public void saveData(String json) {
         FileOutputStream fileOutputStream = null;
 
