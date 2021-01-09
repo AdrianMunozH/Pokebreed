@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
             if(i==0) {
 
-                tvArr[i].setTextColor(getColor(android.R.color.holo_red_light));
+                tvArr[i].setTextColor(getColor(R.color.highlights));
                 prevstat=Integer.parseInt(stats.get(i));
                 roundpassed++;
 
@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //Log.e( "prevstat set to:",prevstat+"(Value="+ statStrings[i] + " )");
                 prevstat=Integer.parseInt(stats.get(i));
-                tvArr[i].setTextColor(getColor(android.R.color.holo_red_light));
+                tvArr[i].setTextColor(getColor(R.color.highlights));
                 tvArr[i-roundpassed].setTextColor(defaultColor);
 
             }else{

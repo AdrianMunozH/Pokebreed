@@ -18,7 +18,8 @@
             android:layout_gravity="center_vertical"
             android:paddingLeft="20dp"
             android:text="TextView"
-            android:textSize="18sp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="30sp"
             android:textStyle="bold" />
 
         <ImageView
@@ -26,15 +27,15 @@
             android:layout_width="80dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            app:srcCompat="@android:drawable/ic_menu_view" />
+            android:layout_marginRight="10dp"
+            app:srcCompat="@drawable/ic_popup" />
 
         <ImageView
             android:id="@+id/bt_delete"
-            android:layout_width="60dp"
-            android:layout_height="80dp"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
             android:contentDescription="TODO"
-            android:paddingRight="15dp"
-            app:srcCompat="@android:drawable/ic_menu_delete" />
+            app:srcCompat="@drawable/ic_remove_bin" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
