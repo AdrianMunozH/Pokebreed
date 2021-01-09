@@ -23,22 +23,32 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     private ImageView btnkreuz;
 
 
+
+
     public MainAdapter(Activity context,List<Pokemon> dataList) {
         this.context = context;
         this.dataList = dataList;
+
+
         notifyDataSetChanged();
     }
     @NonNull
     @Override
     public MainAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_row_main,parent,false);
+
+
+
         return new ViewHolder(view);
+
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull final MainAdapter.ViewHolder holder, int position) {
         final String data = dataList.get(position).getName();
         holder.textView.setText(data);
+
         holder.btDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,6 +56,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                 dataList.remove(position);
                 notifyItemRemoved(position);
                 notifyItemChanged(position,dataList.size());
+
+
+
             }
         });
         holder.btEdit.setOnClickListener(new View.OnClickListener() {
