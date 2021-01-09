@@ -171,10 +171,10 @@ public class MainActivity extends AppCompatActivity {
         roundpassed=0;
         if(types.size() == 1) {
             tvType2.setText("");
-            tvType1.setText("Type: " + types.get(0));
+            tvType1.setText(getResources().getString(R.string.Type)+": " + types.get(0));
         } else if(types.size() == 2) {
-            tvType1.setText("Type 1: " + types.get(0));
-            tvType2.setText("Type 2: " + types.get(1));
+            tvType1.setText(getResources().getString(R.string.Type)+" 1: " + types.get(0));
+            tvType2.setText(getResources().getString(R.string.Type)+" 2: " + types.get(1));
         }
 
     }
