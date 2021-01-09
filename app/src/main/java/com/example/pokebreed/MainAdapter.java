@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +20,8 @@ import java.util.List;
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     private List<Pokemon> dataList;
     private Activity context;
+    private Button btnkreuz;
+
 
     public MainAdapter(Activity context,List<Pokemon> dataList) {
         this.context = context;
@@ -106,8 +109,19 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                 spatk.setText(curP.getSpecialAttack());
                 spdef.setText(curP.getSpecialDefense());
                 spe.setText(curP.getSpeed());
+
+
+                btnkreuz.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                });
             }
         });
+
+
+
     }
 
     @Override
@@ -127,4 +141,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
         }
     }
+
+
+
 }

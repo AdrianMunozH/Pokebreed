@@ -178,6 +178,7 @@ public class ResultPokemon extends AppCompatActivity {
 
         MotherItemsList.add("Select Item");
         FatherItemList.add("Select Item");
+        possible_dadMons.add("Select Mother First");
 
 
 
@@ -185,8 +186,18 @@ public class ResultPokemon extends AppCompatActivity {
 
         getDVValues();
         getItems();
+
+        if(FullItemList.isEmpty()){
+            MotherItemsList.clear();
+            MotherItemsList.add("No Items Needed");
+            FatherItemList.clear();
+            FatherItemList.add("No Items Needed");
+        }
+
         getMotherMons();
         getFatherMons();
+        FatherAdapter.add(possible_dadMons);
+        FatherAdapter.notifyDataSetChanged();
 
         getDittoMons();
 
@@ -207,6 +218,7 @@ public class ResultPokemon extends AppCompatActivity {
                     MotherAbility.setText("no matter");
                     FatherAbility.setText(child.getAbility());
                     MotherMove.setText("-");
+
 
                     FatherAdapter.clear();
 
@@ -307,7 +319,7 @@ public class ResultPokemon extends AppCompatActivity {
                 }
 
                 setMotherItemImage(parent.getItemAtPosition(position).toString());
-
+                setFatherItemImage(Father_Item_Spinner.getSelectedItem().toString());
             }
 
             @Override
@@ -331,6 +343,7 @@ public class ResultPokemon extends AppCompatActivity {
                     for (String s:FullItemList) {
                         MotherItemAdapter.add(s);
                         MotherAdapter.remove("everstone");
+                        MotherAdapter.notifyDataSetChanged();
                     }
                     if(FullItemList.contains("everstone"))MotherAdapter.remove("everstone");
 
@@ -340,9 +353,12 @@ public class ResultPokemon extends AppCompatActivity {
                     MotherItemAdapter.clear();
                     for (String s:MotherItemsList) {
                         MotherItemAdapter.add(s);
+                        MotherAdapter.notifyDataSetChanged();
 
                     }
                     if(FullItemList.contains("destiny-knot"))MotherAdapter.remove("destiny-knot");
+
+
                 }else{
                     FatherNature.setText("-");
                     Log.e( "FatherItemList ",MotherItemsList.toString() );
@@ -426,6 +442,7 @@ public class ResultPokemon extends AppCompatActivity {
     public void getEggGroups(JSONObject jsonObject)throws JSONException{
 
             possible_dadMons = jp.getPokemonOfEggGroup(jsonObject);
+            possible_dadMons.set(0,"Select Father");
 
 
             Log.e( "Possible Mons: ", possible_dadMons.toString());
@@ -457,6 +474,8 @@ public class ResultPokemon extends AppCompatActivity {
         FullItemList.add(jp.getItem(jsonObject));
 
         Log.e( "FullItemList",FullItemList.toString() );
+
+
         MotherItemsList.add(jp.getItem(jsonObject));
         FatherItemList.add(jp.getItem(jsonObject));
 
@@ -775,19 +794,31 @@ public class ResultPokemon extends AppCompatActivity {
          }
 
 
-
-
+        Log.e( "FullItemListSize ",String.valueOf(FullItemList.size()));
+        Log.e("FullItemListSize ",FullItemList.toString() );
          //Items
-        if(Mother_Item_Spinner.getSelectedItemPosition()!=0){
-            mother.setItem(Mother_Item_Spinner.getSelectedItem().toString());
-        }else{
-            return false;
+        if(FullItemList.size()==1 || FullItemList.size()==0){
+            father.setItem("-");
+            mother.setItem("-");
+        }else if(FullItemList.size()==2){
+            if(Father_Item_Spinner.getSelectedItemPosition()==0){
+                father.setItem("-");
+                mother.setItem(Mother_Item_Spinner.getSelectedItem().toString());
+            }else if(Mother_Item_Spinner.getSelectedItemPosition()==0){
+                mother.setItem("-");
+                father.setItem(Father_Item_Spinner.getSelectedItem().toString());
+            }else{
+                return false;
+            }
+        }else if(FullItemList.size()==3){
+                if(Father_Item_Spinner.getSelectedItemPosition()==0 || Mother_Item_Spinner.getSelectedItemPosition()==0){
+                    return false;
+                }else{
+                    mother.setItem(Mother_Item_Spinner.getSelectedItem().toString());
+                    father.setItem(Father_Item_Spinner.getSelectedItem().toString());
+                }
         }
-        if(Father_Item_Spinner.getSelectedItemPosition()!=0){
-            father.setItem(Father_Item_Spinner.getSelectedItem().toString());
-        }else{
-            return false;
-        }
+
 
         if(child.isCalculateStats()) {
             //Mother DVs
@@ -829,6 +860,14 @@ public class ResultPokemon extends AppCompatActivity {
         mother.setMoves(MotherMove.getText().toString());
         father.setMoves(FatherMove.getText().toString());
 
+        //getAbility
+        if(Mother_Spinner.getSelectedItem().equals("ditto")){
+            father.setAbility(child.getAbility());
+            mother.setAbility("-");
+        }else {
+            mother.setAbility(child.getAbility());
+            father.setAbility("-");
+        }
 
 
         child.setMother(mother);

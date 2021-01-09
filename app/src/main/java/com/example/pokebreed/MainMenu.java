@@ -11,6 +11,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -92,7 +93,19 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String lang= Locale.getDefault().getDisplayLanguage();
+                Log.e( "Language ",lang );
+                if(lang.equals("Deutsch")){
+                    startBrowserIntent("http://www.pokewiki.de/Zucht");
+                }else{
+                    startBrowserIntent("https://bulbapedia.bulbagarden.net/wiki/Pokemon_breeding");
+                }
 
+            }
+        });
 
 
 
@@ -170,6 +183,13 @@ public class MainMenu extends AppCompatActivity {
                 }
             }
         }
+
+    }
+
+
+    public void startBrowserIntent(String url){
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(browserIntent);
 
     }
 }
