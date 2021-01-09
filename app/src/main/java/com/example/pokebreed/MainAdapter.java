@@ -20,7 +20,7 @@ import java.util.List;
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     private List<Pokemon> dataList;
     private Activity context;
-    private Button btnkreuz;
+    private ImageView btnkreuz;
 
 
     public MainAdapter(Activity context,List<Pokemon> dataList) {
@@ -59,6 +59,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                 dialog.setContentView(R.layout.dialog_update);
                 int width = WindowManager.LayoutParams.MATCH_PARENT;
                 int height = WindowManager.LayoutParams.WRAP_CONTENT;
+                btnkreuz = dialog.findViewById(R.id.button_kreuz);
 
                 dialog.getWindow().setLayout(width,height);
                 dialog.show();
@@ -114,7 +115,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                 btnkreuz.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        finish();
+                        dialog.dismiss();
                     }
                 });
             }
