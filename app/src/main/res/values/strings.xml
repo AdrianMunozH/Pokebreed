@@ -84,7 +84,7 @@
     <string name="LearnedAttack">Learned Attack</string>
     <string name="Ability">Ability</string>
     <string name="DvInfo">For your selected Dv\'s get as close as possible to:</string>
-    
+    <string name="historypoke">There are no Pokemon saved</string>
 
 
 </resources>
