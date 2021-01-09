@@ -97,7 +97,8 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String lang= Locale.getDefault().getDisplayLanguage();
-                if(lang.equals("de")){
+                Log.e( "Language ",lang );
+                if(lang.equals("Deutsch")){
                     startBrowserIntent("http://www.pokewiki.de/Zucht");
                 }else{
                     startBrowserIntent("https://bulbapedia.bulbagarden.net/wiki/Pokemon_breeding");
