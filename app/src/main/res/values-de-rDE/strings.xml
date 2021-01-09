@@ -5,10 +5,10 @@
 
     <string-array name="Stats">
         <item>KP:</item>
-        <item>Inniative:</item>
-        <item>Attacke:</item>
+        <item>Initiative:</item>
+        <item>Angriff:</item>
         <item>Verteidigung:</item>
-        <item>Spezial-Attacke:</item>
+        <item>Spezial-Angriff:</item>
         <item>Spezial-Verteidigung:</item>
     </string-array>
 
@@ -23,7 +23,7 @@
 
     <string-array name="Natures">
         <item>Wähle Wesen</item>
-        <item>Random</item>
+        <item>Zufällig</item>
         <item>Robust</item>
         <item>Solo (+Angr, -Vert)</item>
         <item>Mutig (+Angr, -Init)</item>
@@ -61,20 +61,33 @@
     <string name="Defense">Verteidigung</string>
     <string name="Sp.Attack">Sp. Angriff</string>
     <string name="Sp.Defense">Sp. Verteidung</string>
-    <string name="Speed">Innitiative</string>
+    <string name="Speed">Initiative</string>
     <string name="SavePokemon">Pokemon speichern?</string>
     <string name="save">speichern</string>
     <string name="dontsave">nicht speichern</string>
     <string name="newPokemon">neues Pokemon</string>
-    <string name="History">Historie</string>
+    <string name="History">Verlauf</string>
     <string name="Information">Informationen</string>
     <string name="Darkmode">Nachtmodus</string>
     <string name="Lightmode">Tagmodus</string>
     <string name="Mother">Mutter</string>
     <string name="Father">Vater</string>
-    <string name="LearnedAttack">gelernte Attacke</string>
+    <string name="LearnedAttack">Erlernte Attacke</string>
     <string name="Ability">Fähigkeit</string>
     <string name="DvInfo">Versuche so gut es geht an folgende Dv Werte ranzukommen:</string>
     <string name="historypoke">Es wurden keine Pokemon gespeichert</string>
+    <string name="Type">Typ</string>
+    <string name="selectMove">Wähle Angriff</string>
+    <string name="selectAbility">Wähle Fähigkeit</string>
+    <string name="anotherPkmn">Bitte wähle ein anderes Pokemon</string>
+    <string name="unknownAbility">Bitte wähle eine Fähigkeit aus</string>
+    <string name="youChoose">"Deine Wahl: "</string>
+    <string name="selectItem">Wähle Item</string>
+    <string name="selectMFirst">Wähle Mutter zuerst</string>
+    <string name="noItemsNeeded">keine Items benötigt</string>
+    <string name="selectFather">wähle Vater</string>
+    <string name="selectMother">wähle Mutter</string>
+    <string name="checkValues">Bitte überprüfe deine Eingaben</string>
+    <string name="noMatter">egal</string>
 
 </resources>

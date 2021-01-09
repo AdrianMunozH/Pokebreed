@@ -86,7 +86,7 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
         // hier kriegen wir die daten aus der letzten Activity
         Intent intent = getIntent();
         pokemon = intent.getStringExtra("pokeName");
-        pokemonName.setText("You Choose: "+pokemon.substring(0,1).toUpperCase()+pokemon.substring(1));
+        pokemonName.setText(getResources().getString(R.string.youChoose)+pokemon.substring(0,1).toUpperCase()+pokemon.substring(1));
 
         currentPokemon=new Pokemon(pokemon);
 
@@ -240,6 +240,7 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
                 }
 
                 sNumber = parent.getItemAtPosition(position).toString();
+
             }
 
             @Override
@@ -273,14 +274,20 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
                     dvs.set(5, SpeSpinner.getSelectedItem().toString());
 
                 }
-                if(spinnerattacken.getSelectedItem()!=null){
+                if(spinnerattacken.getSelectedItemPosition()!=0){
                     move = spinnerattacken.getSelectedItem().toString();
                 }else{
-                    move="none";
+                    move="-";
                 }
 
                 ability=abilitySpinner.getSelectedItem().toString();
-                nature=NatureSpinner.getSelectedItem().toString();
+
+                if(NatureSpinner.getSelectedItemPosition()==1){
+                    nature="Random";
+                }else{
+                    nature=NatureSpinner.getSelectedItem().toString();
+                }
+
 
                 if(spinnerattacken.getSelectedItemPosition()==0 ){
                     calculateMove=false;
@@ -327,8 +334,11 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
 
 
                 if(currentPokemon.getEggGroups().get(0).equals("no-eggs")){
-                    Toast t_unEggG = Toast.makeText(PokemonStats.this,"Please choose another Pokemon", Toast.LENGTH_SHORT);
+                    Toast t_unEggG = Toast.makeText(PokemonStats.this,getResources().getString(R.string.anotherPkmn), Toast.LENGTH_SHORT);
                     t_unEggG.show();
+                }else if(abilitySpinner.getSelectedItemPosition()==0){
+                    Toast t_cA = Toast.makeText(PokemonStats.this,getResources().getString(R.string.unknownAbility), Toast.LENGTH_SHORT);
+                    t_cA.show();
                 }else{
                     nextActivity();
                 }
@@ -370,6 +380,7 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
     //attacken
     public void getAllAttacken(JSONObject jsonObject) throws JSONException {
         attacks = jd.getAllAttacks(jsonObject);
+        attacks.add(0,getResources().getString(R.string.selectMove));
         spinnerattacken.setAdapter(new ArrayAdapter<>(PokemonStats.this,
                 android.R.layout.simple_spinner_dropdown_item,attacks));
 
@@ -377,6 +388,7 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
 
     public void getPokemonAbilities(JSONObject jsonObject) throws JSONException {
         List<String> abilities = jp.getAllAbilities(jsonObject);
+        abilities.add(0,getResources().getString(R.string.selectAbility));
         abilitySpinner.setAdapter(new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_dropdown_item,abilities));
     }

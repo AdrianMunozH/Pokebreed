@@ -81,10 +81,23 @@
     <string name="Lightmode">Lightmode</string>
     <string name="Mother">Mother</string>
     <string name="Father">Father</string>
-    <string name="LearnedAttack">Learned Attack</string>
+    <string name="LearnedAttack">Learned move</string>
     <string name="Ability">Ability</string>
     <string name="DvInfo">For your selected Dv\'s get as close as possible to:</string>
     <string name="historypoke">There are no Pokemon saved</string>
+    <string name="Type">Type</string>
+    <string name="selectMove">selet Move</string>
+    <string name="selectAbility">selct ability</string>
+    <string name="anotherPkmn">Please choose another Pokemon</string>
+    <string name="unknownAbility">Please choose an Ability</string>
+    <string name="youChoose">You choose:</string>
+    <string name="selectItem">Select item</string>
+    <string name="selectMFirst">Select mother first</string>
+    <string name="noItemsNeeded">no items needed</string>
+    <string name="selectFather">select Father</string>
+    <string name="selectMother">select mother</string>
+    <string name="checkValues">Please check your inputs</string>
+    <string name="noMatter">no matter</string>
 
 
 </resources>

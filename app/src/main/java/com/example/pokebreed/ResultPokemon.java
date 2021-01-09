@@ -176,9 +176,9 @@ public class ResultPokemon extends AppCompatActivity {
         MotherItemImage = findViewById(R.id.mItemImage);
 
 
-        MotherItemsList.add("Select Item");
-        FatherItemList.add("Select Item");
-        possible_dadMons.add("Select Mother First");
+        MotherItemsList.add(getResources().getString(R.string.selectItem));
+        FatherItemList.add(getResources().getString(R.string.selectItem));
+        possible_dadMons.add(getResources().getString(R.string.selectMFirst));
 
 
 
@@ -189,9 +189,9 @@ public class ResultPokemon extends AppCompatActivity {
 
         if(FullItemList.isEmpty()){
             MotherItemsList.clear();
-            MotherItemsList.add("No Items Needed");
+            MotherItemsList.add(getResources().getString(R.string.noItemsNeeded));
             FatherItemList.clear();
-            FatherItemList.add("No Items Needed");
+            FatherItemList.add(getResources().getString(R.string.noItemsNeeded));
         }
 
         getMotherMons();
@@ -209,13 +209,19 @@ public class ResultPokemon extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                if(position==0)return;
+                if(position==0){
+                    Log.e( "position==0: ","FatherAdapter cleared" );
+                    FatherAdapter.clear();
+                    FatherAdapter.add(getResources().getString(R.string.selectMFirst));
+                    FatherAdapter.notifyDataSetChanged();
+                    return;
+                }
 
 
 
                 String selectedMonName = parent.getItemAtPosition(position).toString();
                 if(selectedMonName.equals("ditto")){
-                    MotherAbility.setText("no matter");
+                    MotherAbility.setText(getResources().getString(R.string.noMatter));
                     FatherAbility.setText(child.getAbility());
                     MotherMove.setText("-");
 
@@ -266,7 +272,7 @@ public class ResultPokemon extends AppCompatActivity {
                 if(position==0)return;
                 if(!Mother_Spinner.getSelectedItem().equals("ditto")){
                     MotherAbility.setText(child.getAbility());
-                    FatherAbility.setText("no matter");
+                    FatherAbility.setText(getResources().getString(R.string.noMatter));
                     mutableAttack(parent.getItemAtPosition(position).toString());
                 }else{
                     FatherMove.setText(child.getMoves());
@@ -291,6 +297,7 @@ public class ResultPokemon extends AppCompatActivity {
                 if(parent.getItemAtPosition(position).equals("everstone")){
                     MotherNature.setText(child.getNature());
                     Father_Item_Spinner.setSelection(1);
+                    FatherItemImage.setImageDrawable(null);
                     FatherItemAdapter.clear();
                     for (String s:FullItemList) {
                         FatherItemAdapter.add(s);
@@ -299,12 +306,15 @@ public class ResultPokemon extends AppCompatActivity {
                     if (FullItemList.contains("destiny-knot"))FatherItemAdapter.remove("everstone");
                 }else if(parent.getItemAtPosition(position).equals("destiny-knot")){
                     Father_Item_Spinner.setSelection(1);
-                    MotherNature.setText("no matter");
+                    MotherNature.setText(getResources().getString(R.string.noMatter));
+                    FatherItemImage.setImageDrawable(null);
                     FatherItemAdapter.clear();
                     for (String s:FullItemList) {
                         FatherItemAdapter.add(s);
-                        FatherItemAdapter.notifyDataSetChanged();
+
                     }
+                    FatherItemAdapter.notifyDataSetChanged();
+
                     if(FullItemList.contains("destiny-knot"))FatherItemAdapter.remove("destiny-knot");
                 }else if(position==1){
                     MotherItemImage.setImageDrawable(null);
@@ -314,12 +324,14 @@ public class ResultPokemon extends AppCompatActivity {
                     FatherItemAdapter.clear();
                     for (String s:FullItemList) {
                         FatherItemAdapter.add(s);
-                        FatherItemAdapter.notifyDataSetChanged();
+
                     }
+
+                    FatherItemAdapter.notifyDataSetChanged();
                 }
 
                 setMotherItemImage(parent.getItemAtPosition(position).toString());
-                setFatherItemImage(Father_Item_Spinner.getSelectedItem().toString());
+                if(Father_Item_Spinner.getSelectedItem()!=null)setFatherItemImage(Father_Item_Spinner.getSelectedItem().toString());
             }
 
             @Override
@@ -339,17 +351,22 @@ public class ResultPokemon extends AppCompatActivity {
                 if(parent.getItemAtPosition(position).equals("everstone")){
                     if(FullItemList.size()>2)Mother_Item_Spinner.setSelection(1);
                     FatherNature.setText(child.getNature());
+                    MotherItemImage.setImageDrawable(null);
+
                     MotherItemAdapter.clear();
                     for (String s:FullItemList) {
                         MotherItemAdapter.add(s);
-                        MotherAdapter.remove("everstone");
-                        MotherAdapter.notifyDataSetChanged();
                     }
+                    MotherAdapter.remove("everstone");
+                    MotherAdapter.notifyDataSetChanged();
+
                     if(FullItemList.contains("everstone"))MotherAdapter.remove("everstone");
 
                 }else if(parent.getItemAtPosition(position).equals("destiny-knot")){
                     if(FullItemList.size()>2)Mother_Item_Spinner.setSelection(1);
-                    FatherNature.setText("no matter");
+                    FatherNature.setText(getResources().getString(R.string.noMatter));
+                    MotherItemImage.setImageDrawable(null);
+
                     MotherItemAdapter.clear();
                     for (String s:MotherItemsList) {
                         MotherItemAdapter.add(s);
@@ -387,7 +404,7 @@ public class ResultPokemon extends AppCompatActivity {
 
                 if(start_intent){
                     try {
-                        System.out.println("exit on click");
+
                         addPokemonToHistory(child);
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -442,7 +459,7 @@ public class ResultPokemon extends AppCompatActivity {
     public void getEggGroups(JSONObject jsonObject)throws JSONException{
 
             possible_dadMons = jp.getPokemonOfEggGroup(jsonObject);
-            possible_dadMons.set(0,"Select Father");
+            possible_dadMons.set(0,getResources().getString(R.string.selectFather));
 
 
             Log.e( "Possible Mons: ", possible_dadMons.toString());
@@ -453,7 +470,7 @@ public class ResultPokemon extends AppCompatActivity {
 
         possible_mumMons = jp.getEvoPokemon(jsonObject);
         Log.e( "getPossibleMom: ",possible_mumMons.toString() );
-        possible_mumMons.add(0,"Select Mother");
+        possible_mumMons.add(0,getResources().getString(R.string.selectMother));
         //possible_mumMons.add(1,child.getName());
         possible_mumMons.add("ditto");
         Log.e( "Possible Mons Count: ",possible_mumMons.toString());
@@ -466,7 +483,7 @@ public class ResultPokemon extends AppCompatActivity {
 
     public void getPossibleDittoMons(JSONObject jsonObject) throws JSONException {
         dittoList = jp.getEvoPokemon(jsonObject);
-        dittoList.add(0,"Select Father");
+        dittoList.add(0,getResources().getString(R.string.selectFather));
     }
 
     public void getItem(JSONObject jsonObject)throws JSONException{
@@ -589,8 +606,7 @@ public class ResultPokemon extends AppCompatActivity {
             FatherSpe.setText("-");
 
 
-            Toast t = Toast.makeText(this,"no DVs Selected", Toast.LENGTH_SHORT);
-            t.show();
+
         }
     }
 
@@ -629,7 +645,7 @@ public class ResultPokemon extends AppCompatActivity {
             }) ;
 
 
-            FullItemList.add(0,"Select Item");
+            FullItemList.add(0,getResources().getString(R.string.selectItem));
         }
         FatherItemAdapter.clear();
         for (String s:FatherItemList) {
@@ -886,7 +902,7 @@ public class ResultPokemon extends AppCompatActivity {
     }
 
     public void showError(){
-        Toast error = Toast.makeText(this,"Please check your Values", Toast.LENGTH_SHORT);
+        Toast error = Toast.makeText(this,getResources().getString(R.string.checkValues), Toast.LENGTH_SHORT);
         error.show();
     }
 
