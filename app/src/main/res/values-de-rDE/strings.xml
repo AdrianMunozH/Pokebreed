@@ -89,5 +89,7 @@
     <string name="selectMother">wähle Mutter</string>
     <string name="checkValues">Bitte überprüfe deine Eingaben</string>
     <string name="noMatter">egal</string>
+    <string name="ReminderText">Lust ein paar neue Pokemon zu brüten?</string>
+    <string name="ReminderTitle">Ein neues Pokemon wartet auf dich</string>
 
 </resources>
