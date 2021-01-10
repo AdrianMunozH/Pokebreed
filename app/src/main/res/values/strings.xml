@@ -98,6 +98,8 @@
     <string name="selectMother">select mother</string>
     <string name="checkValues">Please check your inputs</string>
     <string name="noMatter">no matter</string>
+    <string name="ReminderText">Time for some Pokemon breeding?</string>
+    <string name="ReminderTitle">Your next Pokemon awaits you</string>
 
 
 </resources>

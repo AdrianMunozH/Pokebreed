@@ -25,6 +25,8 @@
         <activity android:name=".ResultPokemon" />
         <activity android:name=".PokemonStats" />
         <activity android:name=".MainActivity" />
+        
+        <receiver android:name=".PokeBroadcastReceiver"/>
 
         <meta-data
             android:name="preloaded_fonts"

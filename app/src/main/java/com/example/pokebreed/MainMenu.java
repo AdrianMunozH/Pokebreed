@@ -5,6 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -61,6 +66,9 @@ public class MainMenu extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+        createNotificationChannel();
+        //172800 Sec = 48 Stunden // Test mit 5/10/30 Sekunden hat geklappt
+        setReminder(172800);
 
 
         try {
@@ -190,6 +198,32 @@ public class MainMenu extends AppCompatActivity {
     public void startBrowserIntent(String url){
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(browserIntent);
+
+    }
+
+    private void createNotificationChannel(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            CharSequence name = "PokebreedReminderChannel";
+            String description = "Channel for Pokebreed Reminder";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("Pokebreed",name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+    public void setReminder(long seconds){
+        Intent intent = new Intent(MainMenu.this, PokeBroadcastReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainMenu.this,0,intent,0);
+
+        AlarmManager alarmManager=(AlarmManager) getSystemService(ALARM_SERVICE);
+
+        long currTime = System.currentTimeMillis();
+        long calcSeconds = 1000*seconds;
+
+        alarmManager.set(AlarmManager.RTC_WAKEUP,currTime+calcSeconds,pendingIntent);
 
     }
 }
