@@ -100,6 +100,7 @@
     <string name="noMatter">no matter</string>
     <string name="ReminderText">Time for some Pokemon breeding?</string>
     <string name="ReminderTitle">Your next Pokemon awaits you</string>
+    <string name="Exit">done</string>
 
 
 </resources>
