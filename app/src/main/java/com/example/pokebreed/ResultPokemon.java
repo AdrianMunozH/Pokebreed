@@ -114,6 +114,7 @@ public class ResultPokemon extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
+        // Pokemon Objekt aus der Pokemonstats enstanden
         child = (Pokemon) getIntent().getSerializableExtra("childSelection");
         transferDVs =getIntent().getBooleanExtra("transferDVs",false);
         useEverstone = getIntent().getBooleanExtra("useEverstone",false);
@@ -218,7 +219,7 @@ public class ResultPokemon extends AppCompatActivity {
                 }
 
 
-
+                //  Vater ist abhängig von der Auswahl der Mutter und wird hier geregelt
                 String selectedMonName = parent.getItemAtPosition(position).toString();
                 if(selectedMonName.equals("ditto")){
                     MotherAbility.setText(getResources().getString(R.string.noMatter));
@@ -276,9 +277,7 @@ public class ResultPokemon extends AppCompatActivity {
                     mutableAttack(parent.getItemAtPosition(position).toString());
                 }else{
                     FatherMove.setText(child.getMoves());
-                    //mutableAttack(parent.getItemAtPosition(position).toString());
                 }
-                //set father Image
                 setFatherImage(parent.getItemAtPosition(position).toString());
             }
 
@@ -288,6 +287,8 @@ public class ResultPokemon extends AppCompatActivity {
             }
         });
 
+
+        // Item spinner für die Mutter
         Mother_Item_Spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -343,6 +344,7 @@ public class ResultPokemon extends AppCompatActivity {
 
 
 
+        // Item spinner für den Vater
         Father_Item_Spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -395,20 +397,20 @@ public class ResultPokemon extends AppCompatActivity {
             }
         });
 
-
+        // Das fertige Pokemon wird in die JSON Datei "pokemonHistory.json" gespeichert bzw hinzugefügt.
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boolean start_intent=false;
                 start_intent=setParentObjects();
-
                 if(start_intent){
                     try {
-
+                        // fügt das pokemon der datei hinzu
                         addPokemonToHistory(child);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                    // geht ins menü
                     nextActivity();
                 }else{
                     showError();
@@ -430,11 +432,7 @@ public class ResultPokemon extends AppCompatActivity {
             while((outText = bufferedReader.readLine()) != null) {
                 stringBuilder.append(outText).append("\n");
             }
-            Log.e("resultpoke loaddata1",stringBuilder.toString());
             j = new JSONObject(stringBuilder.toString());
-            //hier muss der jsonparser benutzt werden
-            Log.e("rp json object", j.toString());
-            // text nehmen mit stringBuilder.toString()
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -454,26 +452,18 @@ public class ResultPokemon extends AppCompatActivity {
     }
 
 
-
-
     public void getEggGroups(JSONObject jsonObject)throws JSONException{
 
             possible_dadMons = jp.getPokemonOfEggGroup(jsonObject);
             possible_dadMons.set(0,getResources().getString(R.string.selectFather));
 
-
-            Log.e( "Possible Mons: ", possible_dadMons.toString());
-            Log.e( "Possible Dad Mons with Attack: ",parent_mons_withAttack.toString());
     }
 
     public void getPossibleMom(JSONObject jsonObject)throws JSONException{
 
         possible_mumMons = jp.getEvoPokemon(jsonObject);
-        Log.e( "getPossibleMom: ",possible_mumMons.toString() );
         possible_mumMons.add(0,getResources().getString(R.string.selectMother));
-        //possible_mumMons.add(1,child.getName());
         possible_mumMons.add("ditto");
-        Log.e( "Possible Mons Count: ",possible_mumMons.toString());
 
         for (String s:possible_mumMons) {
          MotherAdapter.add(s);
@@ -742,14 +732,6 @@ public class ResultPokemon extends AppCompatActivity {
     }
 
 
-    public void canPokemonLearnMove( String PokemonName){
-
-        Log.e( "canPokemonLearnMove: ","yes" );
-        mutableAttack(PokemonName);
-
-
-    }
-
     public void getAllMoves(JSONObject jsonObject) throws JSONException {
         List<String> attacks;
 
@@ -762,19 +744,15 @@ public class ResultPokemon extends AppCompatActivity {
             FatherMove.setText(child.getMoves());
             MotherMove.setText("-");
 
-    }else{
-        MotherMove.setText(child.getMoves());
-        FatherMove.setText("-");
-    }
-
-
-
+        }else{
+            MotherMove.setText(child.getMoves());
+            FatherMove.setText("-");
+        }
     }
 
 
     public void mutableAttack(String pokemon){
 
-        Log.e( "mutableAttack: ","yes" );
 
         MutableLiveData pokemonMoveListener = APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemon(pokemon));
         pokemonMoveListener.observe(this, new Observer<JSONObject>() {
@@ -809,9 +787,6 @@ public class ResultPokemon extends AppCompatActivity {
              return false;
          }
 
-
-        Log.e( "FullItemListSize ",String.valueOf(FullItemList.size()));
-        Log.e("FullItemListSize ",FullItemList.toString() );
          //Items
         if(FullItemList.size()==1 || FullItemList.size()==0){
             father.setItem("-");
@@ -909,7 +884,7 @@ public class ResultPokemon extends AppCompatActivity {
 
     // History
     public void addPokemonToHistory(Pokemon pokemon) throws JSONException {
-        //context fehlt
+
         rewriteHistory(loadData(),jp.pokemonToJson(pokemon));
         Log.e("pokemon json",jp.pokemonToJson(pokemon).toString());
     }
@@ -925,7 +900,6 @@ public class ResultPokemon extends AppCompatActivity {
 
         try {
             fileOutputStream = openFileOutput(JSONParser.FILE_NAME,MODE_PRIVATE);
-            // vorher lesen ???
             fileOutputStream.write(json.getBytes());
         } catch (FileNotFoundException e) {
             e.printStackTrace();

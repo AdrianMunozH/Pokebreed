@@ -20,6 +20,7 @@ public class JSONParser {
 
     public static final String FILE_NAME = "pokemonHistory.json";
 
+    // Alle Methoden kriegen ein jsonobject das direkt aus der API Request kommt und schreiben das jew. entsprechend zum Kontext um.
 
     public List<String> getAllPoke(JSONObject jsonObject) throws JSONException {
         List<String> pokemonList = new ArrayList<>();
@@ -74,17 +75,7 @@ public class JSONParser {
         }
         return types;
     }
-    public List<String> getPokemonOfType(JSONObject jsonObject) throws JSONException {
-        List<String> pokemonList = new ArrayList<>();
-        JSONArray pokemon = jsonObject.getJSONArray("pokemon");
-        Log.e("ofType",pokemon.toString());
-        for (int i = 0; i < pokemon.length();i++) {
-            JSONObject poke = pokemon.getJSONObject(i).getJSONObject("pokemon");
-            Log.e("TypePokemon",poke.toString());
-            pokemonList.add(poke.getString("name"));
-        }
-        return  pokemonList;
-    }
+
     public String getPicture(JSONObject jsonObject) throws JSONException {
         String pictureUrl;
         JSONObject pokemon = jsonObject.getJSONObject("sprites");
@@ -165,14 +156,7 @@ public class JSONParser {
         JSONObject jsonObject = new JSONObject(gson.toJson(pokemon));
         return jsonObject;
     }
-    public void rewriteHistory(JSONObject file, JSONObject pokemon) throws JSONException {
-        JSONArray jsonArray = file.getJSONArray("pokemonHistory");
-        jsonArray.put(pokemon);
-        //context fehlt
-        ResultPokemon rp = new ResultPokemon();
-        Log.e("rewriteHitory",file.toString() + " : wurde hinzugefügt" + pokemon.toString());
-        rp.saveData(file.toString());
-    }
+
     public JSONObject createHistoryFile() throws JSONException {
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject();
