@@ -23,8 +23,6 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     private ImageView btnkreuz;
 
 
-
-
     public MainAdapter(Activity context,List<Pokemon> dataList) {
         this.context = context;
         this.dataList = dataList;
@@ -36,11 +34,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     @Override
     public MainAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_row_main,parent,false);
-
-
-
+        
         return new ViewHolder(view);
-
 
     }
 
@@ -48,7 +43,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull final MainAdapter.ViewHolder holder, int position) {
         final String data = dataList.get(position).getName();
         holder.textView.setText(data);
-
+    
+        //Delete Button in list_row_main
         holder.btDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,11 +53,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                 notifyItemRemoved(position);
                 notifyItemChanged(position,dataList.size());
 
-
-
             }
         });
-        holder.btEdit.setOnClickListener(new View.OnClickListener() {
+        
+        // Popup Button in list_row_main
+        holder.btPopup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // init main data
@@ -77,6 +73,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                 dialog.getWindow().setLayout(width,height);
                 dialog.show();
 
+                // Alle TextViews für das Popup
                 TextView name = dialog.findViewById(R.id.savedPokemon);
                 //Mutter
                 TextView mName = dialog.findViewById(R.id.name_mutter);
@@ -145,12 +142,12 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView textView;
-        ImageView btEdit,btDelete;
+        ImageView btPopup,btDelete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.text_view);
-            btEdit = itemView.findViewById(R.id.bt_edit);
+            btPopup = itemView.findViewById(R.id.bt_edit);
             btDelete = itemView.findViewById(R.id.bt_delete);
 
         }

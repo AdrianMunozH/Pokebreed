@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -57,55 +56,49 @@ public class History extends AppCompatActivity {
          } catch (JSONException e) {
             e.printStackTrace();
          }
-
-        //real code
+         
 
         recyclerView = findViewById(R.id.recycler_view);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        // Das fehlt
         adapter = new MainAdapter(History.this, pokemonHistory);
         recyclerView.setAdapter(adapter);
     }
-
-    public void deletePokemonInHistory(JSONObject file, int position) throws JSONException {
-        JSONArray jsonArray = file.getJSONArray("pokemonHistory");
-        jsonArray.remove(position);
-        saveData(file.toString());
-    }
+     
 
     @Override
     protected void onStop() {
         super.onStop();
-
+        // vor dem schließen wird die jsonHistory.json neu geschrieben um Veränderung zu speichern
         try {
-            removeAllHistory(jsonObject);
+            rewriteAllHistory(jsonObject);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         Log.e("onStop", String.valueOf(pokemonHistory.size()));
 
     }
-    public void removeAllHistory(JSONObject file) throws JSONException {
+    public void rewriteAllHistory(JSONObject file) throws JSONException {
         JSONArray pokemonArray= file.getJSONArray("pokemonHistory");
         int size = pokemonArray.length();
+        // Löscht alle Elemente
         for (int i = size; i >= 0; i--) {
             Log.e("pokemonArray", String.valueOf(pokemonArray.length() +" i: " + String.valueOf(i)));
             pokemonArray.remove(i);
         }
         int pokeSize = this.pokemonHistory.size();
+        // Schreibt alle Elemente aus der Liste hinzu
         for(int i = 0; i < pokeSize; i++) {
             pokemonArray.put(jp.pokemonToJson(this.pokemonHistory.get(i)));
         }
         saveData(file.toString());
     }
 
+    // Liest Datei aus
     public void saveData(String json) {
         FileOutputStream fileOutputStream = null;
-
         try {
             fileOutputStream = openFileOutput(JSONParser.FILE_NAME,MODE_PRIVATE);
-            // vorher lesen ???
             fileOutputStream.write(json.getBytes());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -123,6 +116,7 @@ public class History extends AppCompatActivity {
 
     }
 
+    // Schreibt in die Datei
     public JSONObject loadData() {
         FileInputStream fileInputStream = null;
         JSONObject j = new JSONObject();
@@ -135,11 +129,7 @@ public class History extends AppCompatActivity {
             while((outText = bufferedReader.readLine()) != null) {
                 stringBuilder.append(outText).append("\n");
             }
-            Log.e("history loaddata1",stringBuilder.toString());
             j = new JSONObject(stringBuilder.toString());
-            //hier muss der jsonparser benutzt werden
-            Log.e("json object", j.toString());
-            // text nehmen mit stringBuilder.toString()
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -157,10 +147,4 @@ public class History extends AppCompatActivity {
         }
     return j;
     }
-
-
-
-
-
-
 }
