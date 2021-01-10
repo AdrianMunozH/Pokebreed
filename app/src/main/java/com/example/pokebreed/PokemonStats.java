@@ -33,7 +33,6 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
     private String pokemon;
     private TextView pokemonName;
     private JSONParser jp;
-    private JSONParser jd;
     private Spinner abilitySpinner;
     private Spinner spinnerattacken;
     String sNumber;
@@ -77,12 +76,12 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_pokemon_stats);
 
 
-
+        
         imageView = (ImageView) findViewById(R.id.pokemonPic);
         pokemonName = (TextView) findViewById(R.id.pokemonName);
         attacks = new ArrayList<>();
         jp = new JSONParser();
-        jd = new JSONParser();
+
         // hier kriegen wir die daten aus der letzten Activity
         Intent intent = getIntent();
         pokemon = intent.getStringExtra("pokeName");
@@ -221,22 +220,14 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
 
         // Attacken
 
-        //----------------------Anfang Attacken Spinner
+        // Anfang Attacken Spinner
         spinnerattacken.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // das funktioniert nicht wirklich außer wir machen immer das erste Element unserer Liste leer.
                 if (position == 0) {
                     //Display toast message
                     Toast.makeText(getApplicationContext(),
                             "Please Select one", Toast.LENGTH_SHORT).show();
-                    //set empty value on textview
-
-                } else {
-                    //get selected value
-                    String sNumber = parent.getItemAtPosition(position).toString();
-                    //set selected value on textview
-
                 }
 
                 sNumber = parent.getItemAtPosition(position).toString();
@@ -379,7 +370,7 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
     }
     //attacken
     public void getAllAttacken(JSONObject jsonObject) throws JSONException {
-        attacks = jd.getAllAttacks(jsonObject);
+        attacks = jp.getAllAttacks(jsonObject);
         attacks.add(0,getResources().getString(R.string.selectMove));
         spinnerattacken.setAdapter(new ArrayAdapter<>(PokemonStats.this,
                 android.R.layout.simple_spinner_dropdown_item,attacks));

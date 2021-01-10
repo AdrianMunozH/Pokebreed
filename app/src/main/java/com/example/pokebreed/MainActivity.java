@@ -4,15 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
+
 import android.content.Intent;
 
 import android.content.SharedPreferences;
-import android.content.res.TypedArray;
+
 import android.os.Bundle;
-import android.util.Log;
-import android.util.TypedValue;
+
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -31,17 +29,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    //Kommentar von Daniel - ASDf
+
     public List<String> pokemons;
-    String selectedMon = "";
 
     //Initialise variable
     private Spinner spinner;
     private String currentPokemon;
     JSONParser jp = new JSONParser();
 
-    //Button Attacken // Popupfenster attacken activity
-    private Button attack_button;
+
     private ImageView imageView;
 
 
@@ -64,9 +60,10 @@ public class MainActivity extends AppCompatActivity {
         //API Instance für komplette App
         // !!!!!!!!!! muss nur einmal mit this aufgerufen werden !!!!!!!!!!!!!!!!!
         APIRequests.getInstance(this);
-        // die listen müssen init werden auch wenn wir sie später ersetzen
-        pokemons = new ArrayList<>();
 
+
+
+        pokemons = new ArrayList<>();
         // Das beides muss immer nacheinander passieren.
         MutableLiveData allPokelistener = APIRequests.getInstance().requestGet(APIRequests.getInstance().getPokemonList());
         allPokelistener.observe(this, new Observer<JSONObject>() {
@@ -91,21 +88,10 @@ public class MainActivity extends AppCompatActivity {
            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                currentPokemon = parent.getItemAtPosition(position).toString();
                apiLoadPicture();
-               // das funktioniert nicht wirklich außer wir machen immer das erste Element unserer Liste leer.
                if (position == 0){
                    //Display toast message
                    Toast.makeText(getApplicationContext(),
                           "Please Select one",Toast.LENGTH_SHORT).show();
-                   //set empty value on textview
-
-               }else{
-                   //get selected value
-                   String sNumber = parent.getItemAtPosition(position).toString();
-                   //set selected value on textview
-
-
-
-
                }
            }
 
@@ -125,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    // Füllen der TextViews mit Basestats der Pokemon
     private void loadStats(JSONObject jsonObject) throws JSONException {
         TextView tvHP = (TextView) findViewById(R.id.tvHP);
         TextView tvSpeed = (TextView) findViewById(R.id.tvSpeed);
@@ -156,7 +142,6 @@ public class MainActivity extends AppCompatActivity {
 
             }else if(prevstat<Integer.parseInt(stats.get(i))){
 
-                //Log.e( "prevstat set to:",prevstat+"(Value="+ statStrings[i] + " )");
                 prevstat=Integer.parseInt(stats.get(i));
                 tvArr[i].setTextColor(getColor(R.color.highlights));
                 tvArr[i-roundpassed].setTextColor(defaultColor);
@@ -165,7 +150,6 @@ public class MainActivity extends AppCompatActivity {
                 roundpassed++;
             }
 
-            Log.e( "loadStats: ",statStrings[i]+""+prevstat+"" );
         }
         prevstat=0;
         roundpassed=0;
@@ -198,10 +182,7 @@ public class MainActivity extends AppCompatActivity {
         // source code und doc ---  https://github.com/bumptech/glide
         Glide.with(this).load(jp.getPicture(jsonObject)).into(imageView);
     }
-    private void baseStats(JSONObject jsonObject) throws JSONException {
-        List arr = jp.getBaseStats(jsonObject);
 
-    }
     private void nextActivity() {
         Intent intent = new Intent(this,PokemonStats.class);
         intent.putExtra("pokeName", currentPokemon.toString());

@@ -62,7 +62,7 @@ public class MainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-
+        // Checked ob eine Datei für die Historie existiert
         try {
             historyFile();
         } catch (JSONException e) {
@@ -75,15 +75,13 @@ public class MainMenu extends AppCompatActivity {
         info = findViewById(R.id.info);
 
 
+        //Buttons für die Activity wechsel
         newPokemon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 nextActivity(MainActivity.class);
-
             }
         });
-
 
 
         history.setOnClickListener(new View.OnClickListener() {
@@ -108,7 +106,7 @@ public class MainMenu extends AppCompatActivity {
         });
 
 
-
+        // Dark-Lightmode switch
         modeswitch= findViewById(R.id.modeSwitch);
         if(useDarkTheme){
             //Dark Mode
@@ -149,26 +147,19 @@ public class MainMenu extends AppCompatActivity {
 
         startActivity(intent);
     }
+    // erstellt die neue Datei beim ersten mal öffnen
     private void historyFile() throws JSONException {
         JSONParser jsonParser = new JSONParser();
         File file = new File(getApplicationContext().getFilesDir(),JSONParser.FILE_NAME);
-        // erstellt gerade noch die Datei wenn sie existiert also muss nur einmal auskommentiert werden
-        if(file.exists()) {
-            Log.e("exists","y");
-
-        } else {
-            Log.e("exists","n");
+        if(!file.exists()) {
             saveData(jsonParser.createHistoryFile().toString());
-
         }
 
     }
     public void saveData(String json) {
         FileOutputStream fileOutputStream = null;
-        Log.e("saveData MainMenue", "kk");
         try {
             fileOutputStream = openFileOutput(JSONParser.FILE_NAME,MODE_PRIVATE);
-            // vorher lesen ???
             fileOutputStream.write(json.getBytes());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
