@@ -5,6 +5,10 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/*Pokemon Klasse wird später zum Erstellen der JSON Datei genutzt.
+ Ausßerdem werden hier alle wichtigen Informationen zu einem Pokemon abgespeichert,
+ die zur weiteren Berechnung benötigt werden */
 public class Pokemon implements Serializable {
     private int id;
     private String name;
