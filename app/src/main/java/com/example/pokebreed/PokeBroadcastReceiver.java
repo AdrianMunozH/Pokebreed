@@ -7,7 +7,7 @@ import android.content.Intent;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-
+/*Broadcast receiver für Notifications Hilfestellung: https://www.youtube.com/watch?v=nl-dheVpt8o*/
 public class PokeBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {

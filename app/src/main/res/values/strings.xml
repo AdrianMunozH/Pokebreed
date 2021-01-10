@@ -86,7 +86,7 @@
     <string name="DvInfo">For your selected Dv\'s get as close as possible to:</string>
     <string name="historypoke">There are no Pokemon saved</string>
     <string name="Type">Type</string>
-    <string name="selectMove">selet Move</string>
+    <string name="selectMove">select Move</string>
     <string name="selectAbility">selct ability</string>
     <string name="anotherPkmn">Please choose another Pokemon</string>
     <string name="unknownAbility">Please choose an Ability</string>
