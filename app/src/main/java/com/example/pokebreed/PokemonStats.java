@@ -76,7 +76,7 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_pokemon_stats);
 
 
-        
+
         imageView = (ImageView) findViewById(R.id.pokemonPic);
         pokemonName = (TextView) findViewById(R.id.pokemonName);
         attacks = new ArrayList<>();
@@ -394,6 +394,7 @@ public class PokemonStats extends AppCompatActivity implements AdapterView.OnIte
     }
 
 
+    // Set Pokemon Object für weitere Benutzung in Appverlauf
     public void setPokemon(int id, String nature, String ability, String move,List<String> dvValues,List<String> eggGroups, boolean transferDvs,String evoUrl,boolean calculateMove ){
         currentPokemon.setId(id);
         currentPokemon.setNature(nature);
